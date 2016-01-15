@@ -9,7 +9,7 @@
     <context:annotation-config/>
 
 
-    <bean id="mgDataSource" class="com.ares.framework.dao.mongodb.client.MgDataSource" destroy-method="shutdown">
+    <bean id="mgDataSource" class="com.ares.framework.dao.mongodb.client.MgDataSource" >
         <constructor-arg ref="mongoClient"/>
     </bean>
     
