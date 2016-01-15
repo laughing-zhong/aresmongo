@@ -1,4 +1,4 @@
-package com.ares.app.cb.dao;
+package com.ares.app.dao;
 
 
 

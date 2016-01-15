@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 import com.ares.app.DO.User;
-import com.ares.app.cb.dao.UserMongoDAO;
+import com.ares.app.dao.UserMongoDAO;
 import com.ares.app.domain.Do.UserCbDO;
 import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.exception.KeyNotFoundException;
