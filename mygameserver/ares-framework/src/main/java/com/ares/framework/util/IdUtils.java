@@ -19,7 +19,7 @@ import java.util.UUID;
  * Utility class that generates and compacts UUIDs into shorter
  * strings
  *
- * @author dadler
+ * @author wesley
  */
 
 public class IdUtils {

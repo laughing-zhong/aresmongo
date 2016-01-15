@@ -52,7 +52,7 @@ public interface IDAO<DO>  extends IFAccessEorror {
 	 *                      DaoException will be thrown
 	 */
 	DO findById( String targetId ) throws DAOException;
-	DO findById( String... targetIds ) throws DAOException;
+	List<DO> findById( String... targetIds ) throws DAOException;
 
 	/**
 	 * Finds T objects by targetIds.

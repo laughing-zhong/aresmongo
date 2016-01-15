@@ -15,7 +15,7 @@ import com.mongodb.client.model.Filters;
 public class SynMongClient implements IMongodbClient{
 
 
-	private final static String MONGOID="_id";
+	public final static String MONGOID="_id";
 	private  MongoClient mongoClient;
 	private  MongoDatabase db ;
 	public SynMongClient(MongdbConfigBean  configBean){	
@@ -41,34 +41,36 @@ public class SynMongClient implements IMongodbClient{
 
 	@Override
 	public List<Document> findObjList(String clltName, String filedName,List<String> uIds) {
-		return  db.getCollection(clltName).find(Filters.in("", filedName,uIds.iterator())).into(new ArrayList<Document>());
+		return  db.getCollection(clltName)
+				.find(Filters.in("", filedName,uIds.iterator()))
+				.into(new ArrayList<Document>());
 	}
 
 	@Override
 	public List<Document> findObjListBetween(String clltName, String filedName,
 			int low, int high) {
-		//db.getCollection(clltName).find(Filters.and(Filters.lt(fieldName, high))(fieldName, geometry), resultClass)
-		return null;
+		return db.getCollection(clltName)
+				.find(Filters.and(Filters.lt(filedName, high),Filters.gt(filedName, low)))
+				.into(new ArrayList<Document>());
 	}
 
 	@Override
 	public List<Document> findObjListLarger(String clltName, String filedName,
 			int targetCount) {
-		// TODO Auto-generated method stub
-		return null;
+		return db.getCollection(clltName).find(Filters.gt(filedName, targetCount))
+				.into(new ArrayList<Document>());
 	}
 
 	@Override
 	public List<Document> findObjListBelower(String clltName, String filedName,
 			int targetCount) {
-		// TODO Auto-generated method stub
-		return null;
+		return db.getCollection(clltName).find(Filters.lt(filedName, targetCount))
+				.into(new ArrayList<Document>());
 	}
 
 	@Override
 	public List<Document> findObjListByFileter(String clltName, Bson filter) {
-		// TODO Auto-generated method stub
-		return null;
+		return db.getCollection(clltName).find(filter).into(new ArrayList<Document>());				
 	}
 
 }

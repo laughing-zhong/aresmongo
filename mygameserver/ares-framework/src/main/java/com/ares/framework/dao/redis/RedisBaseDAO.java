@@ -1,20 +1,4 @@
 package com.ares.framework.dao.redis;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,11 +123,6 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 		  this.put(objectToPersist);	
 	}
 
-	@Override
-	public DomainObject findById(String... targetIds) throws DAOException {
-		throw new FwNotSupportedException("not supported");
-		
-	}
 
 
 	@Override
@@ -194,6 +173,12 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 	public void onFError(String targetId) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<DomainObject> findById(String... targetIds) throws DAOException {
+		// TODO Auto-generated method stub
+		  throw new FwNotSupportedException(" no surpport");
 	}
 
 }
