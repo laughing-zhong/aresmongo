@@ -1,16 +1,7 @@
 package com.ares.framework.dao.mongodb;
 
-import java.util.List;
-
-
-
-
-
-
 import javax.inject.Inject;
-
 import org.bson.Document;
-
 import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.exception.KeyNotFoundException;
 import com.ares.framework.dao.mongo.IDAO;
@@ -18,7 +9,6 @@ import com.ares.framework.dao.mongodb.client.MgDataSource;
 import com.ares.framework.dao.mongodb.client.SynMongClient;
 import com.ares.framework.domain.MongoKeyDO;
 import com.ares.framework.exception.DocumentIdEmptyException;
-import com.ares.framework.util.IdUtils;
 import com.ares.framework.util.JsonUtil;
 import com.google.common.base.Strings;
 
@@ -61,18 +51,14 @@ public abstract class AbstractMongodbDAO <DomainDO extends MongoKeyDO>  implemen
 
 	@Override
 	public void put(DomainDO objectToPersist) throws DAOException {
-		create(objectToPersist);
-			
+		create(objectToPersist);			
 	}
-
-
-
-
-
+	
 	@Override
 	public boolean delete(DomainDO targetObject) throws DAOException {
 		// TODO Auto-generated method stub
-		return false;
+		this.mgDataSource.getMgConnection().delete(collectionName, targetObject.getId());
+		return true;
 	}
 
 
@@ -80,7 +66,8 @@ public abstract class AbstractMongodbDAO <DomainDO extends MongoKeyDO>  implemen
 	@Override
 	public boolean delete(String targetId) throws DAOException {
 		// TODO Auto-generated method stub
-		return false;
+		this.mgDataSource.getMgConnection().delete(collectionName, targetId);
+		return true;
 	}
 
 	

@@ -72,5 +72,10 @@ public class SynMongClient implements IMongodbClient{
 	public List<Document> findObjListByFileter(String clltName, Bson filter) {
 		return db.getCollection(clltName).find(filter).into(new ArrayList<Document>());				
 	}
+	@Override
+	public void delete(String clltName,String targetId) {
+		// TODO Auto-generated method stub
+		 db.getCollection(clltName).deleteOne(Filters.eq(MONGOID, targetId));	
+	}
 
 }
