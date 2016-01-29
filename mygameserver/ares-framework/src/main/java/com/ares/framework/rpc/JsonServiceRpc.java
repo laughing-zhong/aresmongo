@@ -52,10 +52,10 @@ public class JsonServiceRpc {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResponse  JCallRpc(@RequestBody  JsonRpcRequest   request) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException
-	{
+	{/*
 	
 		JsonResponse   response = new JsonResponse();
-		JIService service = serviceMgr.GetJService(request.getServiceName());
+		//JIService service = serviceMgr.GetJService(request.getServiceName());
 		if(service == null)
 		{
 			response.setStatus(MsgState.NO_SERVICE);
@@ -71,6 +71,8 @@ public class JsonServiceRpc {
 		}
 		response.setPayLoad( CallObjMethod(service, method, request.getPayLoad()));
 		return response;
+		*/
+		return null;
 	}
 	
 	private Method GetMethod(Object obj, String methodName)

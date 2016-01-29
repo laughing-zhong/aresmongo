@@ -48,6 +48,8 @@
 	<mvc:resources mapping="/resources/**" location="/web-resources/flatui/" />
 	
 	<context:component-scan base-package="com.ares.web.controller" />
+	<context:component-scan base-package="com.ares.framework.rpc" />
+
 	
 	<!-- This bean sets up the Velocity environment for us based on a root path 
 		for templates. Optionally, a properties file can be specified for more control 
@@ -65,7 +67,7 @@
 	<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
-		<property name="suffix" value=".vm" />
+		<property name="suffix" value=".html" />
 		<property name="order" value="1" />
 
 		<!-- if you want to use the Spring Velocity macros, set this property to true -->

@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import com.ares.framework.service.IService;
 
 
-
-
+//this only for test protobuf
 @Service
 public class LoginService  implements IService{
 	

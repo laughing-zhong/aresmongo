@@ -12,8 +12,7 @@ import com.ares.framework.dao.mongodb.MongoDBDAO;
 
 
 @Repository
-@CollectionName("user")
-
+@CollectionName("gameplayer")
 public class UserMongoDAO extends MongoDBDAO<UserCbDO>{
 	
 	public UserMongoDAO(){

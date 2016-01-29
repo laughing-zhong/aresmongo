@@ -15,7 +15,7 @@ public class RedisTestService {
 	
 	@Inject 
 	private UserDAO userDAO;
-	@PostConstruct
+	//@PostConstruct
 	public void test(){
 		
 		UserDO userDo = new UserDO();
