@@ -18,10 +18,10 @@ import com.ares.framework.domain.MongoKeyDO;
 @Repository
 @EntityKey("user")
 
-public class UserCbDO extends MongoKeyDO {
+public class UserMongoDO extends MongoKeyDO {
 	
 
-	public UserCbDO(){}
+	public UserMongoDO(){}
 	private String userName;
 
 	public String getUserName() {

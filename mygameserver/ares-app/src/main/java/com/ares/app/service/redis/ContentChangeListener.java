@@ -27,7 +27,7 @@ import java.util.concurrent.ThreadFactory;
  * @author m.mcbride
  *
  */
-@Component
+//@Component
 public class ContentChangeListener extends JedisPubSub
 {
 	

@@ -9,7 +9,7 @@ import com.ares.app.domain.Do.UserDO;
 import com.ares.app.redis.dao.UserDAO;
 
 
-@Service
+//@Service
 public class RedisTestService {
 	
 	

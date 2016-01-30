@@ -7,7 +7,7 @@ import com.ares.framework.service.IService;
 
 
 //this only for test protobuf
-@Service
+//@Service
 public class LoginService  implements IService{
 	
 	public Login.ResponseLogin OnLogin(Login.RequestLogin requestLogin)

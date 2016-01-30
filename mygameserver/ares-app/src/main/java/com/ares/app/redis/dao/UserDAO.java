@@ -7,8 +7,8 @@ import com.ares.framework.dao.redis.EntityKey;
 import com.ares.framework.dao.redis.RedisBaseDAO;
 
 
-@Repository
-@EntityKey("user")
+//@Repository
+//@EntityKey("user")
 public class UserDAO extends RedisBaseDAO<UserDO>  {
 	
 	public UserDAO(){
