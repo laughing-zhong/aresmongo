@@ -23,6 +23,7 @@ public class MongdbUtilsService  implements IService{
 		if( doc == null){
 			 doc = new Document("_id",content.getDocId()).append(DATA, content.getContent());
 			this.mgDataSource.getMgConnection().insert(content.getTableName(),doc);
+			return doc;
 		}
 		Document document = new Document(SynMongClient.MONGOID,content.getDocId()).append(DATA, content.getContent());
 		this.mgDataSource.getMgConnection().update(content.getTableName(), document);		
