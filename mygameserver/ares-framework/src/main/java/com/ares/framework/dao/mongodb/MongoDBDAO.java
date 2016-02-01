@@ -28,9 +28,10 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	@Override
 	public DomainDO findById(String targetId) throws DAOException {
 		// TODO Auto-generated method stub	
-		//String jsonStr = JsonUtil.genJsonStr(jsonObj);
+		Document document = mgDataSource.getMgConnection().findById(this.getCollectionName(), targetId);
+	    if(document == null) return null;
 		try {
-			return  JsonObjectMapper.getInstance().readValue("  ", domainObjectClass);
+			return  JsonObjectMapper.getInstance().readValue(document.getString("d"), domainObjectClass);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,8 +41,7 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 		return null;
 	}
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Flat UI Free 101 Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <title>mongdb web</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -12,28 +12,60 @@
     <link href="/resources/css/flat-ui.min.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/favicon.ico">
+		
+		 
+ 		    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="/resources/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/resources/js/vendor/video.js"></script>
+    <script src="/resources/js/flat-ui.min.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.js"></script>
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
+	
+	
+	<script type="text/javascript">
+	
+$(function() { 
+	$("#save").click(function() {
+	  $.post("/rpc/MongdbUtilsService/wirteMgContent", {tableName: $("#tableName").val(), content: $("#content").val(),docId:$("#docId").val()},
+	   function(data){
+          $("#content").val(data.d);
+          console.log(data); //  2pm
+        }
+	  )
+	}
+  );
+  
+  $("#lookup").click(function(){
+     	  $.post("/rpc/MongdbUtilsService/lookup", {tableName: $("#tableName").val(),docId:$("#docId").val()},
+	   function(data){
+          $("#content").val(data.d);
+          console.log(data); //  2pm
+        }
+	  )
+  });
+  
+ } 
+ );
+	
+    </script>
   </head>
   <body>
-   <form action="/rpc/UserLoginService/login" method="post">
-    <div><input  type="text" name="userName" value="1"  /></div>
-     <div><input type="text" name="Id"    value="2"  /></div>
-     <div><input type="number" name="age"    value="4" /></div>
-	 <div><input type="submit" name="submit"  /></div>
+ <div class="container">
+	<h4>Forms</h4>
+   <form >
+    <p> <span class="label label-default">表名</span>     <input type="text" name="tableName" value="1"  id="tableName" /></p>
+	  <p><span class="label label-default">docId</span> <input type="text" name="docId"   value="3"  id="docId"/></p>
+    <p><span class="label label-default">json字符串</span> <input type="text" name="content"   value="2"  id="content"/></p>
+	<p>   <button type="button" class="btn btn-primary" id="save" >Save</button>   <button type="button" class="btn btn-primary" id="lookup" >Lookup</button>  </p>
    </form>
     <!-- /.container -->
+ </div>
 
-
-    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-    <script src="/resources/js/vendor/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/resources/js/vendor/video.js"></script>
-    <script src="/resources/js/flat-ui.min.js"></script>
 
   </body>
 </html>

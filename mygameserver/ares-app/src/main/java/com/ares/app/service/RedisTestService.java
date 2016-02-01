@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ares.app.domain.Do.UserDO;
+import com.ares.app.domain.Do.UserMongoDO;
 import com.ares.app.redis.dao.UserDAO;
 
 
@@ -24,8 +25,8 @@ public class RedisTestService {
 		
 		userDAO.put(userDo);
 		
-		UserDO  gotUserDO = userDAO.findById("123");
-		System.out.println("get userName = "+gotUserDO.getUserName());
+		//UserMongoDO  gotUserDO = userDAO.findById("123");
+	//	System.out.println("get userName = "+gotUserDO.getUserName());
 			
 	}
 
