@@ -9,7 +9,7 @@
     <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
-    <link href="/resources/css/flat-ui.min.css" rel="stylesheet">
+    <link href="/resources/css/flat-ui.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/favicon.ico">
 		
@@ -19,6 +19,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/resources/js/vendor/video.js"></script>
     <script src="/resources/js/flat-ui.min.js"></script>
+	<script src="/resources/assets/js/application.js"></script>
+    <script src="/resources/js/bootstrap-treeview.js"></script>
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -51,21 +54,89 @@ $(function() {
   
  } 
  );
-	
+ 
+       $(document).ready(function(){
+        $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
+
+        $('select[name="searchfield"]').select2({dropdownCssClass: 'show-select-search'});
+        $('select[name="inverse-dropdown-searchfield"]').select2({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
+      });
     </script>
   </head>
-  <body>
- <div class="container">
-	<h4>Forms</h4>
-   <form >
-    <p> <span class="label label-default">表名</span>     <input type="text" name="tableName" value="1"  id="tableName" /></p>
-	  <p><span class="label label-default">docId</span> <input type="text" name="docId"   value="3"  id="docId"/></p>
-    <p><span class="label label-default">json字符串</span> <input type="text" name="content"   value="2"  id="content"/></p>
-	<p>   <button type="button" class="btn btn-primary" id="save" >Save</button>   <button type="button" class="btn btn-primary" id="lookup" >Lookup</button>  </p>
-   </form>
-    <!-- /.container -->
+ <body>
+ <div class="container-fluid">
+
+ <p>	<h4>mongdb</h4> </p>
+  <div class="row">	
+  <form>
+	
+    <div class="col-xs-2">	
+         <h6>tableName</h6>
+		 <p id="treeview1" class=""/>
+     </div>
+
+	<div class="col-xs-6">
+		 <input type="text" name="tableName" value="1"  id="tableName" /> 
+        <p> <span class="label label-default">docId</span> <input type="text" name="docId"   value="3"  id="docId"/></p>        
+        <p><span class="label label-default">docucment</span> <textarea class="form-control" rows="6" name="content"   value="2"  id="content"></textarea></p>
+
+		<button type="button" class="btn btn-primary" id="save" >Save</button> 
+		<button type="button" class="btn btn-primary" id="lookup" >Lookup</button> 
+		<button type="button" class="btn btn-primary" id="create" >Create</button> 		
+    </div>
+	<div class="col-xs-2">
+    </div>				
+  </form>
  </div>
+ </div>
+ <script >  
+var json = '[' +
+          '{' +
+            '"text": "Parent 1",' +
+            '"nodes": [' +
+              '{' +
+                '"text": "Child 1",' +
+                '"nodes": [' +
+                  '{' +
+                    '"text": "Grandchild 1"' +
+                  '},' +
+                  '{' +
+                    '"text": "Grandchild 2"' +
+                  '}' +
+                ']' +
+              '},' +
+              '{' +
+                '"text": "Child 2"' +
+              '}' +
+            ']' +
+          '},' +
+          '{' +
+            '"text": "Parent 2"' +
+          '},' +
+          '{' +
+            '"text": "Parent 3"' +
+          '},' +
+          '{' +
+            '"text": "Parent 4"' +
+          '},' +
+          '{' +
+            '"text": "Parent 5"' +
+          '}' +
+        ']';
 
-
+		
+	$.post("/rpc/MongdbUtilsService/getMongdbInfo",
+	   function(data1){
+          $("#content").val(data1.d);
+		  
+		  $('#treeview1').treeview({
+          data: data1
+        });
+          console.log(data1); //  2pm
+		  console.log(json);
+        }
+	  );
+      	
+ </script>
   </body>
 </html>

@@ -108,14 +108,18 @@ public class WebRequestRpc {
 	
 	private  Object CallObjMethod(IService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
 	{
-		 Class<?> methosParamType = method.getParameterTypes()[0];  
-		 
-		  Object obj = methosParamType.newInstance();
-	       try {
-				BeanUtils.populate(obj, params);
-			} catch (IllegalAccessException | InvocationTargetException e) {
-				e.printStackTrace();
-			}  
-	   return method.invoke(service, obj);   		
+		int paramCount =  method.getParameterCount();
+		if(paramCount > 0){
+			 Class<?> methosParamType = method.getParameterTypes()[0];  
+			 
+			  Object obj = methosParamType.newInstance();
+		       try {
+					BeanUtils.populate(obj, params);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}  
+		   return method.invoke(service, obj);   		
+		}
+		return method.invoke(service);	
 	}
 }

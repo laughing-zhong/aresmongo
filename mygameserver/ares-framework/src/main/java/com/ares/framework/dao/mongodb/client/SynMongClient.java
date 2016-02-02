@@ -8,7 +8,9 @@ import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.Filters;
 
 
@@ -20,6 +22,7 @@ public class SynMongClient implements IMongodbClient{
 	private  MongoDatabase db ;
 	public SynMongClient(MongdbConfigBean  configBean){	
          mongoClient = new MongoClient(configBean.getAddr(),configBean.getPort());
+      
          db = mongoClient.getDatabase(configBean.getDbName());	
 	}
 	@Override
@@ -76,6 +79,26 @@ public class SynMongClient implements IMongodbClient{
 	public void delete(String clltName,String targetId) {
 		// TODO Auto-generated method stub
 		 db.getCollection(clltName).deleteOne(Filters.eq(MONGOID, targetId));	
+	}
+	@Override
+	public List<String> getDbs() {
+		// TODO Auto-generated method stub
+	 List<String> names = new ArrayList<String>();
+	  MongoCursor<String> it = mongoClient.listDatabaseNames().iterator();
+		while(it.hasNext()){
+			names.add(it.next());
+		}
+		return names ;
+	}
+	@Override
+	public List<String> getCollections(String dbName) {
+		// TODO Auto-generated method stub
+		List<String> names = new ArrayList<String>();
+	    MongoCursor<String> it = this.mongoClient.getDatabase(dbName).listCollectionNames().iterator();
+	    while(it.hasNext()){
+	    	names.add(it.next());
+	    }	
+		return names;
 	}
 
 }
