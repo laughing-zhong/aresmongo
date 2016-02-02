@@ -130,7 +130,11 @@ var json = '[' +
           $("#content").val(data1.d);
 		  
 		  $('#treeview1').treeview({
-          data: data1
+          data: data1,
+		   onNodeSelected: function(event, node) {
+              $('#tableName').val(node.text);
+            }
+
         });
           console.log(data1); //  2pm
 		  console.log(json);
