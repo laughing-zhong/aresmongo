@@ -76,8 +76,8 @@ $(function() {
      </div>
 
 	<div class="col-xs-6">
-		 <input type="text" name="tableName" value="1"  id="tableName" /> 
-        <p> <span class="label label-default">docId</span> <input type="text" name="docId"   value="3"  id="docId"/></p>        
+		 <input type="text" name="tableName"  id="tableName" /> 
+        <p> <span class="label label-default">docId</span> <input type="text" name="docId"   id="docId"/></p>        
         <p><span class="label label-default">docucment</span> <textarea class="form-control" rows="6" name="content"   value="2"  id="content"></textarea></p>
 
 		<button type="button" class="btn btn-primary" id="save" >Save</button> 
@@ -126,9 +126,7 @@ var json = '[' +
 
 		
 	$.post("/rpc/MongdbUtilsService/getMongdbInfo",
-	   function(data1){
-          $("#content").val(data1.d);
-		  
+	   function(data1){	  
 		  $('#treeview1').treeview({
           data: data1,
 		   onNodeSelected: function(event, node) {
