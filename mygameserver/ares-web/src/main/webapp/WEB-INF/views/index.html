@@ -76,7 +76,7 @@ $(function() {
      </div>
 
 	<div class="col-xs-6">
-		 <input type="text" name="tableName"  id="tableName" /> 
+		<p><span class="label label-default">collectionName</span> <input type="text" name="tableName"  id="tableName" />   </p>
         <p> <span class="label label-default">docId</span> <input type="text" name="docId"   id="docId"/></p>        
         <p><span class="label label-default">docucment</span> <textarea class="form-control" rows="6" name="content"   value="2"  id="content"></textarea></p>
 
@@ -89,42 +89,7 @@ $(function() {
   </form>
  </div>
  </div>
- <script >  
-var json = '[' +
-          '{' +
-            '"text": "Parent 1",' +
-            '"nodes": [' +
-              '{' +
-                '"text": "Child 1",' +
-                '"nodes": [' +
-                  '{' +
-                    '"text": "Grandchild 1"' +
-                  '},' +
-                  '{' +
-                    '"text": "Grandchild 2"' +
-                  '}' +
-                ']' +
-              '},' +
-              '{' +
-                '"text": "Child 2"' +
-              '}' +
-            ']' +
-          '},' +
-          '{' +
-            '"text": "Parent 2"' +
-          '},' +
-          '{' +
-            '"text": "Parent 3"' +
-          '},' +
-          '{' +
-            '"text": "Parent 4"' +
-          '},' +
-          '{' +
-            '"text": "Parent 5"' +
-          '}' +
-        ']';
-
-		
+ <script >  	
 	$.post("/rpc/MongdbUtilsService/getMongdbInfo",
 	   function(data1){	  
 		  $('#treeview1').treeview({
@@ -135,7 +100,6 @@ var json = '[' +
 
         });
           console.log(data1); //  2pm
-		  console.log(json);
         }
 	  );
       	

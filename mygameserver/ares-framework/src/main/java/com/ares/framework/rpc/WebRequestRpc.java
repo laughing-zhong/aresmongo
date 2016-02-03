@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,16 @@ public class WebRequestRpc {
 	public Object  CallRpc(@PathVariable String serviceName,
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
+		HttpSession session= req.getSession(false);
+		if(session == null){
+			session = req.getSession(true);
+			session.setAttribute("name", "wesley");
+		}
+		else{
+			String name = (String)session.getAttribute("name");
+			System.out.println("get name = "+name);
+		}
+
 		IService service = serviceMgr.GetService(serviceName);
 		if(service == null)
 		{
