@@ -34,8 +34,7 @@ public class MongdbUtilsService  implements IService{
 		return document;		
 	}
 	
-	public Document lookup(LookupBean lookUp){
-		
+	public Document lookup(LookupBean lookUp){		
 		return this.mgDataSource.getMgConnection().findById(lookUp.getTableName(), lookUp.getDocId());
 	}
 	

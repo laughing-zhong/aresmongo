@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -43,15 +44,13 @@ public class WebRequestRpc {
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
 		IService service = serviceMgr.GetService(serviceName);
-		if(service == null)
-		{
+		if(service == null){
 			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
 		    return "404";
 		}
 		
 		Method method = this.GetMethod(service, methodName);
-		if(method == null)
-		{
+		if(method == null){
 			model.addAttribute("errormsg", "can not find the method:"+methodName+"in the service: "+serviceName);
 			 return "404";
 		}
@@ -65,14 +64,19 @@ public class WebRequestRpc {
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
 		HttpSession session= req.getSession(false);
-		if(session == null){
-			session = req.getSession(true);
-			session.setAttribute("name", "wesley");
+		Cookie[]  cookies =  req.getCookies();
+		if(cookies != null){
+			Cookie cookie = cookies[0];
+			System.out.println("VVVVVVVVVVVVVVV   value = "+cookie.getValue()+"  name ="+cookie.getName());
 		}
-		else{
-			String name = (String)session.getAttribute("name");
-			System.out.println("get name = "+name);
-		}
+//		if(session == null){
+//			session = req.getSession(true);
+//			session.setAttribute("name", "wesley");
+//		}
+//		else{
+//			String name = (String)session.getAttribute("name");
+//			System.out.println("get name = "+name);
+//		}
 
 		IService service = serviceMgr.GetService(serviceName);
 		if(service == null)
@@ -82,8 +86,7 @@ public class WebRequestRpc {
 		}
 		
 		Method method = this.GetMethod(service, methodName);
-		if(method == null)
-		{
+		if(method == null){
 			model.addAttribute("errormsg", "can not find the method:"+methodName+"in the service: "+serviceName);
 			 return "404";
 		}
@@ -93,10 +96,8 @@ public class WebRequestRpc {
 	private Method GetMethod(Object obj, String methodName)
 	{
 		Method[] methods = obj.getClass().getMethods();
-		for(int i = 0 ; i < methods.length ; ++i)
-		{
-			if(methods[i].getName().equals(methodName))
-			{
+		for(int i = 0 ; i < methods.length ; ++i){
+			if(methods[i].getName().equals(methodName)){
 				return methods[i];
 			}
 		}
@@ -121,8 +122,7 @@ public class WebRequestRpc {
 	{
 		int paramCount =  method.getParameterCount();
 		if(paramCount > 0){
-			 Class<?> methosParamType = method.getParameterTypes()[0];  
-			 
+			 Class<?> methosParamType = method.getParameterTypes()[0];  			 
 			  Object obj = methosParamType.newInstance();
 		       try {
 					BeanUtils.populate(obj, params);
