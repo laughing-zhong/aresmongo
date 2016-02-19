@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
 	<head>
+		<link rel="stylesheet" href="/resources/css/body.css" type="text/css" />
 		<meta charset="utf-8" />
 		<title>Default Examples</title>
-		<style>
+	    <style>
 			form {
-				margin: 0;
+				margin: 100;
 			}
 			textarea {
 				display: block;
@@ -15,8 +16,14 @@
 		<script>
 			var editor;
 			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
-				/**	allowFileManager : true */
+			editor = K.create('textarea[name="content"]', {
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 				});
 				K('input[name=getHtml]').click(function(e) {
 					alert(editor.html()); 
@@ -53,7 +60,9 @@
 	<body>
 		<h3>默认模式</h3>
 		<form>
-			<textarea name="content" style="width:800px;height:400px;visibility:hidden;">KindEditor</textarea>
+			<div id="center">
+			<textarea name="content" style="width:500px;height:250px;visibility:hidden;">KindEditor</textarea>
+            </div>
 			<p>
 				<input type="button" name="getHtml" value="取得HTML" />
 				<input type="button" name="isEmpty" value="判断是否为空" />
