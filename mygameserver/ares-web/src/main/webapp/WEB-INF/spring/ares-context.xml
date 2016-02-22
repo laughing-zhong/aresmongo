@@ -25,6 +25,7 @@
     
     <context:component-scan base-package="com.ares.app.service" />
     <context:component-scan base-package="com.ares.app.asyn.msg.listener"/>
+    
      
 
     <!-- Helpers 

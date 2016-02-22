@@ -6,6 +6,8 @@ import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import com.ares.framework.dao.exception.DAOException;
+import com.ares.service.exception.FwNotSupportedException;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
@@ -99,6 +101,11 @@ public class SynMongClient implements IMongodbClient{
 	    	names.add(it.next());
 	    }	
 		return names;
+	}
+	
+	@Override
+	public List<Document>findAll(String clltName){		
+		 return  db.getCollection(clltName).find().into(new ArrayList<Document>());
 	}
 
 }

@@ -180,5 +180,9 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 		// TODO Auto-generated method stub
 		  throw new FwNotSupportedException(" no surpport");
 	}
+	@Override
+	public List<DomainObject>findAll() throws DAOException{		
+		   throw new FwNotSupportedException(" no surpport");
+	}
 
 }

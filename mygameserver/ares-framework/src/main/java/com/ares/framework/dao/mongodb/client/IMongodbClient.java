@@ -20,5 +20,6 @@ public interface IMongodbClient {
 	public List<Document> findObjListLarger(String clltName,String filedName,int targetCount);
 	public List<Document> findObjListBelower(String clltName,String filedName,int targetCount);
 	public List<Document> findObjListByFileter(String clltName,Bson filter);
+	public List<Document> findAll(String clltName);
 
 }

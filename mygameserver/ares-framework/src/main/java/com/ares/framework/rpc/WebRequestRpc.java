@@ -29,7 +29,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 
 @Controller
-
 public class WebRequestRpc {
 	@Inject
 	private ServiceMgr  serviceMgr;

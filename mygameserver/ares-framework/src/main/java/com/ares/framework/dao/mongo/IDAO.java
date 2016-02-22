@@ -86,6 +86,8 @@ public interface IDAO<DO>  extends IFAccessEorror {
 	 *                      DaoException will be thrown
 	 */
 	boolean delete( String targetId ) throws DAOException;
+	
+	List<DO> findAll() throws DAOException;
 
 
 }

@@ -69,10 +69,20 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	@Override
 	public List<DomainDO> findByIds(List<String> ids) throws DAOException {
 	    List<Document> documents = this.mgDataSource.getMgConnection().findObjList(this.collectionName, SynMongClient.MONGOID, ids);
-	  List<DomainDO> domainDoList = new ArrayList<DomainDO>();
+	    List<DomainDO> domainDoList = new ArrayList<DomainDO>();
 	    for(Document document :documents){    	
 	    	domainDoList.add(this.ducument2DomainDO(document));
 	    }
 		return domainDoList;
+	}
+	
+	@Override 
+	public List<DomainDO> findAll() throws DAOException{
+		List<Document> docList = this.mgDataSource.getMgConnection().findAll(this.collectionName);
+		List<DomainDO> domainList = new ArrayList<DomainDO>();
+		for(Document doc : docList){
+			domainList.add(this.ducument2DomainDO(doc));
+		}
+		return domainList;		
 	}
 }
