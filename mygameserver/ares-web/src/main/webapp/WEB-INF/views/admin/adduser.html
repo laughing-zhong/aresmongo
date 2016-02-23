@@ -26,10 +26,10 @@
 <script type="text/javascript">
 $(function() { 
 	$("#createAdmin").click(function() {
+	alert("ok");
     $.post("/admin/save/admin", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val()，passwd:$("passwd").val()},
 	   function(data){
           $("#content").val(data.d);
-          console.log(data);  
         }
 	  )
 	
@@ -63,7 +63,7 @@ $(function() {
               </div>
             </div>
             <div class="form-group">
-              <label for="inputEmail1" class="col-lg-2 control-label">联系方式</label>
+              <label for="inputEmail1" class="col-lg-3 control-label">联系方式</label>
               <div class="col-lg-6">
                 <input type="email" class="form-control" id="teleno" placeholder="teleno">
               </div>
@@ -71,7 +71,7 @@ $(function() {
 			
 			<div class="form-group">
 			  <div class="col-lg-2">
-			    <button type="submit" id="createAdmin" class="btn btn-default">Create</button>
+			    <button type="submit" id="createAdmin" class="btn btn-primary" >Create</button>
 			  </div>
             </div>
 			
@@ -100,9 +100,9 @@ $(function() {
               </div>
             </div>
             <div class="form-group">
-              <label for="inputEmail1" class="col-lg-2 control-label">联系方式</label>
+              <label for="inputEmail1" class="col-lg-3 control-label">联系方式</label>
               <div class="col-lg-6">
-                <input type="email" class="form-control" id="teleno" placeholder="teleno">
+                <input type="text" class="form-control" id="teleno" placeholder="teleno">
               </div>
             </div>	
 			
@@ -126,13 +126,13 @@ $(function() {
 			
 			<div class="form-group">
 			  <div class="col-lg-2">
-			    <button type="submit" class="btn btn-default">Create</button>
+			    <button type="submit" class="btn btn-primary" >Create</button>
 				</div>
 				<div class="col-lg-2">
-				   <button type="submit" class="btn btn-default">update</button>
+				   <button type="submit" class="btn btn-primary" >update</button>
 				 </div>
 				<div class="col-lg-2">
-				   <button type="submit" class="btn btn-default">search</button>
+				   <button type="submit" class="btn btn-primary" >search</button>
 				</div>
 			  </div>
             </div>	  
