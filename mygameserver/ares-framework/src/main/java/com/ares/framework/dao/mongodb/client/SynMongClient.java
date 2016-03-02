@@ -6,20 +6,20 @@ import java.util.List;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.ares.framework.dao.exception.DAOException;
-import com.ares.service.exception.FwNotSupportedException;
+
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
+
 import com.mongodb.client.model.Filters;
 
 
 public class SynMongClient implements IMongodbClient{
 
 
-	public final static String MONGOID="_id";
+	public final static String MONGOID = "_id";
+	public final static String MONGDATA = "d";
 	private  MongoClient mongoClient;
 	private  MongoDatabase db ;
 	public SynMongClient(MongdbConfigBean  configBean){	

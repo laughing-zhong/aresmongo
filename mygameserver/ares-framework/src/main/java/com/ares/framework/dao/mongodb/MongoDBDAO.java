@@ -12,6 +12,7 @@ import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.json.transcoder.JsonObjectMapper;
 import com.ares.framework.dao.mongodb.client.SynMongClient;
 import com.ares.framework.domain.MongoKeyDO;
+import com.ares.service.exception.FwNotSupportedException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -52,7 +53,8 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	
 	private DomainDO ducument2DomainDO(Document document){
 		try {
-			return JsonObjectMapper.getInstance().readValue(document.getString(SynMongClient.MONGOID),domainObjectClass);
+			System.out.println("document = "+document);
+			return JsonObjectMapper.getInstance().readValue(document.getString(SynMongClient.MONGDATA),domainObjectClass);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,4 +87,30 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 		}
 		return domainList;		
 	}
+	
+	@Override
+	public List<DomainDO> findDocs(String filedName,List<String> targetIds){		
+		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIds);
+		List<DomainDO> domainList = new ArrayList<DomainDO>();
+		for(Document doc : docList){
+			domainList.add(this.ducument2DomainDO(doc));
+		}
+		return domainList;	
+	}
+	
+	@Override
+	public 	List<DomainDO> findDos(String filedName,String ... targetId){
+		
+		List<String> targetIdList = new ArrayList<String>();
+		for( int i = 0 ; i <  targetId.length; ++i){
+			targetIdList.add(targetId[i]);
+		}
+		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIdList);
+		List<DomainDO> domainList = new ArrayList<DomainDO>();
+		for(Document doc : docList){
+			domainList.add(this.ducument2DomainDO(doc));
+		}
+		return domainList;			
+	}
+	
 }

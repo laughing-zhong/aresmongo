@@ -1,5 +1,7 @@
 package com.ares.app.domain.Do;
 
+import java.util.List;
+
 import com.ares.framework.domain.MongoKeyDO;
 
 public class AccountDO extends MongoKeyDO {
@@ -21,5 +23,8 @@ public class AccountDO extends MongoKeyDO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	List<String> employeeList ;
+	List<String> managerList;
 }
 

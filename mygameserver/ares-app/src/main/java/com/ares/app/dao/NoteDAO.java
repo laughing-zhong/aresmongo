@@ -2,16 +2,18 @@ package com.ares.app.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.ares.app.domain.Do.AdminDO;
+import com.ares.app.domain.Do.NoteDO;
 import com.ares.framework.dao.mongodb.CollectionName;
 import com.ares.framework.dao.mongodb.MongoDBDAO;
 
 
 @Repository
-@CollectionName("admin")
-public class AdminDAO extends MongoDBDAO<AdminDO>{
+@CollectionName("note")
+public class NoteDAO extends MongoDBDAO<NoteDO> {
 
-	public AdminDAO() {
-		super(AdminDO.class);
+	public NoteDAO() {
+		super(NoteDO.class);
+		// TODO Auto-generated constructor stub
 	}
+
 }

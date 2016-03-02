@@ -8,6 +8,8 @@ import javax.inject.Inject;
 
 
 
+
+
 import com.ares.framework.dal.util.EntityUtils;
 import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.exception.KeyNotFoundException;
@@ -181,8 +183,18 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 		  throw new FwNotSupportedException(" no surpport");
 	}
 	@Override
-	public List<DomainObject>findAll() throws DAOException{		
+	public List<DomainObject>findAll() {		
 		   throw new FwNotSupportedException(" no surpport");
+	}
+	
+	@Override
+	public List<DomainObject> findDocs(String filedName,List<String> targetIds){
+		  throw new FwNotSupportedException(" no surpport");
+	}
+	
+	@Override
+	public 	List<DomainObject> findDos(String fileName,String ... targetId){
+		  throw new FwNotSupportedException(" no surpport");
 	}
 
 }

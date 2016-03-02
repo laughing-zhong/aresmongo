@@ -1,5 +1,8 @@
 package com.ares.app.domain.Do;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ares.framework.domain.MongoKeyDO;
 
 public class AdminDO extends MongoKeyDO{
@@ -40,4 +43,18 @@ public class AdminDO extends MongoKeyDO{
 		this.name = name;
 	}
 	private String name;
+	private List<String>employeeList;
+	private List<String>managerList ;
+	public List<String> getManagerList() {
+		return managerList;
+	}
+	public void setManagerList(List<String> managerList) {
+		this.managerList = managerList;
+	}
+	public List<String> getEmployeeList() {
+		return employeeList;
+	}
+	public void setEmployeeList(List<String> employeeList) {
+		this.employeeList = employeeList;
+	}
 }
