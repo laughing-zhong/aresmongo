@@ -26,7 +26,16 @@
 <script type="text/javascript">
 $(function() { 
 	$("#createAdmin").click(function() {
-    $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
+     $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
+	   function(data){
+          $("#content").val(data.d);
+        }
+	  )	
+	}	
+	)
+	
+	$("#createAccount").click(function() {
+     $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
           $("#content").val(data.d);
         }
@@ -121,13 +130,13 @@ $(function() {
 			
 			<div class="form-group">
 			  <div class="col-lg-2">
-			    <button type="submit" class="btn btn-primary" >Create</button>
+			    <button type="submit" class="btn btn-primary"    id="createAccount" >Create</button>
 			  </div>
 				<div class="col-lg-2">
-				   <button type="submit" class="btn btn-primary" >update</button>
+				   <button type="submit" class="btn btn-primary"  id="updateAccount">update</button>
 				</div>
 				<div class="col-lg-2">
-				   <button type="submit" class="btn btn-primary" >search</button>
+				   <button type="submit" class="btn btn-primary"  id="searchAccunt" >search</button>
 				</div>
 		</div>
       </div>	  

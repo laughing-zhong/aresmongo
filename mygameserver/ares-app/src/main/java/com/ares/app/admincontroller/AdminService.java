@@ -1,7 +1,6 @@
 package com.ares.app.admincontroller;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
