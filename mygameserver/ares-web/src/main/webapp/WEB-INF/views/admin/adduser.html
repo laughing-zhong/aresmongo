@@ -35,13 +35,24 @@ $(function() {
 	)
 	
 	$("#createAccount").click(function() {
+		var contactSelect = document.getElementById("contactList");
+		var val = '';
+		var valname = '';
+		for (var i=0;i<contactSelect.length;i++){
+			if (contactSelect.options[i].selected){
+			val += ','+contactSelect.options[i].value;
+			valname += ','+contactSelect.options[i].text
+			}
+		}
+	   console.log(val); 
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
-          $("#content").val(data.d);
+	    
         }
 	  )	
 	}	
 	);
+
 
 })
  </script>
@@ -116,7 +127,7 @@ $(function() {
 		    <div class="form-group">
 				 <label class="col-lg-2 control-label">联系人</label>
 				 <div class="col-lg-8">				
-		         <select data-toggle="select" multiple class="form-control multiselect multiselect-inverse mrs mbm">
+		         <select data-toggle="select" id ="contactList" multiple class="form-control multiselect multiselect-inverse mrs mbm">
 		          #foreach($item in $playerList)
 					#if($item.id==1)
 			            <option value=$item.id selected>$item.name</option>				
