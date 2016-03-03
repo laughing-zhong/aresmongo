@@ -36,21 +36,37 @@ $(function() {
 	
 	$("#createAccount").click(function() {
 		var contactSelect = document.getElementById("contactList");
-		var val = '';
-		var valname = '';
+		var val_array = [];
+	
 		for (var i=0;i<contactSelect.length;i++){
-			if (contactSelect.options[i].selected){
-			val += ','+contactSelect.options[i].value;
-			valname += ','+contactSelect.options[i].text
-			}
+			if (contactSelect.options[i].selected)
+				val_array.push(contactSelect.options[i].value);
 		}
-	   console.log(val); 
-     $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
+	   console.log(JSON.stringify(val_array)); 
+     $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:JSON.stringify(val_array)},
 	   function(data){
 	    
-        }
-	  )	
-	}	
+                   }
+	       )	
+	    }	
+	);
+	
+	
+   $("#searchAccunt").click(function() {
+        var accountName = $("#name").val()
+		var val_array = [];
+	
+		for (var i=0;i<contactSelect.length;i++){
+			if (contactSelect.options[i].selected)
+				val_array.push(contactSelect.options[i].value);
+		}
+	   console.log(JSON.stringify(val_array)); 
+     $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:JSON.stringify(val_array)},
+	   function(data){
+	    
+                   }
+	       )	
+	    }	
 	);
 
 
@@ -71,7 +87,7 @@ $(function() {
 			 <div class="form-group">
                <label for="inputEmail1" class="col-lg-2 control-label">密码</label>
                <div class="col-lg-6">
-                 <input type="password" class="form-control" id="admin-passwd" >
+                 <input type="password" class="form-control" id="passwd" >
                </div>
             </div>	
 		   <div class="form-group">
@@ -105,12 +121,18 @@ $(function() {
         </div>
       </nav>
 	  
-	   <div class="form-group">
+	      <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">姓名</label>
               <div class="col-lg-6">
                 <input type="email" class="form-control" id="name" >
               </div>
-            </div>
+            </div>		
+		    <div class="form-group">
+               <label for="inputEmail1" class="col-lg-2 control-label">密码</label>
+               <div class="col-lg-6">
+                 <input type="password" class="form-control" id="admin-passwd" >
+               </div>
+            </div>	
 		   <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">Email</label>
               <div class="col-lg-6">

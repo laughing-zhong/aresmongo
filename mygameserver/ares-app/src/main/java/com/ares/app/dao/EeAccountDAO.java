@@ -3,16 +3,16 @@ import org.springframework.stereotype.Repository;
 
 
 
-import com.ares.app.domain.Do.AccountDO;
+import com.ares.app.domain.Do.EeAccountDO;
 import com.ares.framework.dao.mongodb.CollectionName;
 import com.ares.framework.dao.mongodb.MongoDBDAO;
 
 
 @Repository
-@CollectionName("account")
-public class AccountDAO extends MongoDBDAO<AccountDO>{
+@CollectionName("ee_account")
+public class EeAccountDAO extends MongoDBDAO<EeAccountDO>{
 	
-	public AccountDAO(){
-		super(AccountDO.class);
+	public EeAccountDAO(){
+		super(EeAccountDO.class);
 	}
 }

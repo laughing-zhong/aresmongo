@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.ares.app.domain.Do.UserDO;
-import com.ares.app.domain.Do.AccountDO;
+import com.ares.app.domain.Do.EeAccountDO;
 import com.ares.app.redis.dao.UserDAO;
 
 

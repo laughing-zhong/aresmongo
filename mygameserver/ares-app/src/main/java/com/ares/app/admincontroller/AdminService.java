@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ares.app.dao.AdminDAO;
+import com.ares.app.dao.EeAccountDAO;
 import com.ares.app.domain.Do.AdminDO;
+import com.ares.app.domain.Do.EeAccountDO;
 import com.ares.framework.util.IdUtils;
 
 
@@ -20,7 +22,10 @@ import com.ares.framework.util.IdUtils;
 public class AdminService   {	
 	
 	@Inject
-	private  AdminDAO adminDAO;
+	private  AdminDAO adminDAO;	
+	@Inject
+	private EeAccountDAO eeAccountDAO;
+	
 	@RequestMapping(value = "/admin",method=RequestMethod.GET)
 	public  String  getAdminList(Model model){			
 		List<AdminDO> playerList = 	adminDAO.findAll();
@@ -35,6 +40,17 @@ public class AdminService   {
 		}
 		adminDAO.create(adminDO);	
 		return "/admin/adduser";	
+	}
+	
+	@RequestMapping(value="/admin/save/ee_acount",method = RequestMethod.POST)
+	public String saveEeAcount(EeAccountDO eeAccountDO){		
+		if(eeAccountDO.getId() == null){
+			eeAccountDO.setId(IdUtils.generate());
+		    eeAccountDAO.create(eeAccountDO);
+		}
+		else
+			eeAccountDAO.replace(eeAccountDO);
+		return "/admin/adduser";
 	}
 	
 }
