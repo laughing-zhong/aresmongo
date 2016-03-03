@@ -53,16 +53,11 @@ $(function() {
 	
 	
    $("#searchAccunt").click(function() {
-        var accountName = $("#name").val()
-		var val_array = [];
-	
-		for (var i=0;i<contactSelect.length;i++){
-			if (contactSelect.options[i].selected)
-				val_array.push(contactSelect.options[i].value);
-		}
-	   console.log(JSON.stringify(val_array)); 
-     $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:JSON.stringify(val_array)},
+        var accountName = $("#name").val();
+		console.log(accountName);
+     $.post("/rpc/EeAcountService/searchEeAccount", {accountName},
 	   function(data){
+	   console.log(data);
 	    
                    }
 	       )	

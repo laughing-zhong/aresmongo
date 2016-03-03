@@ -3,6 +3,10 @@ package com.ares.framework.rpc;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ares.framework.rpc.json.JsonResponse;
-import com.ares.framework.rpc.json.MsgState;
 import com.ares.framework.service.IService;
-import com.ares.framework.service.JIService;
 import com.ares.framework.service.ServiceMgr;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -121,8 +123,16 @@ public class WebRequestRpc {
 	{
 		int paramCount =  method.getParameterCount();
 		if(paramCount > 0){
-			 Class<?> methosParamType = method.getParameterTypes()[0];  			 
+			 Class<?> methosParamType = method.getParameterTypes()[0]; 
+	   
 			  Object obj = methosParamType.newInstance();
+			     if(IsStringType(methosParamType)){
+			    	 Iterator<String[]>  stringParam = params.values().iterator();
+			    	 if(stringParam.hasNext()){
+			    	    String paramValue =  stringParam.next()[0];
+			    	    return method.invoke(service, paramValue);   		
+			    	 }
+		          }
 		       try {
 					BeanUtils.populate(obj, params);
 				} catch (IllegalAccessException | InvocationTargetException e) {
@@ -132,4 +142,9 @@ public class WebRequestRpc {
 		}
 		return method.invoke(service);	
 	}
+	
+	private  boolean IsStringType(Class<?> clazz) 
+	 {   
+	     return clazz.equals(String.class);      
+	 }
 }

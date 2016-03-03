@@ -7,11 +7,11 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 
+
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-
 import com.mongodb.client.model.Filters;
 
 
@@ -44,11 +44,15 @@ public class SynMongClient implements IMongodbClient{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Document> findObjList(String clltName, String filedName,List<String> uIds) {
-		return  db.getCollection(clltName)
-				.find(Filters.in("", filedName,uIds.iterator()))
-				.into(new ArrayList<Document>());
+//		return  db.getCollection(clltName)
+//				.find(Filters.in(filedName,uIds.iterator()))
+//				.into(new ArrayList<Document>());
+		db.getCollection(clltName).find(Filters.in(filedName, uIds.iterator())).into(new ArrayList<Document>());
+		return null;
+		//return db.getCollection(clltName).find().into(new ArrayList<Document>());
 	}
 
 	@Override

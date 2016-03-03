@@ -19,7 +19,7 @@ import com.ares.framework.util.IdUtils;
 
 
 @Controller
-public class AdminService   {	
+public class AdminController   {	
 	
 	@Inject
 	private  AdminDAO adminDAO;	

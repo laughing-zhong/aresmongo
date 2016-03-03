@@ -12,7 +12,6 @@ import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.json.transcoder.JsonObjectMapper;
 import com.ares.framework.dao.mongodb.client.SynMongClient;
 import com.ares.framework.domain.MongoKeyDO;
-import com.ares.service.exception.FwNotSupportedException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
