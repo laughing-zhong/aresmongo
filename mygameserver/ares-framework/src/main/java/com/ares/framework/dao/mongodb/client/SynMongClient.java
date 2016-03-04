@@ -1,6 +1,7 @@
 package com.ares.framework.dao.mongodb.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.BsonArray;
@@ -54,24 +55,21 @@ public class SynMongClient implements IMongodbClient{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Document> findObjList(String clltName, String filedName,List<BsonValue> uIds) {
-//		return  db.getCollection(clltName)
-//				.find(Filters.in(filedName,uIds.iterator()))
-//				.into(new ArrayList<Document>())
-		
-		FindIterable iterable = db.getCollection(clltName).find(Filters.in(filedName, uIds.iterator()));
-		
-		
-		iterable.forEach(new Block<Document>() {
-		    @Override
-		    public void apply(final Document document) {
-		        System.out.println(document);
-		    }
-		});
-
-		return null;
-		//return db.getCollection(clltName).find().into(new ArrayList<Document>());
+	public List<Document> findObjList(String clltName, String filedName,
+			List<String> uIds) {
+		return db.getCollection(clltName)
+				.find(Filters.in(filedName, Arrays.asList(uIds)))
+				.into(new ArrayList<Document>());
 	}
+	
+	public List<Document> findObjList(String clltName, String filedName,
+			String... uIds) {
+
+		return db.getCollection(clltName).find(Filters.in(filedName, uIds))
+				.into(new ArrayList<Document>());
+	}
+		
+	
 
 	@Override
 	public List<Document> findObjListBetween(String clltName, String filedName,

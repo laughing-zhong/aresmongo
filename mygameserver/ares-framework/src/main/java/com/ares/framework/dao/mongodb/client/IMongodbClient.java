@@ -17,7 +17,8 @@ public interface IMongodbClient {
 	List<String> getDbs();
 	List<String> getCollections(String db);
 
-	public List<Document> findObjList(String clltName,String filedName,List<BsonValue>uIds);
+	public List<Document> findObjList(String clltName,String filedName,List<String>uIds);
+	public List<Document> findObjList(String clltName,String filedName,String ... uIds);; 
 	public List<Document> findObjListBetween(String clltName,String filedName,int low,int high);
 	public List<Document> findObjListLarger(String clltName,String filedName,int targetCount);
 	public List<Document> findObjListBelower(String clltName,String filedName,int targetCount);
