@@ -91,7 +91,7 @@ public class ContentServiceImpl implements ContentService, ApplicationEventPubli
 		// let's generate an id if not present. good for quick iteration.
 	//	if ( StringUtils.isNullOrWhitespace( storeVersion ) ) storeVersion = IdUtils.generate();
 
-		vipConfigDAO.put(new VipConfigDO(CURRENT_VIP_KEY,content.getVipConfig()));
+		vipConfigDAO.upsert(new VipConfigDO(CURRENT_VIP_KEY,content.getVipConfig()));
 
 		// invalidate cache
 		cacheManager.invalidateAll();

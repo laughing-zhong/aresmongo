@@ -17,7 +17,7 @@ public class EeAcountService implements IService{
 	private EeAccountDAO eeAccountDAO;
 	
 	public EeAccountDO  searchEeAccount(String accountName){		
-		List<EeAccountDO> eeAccountList = eeAccountDAO.findDos("name", accountName);
+		List<EeAccountDO> eeAccountList = eeAccountDAO.findDos("_id", accountName);
 		int count = eeAccountList.size();
 		if(count > 1){
 			System.out.println(" select userName  "+accountName+" count = "+count);

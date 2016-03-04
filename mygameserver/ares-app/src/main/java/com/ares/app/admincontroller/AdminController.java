@@ -14,6 +14,7 @@ import com.ares.app.dao.AdminDAO;
 import com.ares.app.dao.EeAccountDAO;
 import com.ares.app.domain.Do.AdminDO;
 import com.ares.app.domain.Do.EeAccountDO;
+import com.ares.app.service.exception.DataException;
 import com.ares.framework.util.IdUtils;
 
 
@@ -45,12 +46,14 @@ public class AdminController   {
 	@RequestMapping(value="/admin/save/ee_acount",method = RequestMethod.POST)
 	public String saveEeAcount(EeAccountDO eeAccountDO){		
 		if(eeAccountDO.getId() == null){
-			eeAccountDO.setId(IdUtils.generate());
-		    eeAccountDAO.create(eeAccountDO);
+			eeAccountDO.setId(eeAccountDO.getName());
 		}
-		else
-			eeAccountDAO.replace(eeAccountDO);
+		boolean ret = eeAccountDAO.upsert(eeAccountDO);
+		if(!ret){
+			System.out.println("upsert faild");
+		}		
 		return "/admin/adduser";
 	}
+	
 	
 }

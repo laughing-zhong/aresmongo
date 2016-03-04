@@ -66,7 +66,6 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 		return null;
 	}
 	
-	@Override
 	public void put(DomainObject value) {
 	    String strValue = generatorJsonStr(value);
 	    if(strValue == null){
@@ -76,7 +75,7 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 	    saveRedis(key,strValue);
 	}
 	
-	
+//	
 	@Override
 	public DomainObject findById( String id){	
 		final String key = this.getKeyFromId(id);
@@ -120,9 +119,10 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 	}
 
 	@Override
-	public void replace(DomainObject objectToPersist)
+	public boolean  replace(DomainObject objectToPersist)
 			throws KeyNotFoundException, DAOException {
 		  this.put(objectToPersist);	
+		  return true;
 	}
 
 
@@ -195,6 +195,12 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 	@Override
 	public 	List<DomainObject> findDos(String fileName,String ... targetId){
 		  throw new FwNotSupportedException(" no surpport");
+	}
+
+	@Override
+	public boolean upsert(DomainObject objectToPersist) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

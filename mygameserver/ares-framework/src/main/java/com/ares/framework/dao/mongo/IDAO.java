@@ -22,6 +22,17 @@ public interface IDAO<DO>  extends IFAccessEorror {
 	 *                      DaoException will be thrown
 	 */
 	void create( DO objectToPersist ) throws DAOException;
+	
+
+	/**
+	 * update or insert a T object in the database. If the object
+	 * does NOT exist in the database, this will  create new .
+	 *
+	 * @param objectToPersist The DomainObject to save to the database
+	 * @throws DAOException If there was any serious issues in the Dao layer, a
+	 *                      DaoException will be thrown
+	 */
+	boolean upsert(DO objectToPersist);
 
 	/**
 	 * Replaces a T object in the database. If the object
@@ -31,17 +42,9 @@ public interface IDAO<DO>  extends IFAccessEorror {
 	 * @throws DAOException If there was any serious issues in the Dao layer, a
 	 *                      DaoException will be thrown
 	 */
-	void replace( DO objectToPersist ) throws KeyNotFoundException, DAOException;
+	boolean replace( DO objectToPersist ) throws KeyNotFoundException, DAOException;
 
-	/**
-	 * Put a T object in the database. This method does
-	 * not care if there is an existing value in the database or not.
-	 *
-	 * @param objectToPersist The DomainObject to put into the database
-	 * @throws DAOException If there was any serious issues in the Dao layer, a
-	 *                      DaoException will be thrown
-	 */
-	void put( DO objectToPersist ) throws DAOException;
+
 
 	/**
 	 * Finds a T object by a given targetId.

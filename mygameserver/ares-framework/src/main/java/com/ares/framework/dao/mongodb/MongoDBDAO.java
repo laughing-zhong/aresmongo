@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bson.BsonArray;
+import org.bson.BsonString;
+import org.bson.BsonValue;
 import org.bson.Document;
 
 import com.ares.framework.dao.exception.DAOException;
@@ -69,7 +72,13 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 
 	@Override
 	public List<DomainDO> findByIds(List<String> ids) throws DAOException {
-	    List<Document> documents = this.mgDataSource.getMgConnection().findObjList(this.collectionName, SynMongClient.MONGOID, ids);
+		
+		List<BsonValue> targetIdList = new BsonArray();
+		for( int i = 0 ; i <  ids.size(); ++i){
+			BsonString bs = new BsonString (ids.get(i));
+			targetIdList.add(bs);
+		}	
+	    List<Document> documents = this.mgDataSource.getMgConnection().findObjList(this.collectionName, SynMongClient.MONGOID, targetIdList);
 	    List<DomainDO> domainDoList = new ArrayList<DomainDO>();
 	    for(Document document :documents){    	
 	    	domainDoList.add(this.ducument2DomainDO(document));
@@ -88,8 +97,14 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	}
 	
 	@Override
-	public List<DomainDO> findDocs(String filedName,List<String> targetIds){		
-		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIds);
+	public List<DomainDO> findDocs(String filedName,List<String> targetIds){
+		
+		List<BsonValue> targetIdList = new BsonArray();
+		for( int i = 0 ; i <  targetIds.size(); ++i){
+			BsonString bs = new BsonString (targetIds.get(i));
+			targetIdList.add(bs);
+		}	
+		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIdList);
 		List<DomainDO> domainList = new ArrayList<DomainDO>();
 		for(Document doc : docList){
 			domainList.add(this.ducument2DomainDO(doc));
@@ -99,17 +114,18 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	
 	@Override
 	public 	List<DomainDO> findDos(String filedName,String ... targetId){
-		
-		List<String> targetIdList = new ArrayList<String>();
+		List<BsonValue> targetIdList = new BsonArray();
 		for( int i = 0 ; i <  targetId.length; ++i){
-			targetIdList.add(targetId[i]);
+			BsonString bs = new BsonString (targetId[i]);
+			targetIdList.add(bs);
 		}
-		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIdList);
+		List<Document> docList = this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIdList);
 		List<DomainDO> domainList = new ArrayList<DomainDO>();
 		for(Document doc : docList){
 			domainList.add(this.ducument2DomainDO(doc));
 		}
 		return domainList;			
 	}
+
 	
 }

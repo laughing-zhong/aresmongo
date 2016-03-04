@@ -1,7 +1,9 @@
 package com.ares.framework.dao.mongodb;
 
 import javax.inject.Inject;
+
 import org.bson.Document;
+
 import com.ares.framework.dao.exception.DAOException;
 import com.ares.framework.dao.exception.KeyNotFoundException;
 import com.ares.framework.dao.mongo.IDAO;
@@ -42,17 +44,20 @@ public abstract class AbstractMongodbDAO <DomainDO extends MongoKeyDO>  implemen
 	}
 
 	@Override
-	public void replace(DomainDO objectToPersist) throws KeyNotFoundException,
+	public boolean replace(DomainDO objectToPersist) throws KeyNotFoundException,
 			DAOException {
 		  Document document = new Document(SynMongClient.MONGOID,objectToPersist.getId()).append(DATA, JsonUtil.genJsonStr(objectToPersist));
-		  this.mgDataSource.getMgConnection().update(this.collectionName, document);
-		
+		return  this.mgDataSource.getMgConnection().update(this.collectionName, document);		
 	}
+	
 
 	@Override
-	public void put(DomainDO objectToPersist) throws DAOException {
-		create(objectToPersist);			
+	public boolean upsert(DomainDO objectToPersist) {
+		  Document document = new Document(SynMongClient.MONGOID,objectToPersist.getId()).append(DATA, JsonUtil.genJsonStr(objectToPersist));
+		 return this.mgDataSource.getMgConnection().upsert(this.collectionName, document);
 	}
+
+
 	
 	@Override
 	public boolean delete(DomainDO targetObject) throws DAOException {

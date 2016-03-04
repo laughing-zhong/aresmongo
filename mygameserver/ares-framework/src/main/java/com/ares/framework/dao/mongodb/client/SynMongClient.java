@@ -3,16 +3,20 @@ package com.ares.framework.dao.mongodb.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.BsonArray;
+import org.bson.BsonValue;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-
-
+import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 
 
 public class SynMongClient implements IMongodbClient{
@@ -22,9 +26,10 @@ public class SynMongClient implements IMongodbClient{
 	public final static String MONGDATA = "d";
 	private  MongoClient mongoClient;
 	private  MongoDatabase db ;
+	private  UpdateOptions updateOpt = 	 new UpdateOptions();
 	public SynMongClient(MongdbConfigBean  configBean){	
-         mongoClient = new MongoClient(configBean.getAddr(),configBean.getPort());
-      
+         mongoClient = new MongoClient(configBean.getAddr(),configBean.getPort());      
+         updateOpt.upsert(true);
          db = mongoClient.getDatabase(configBean.getDbName());	
 	}
 	@Override
@@ -39,18 +44,31 @@ public class SynMongClient implements IMongodbClient{
 	}
 
 	@Override
-	public void update(String clltName, Document document) {
-		db.getCollection(clltName).replaceOne(Filters.eq(MONGOID, document.get(MONGOID)), document);
+	public boolean update(String clltName, Document document) {
+		UpdateResult result = db.getCollection(clltName).replaceOne(Filters.eq(MONGOID, document.get(MONGOID)), document);
+		if(result.getModifiedCount() == 1)
+			return true;
+		return false;
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Document> findObjList(String clltName, String filedName,List<String> uIds) {
+	public List<Document> findObjList(String clltName, String filedName,List<BsonValue> uIds) {
 //		return  db.getCollection(clltName)
 //				.find(Filters.in(filedName,uIds.iterator()))
-//				.into(new ArrayList<Document>());
-		db.getCollection(clltName).find(Filters.in(filedName, uIds.iterator())).into(new ArrayList<Document>());
+//				.into(new ArrayList<Document>())
+		
+		FindIterable iterable = db.getCollection(clltName).find(Filters.in(filedName, uIds.iterator()));
+		
+		
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+		        System.out.println(document);
+		    }
+		});
+
 		return null;
 		//return db.getCollection(clltName).find().into(new ArrayList<Document>());
 	}
@@ -82,9 +100,12 @@ public class SynMongClient implements IMongodbClient{
 		return db.getCollection(clltName).find(filter).into(new ArrayList<Document>());				
 	}
 	@Override
-	public void delete(String clltName,String targetId) {
+	public boolean delete(String clltName,String targetId) {
 		// TODO Auto-generated method stub
-		 db.getCollection(clltName).deleteOne(Filters.eq(MONGOID, targetId));	
+		DeleteResult result =  db.getCollection(clltName).deleteOne(Filters.eq(MONGOID, targetId));	
+		if(result.getDeletedCount() == 1l)
+			return true;
+		return false;
 	}
 	@Override
 	public List<String> getDbs() {
@@ -110,6 +131,14 @@ public class SynMongClient implements IMongodbClient{
 	@Override
 	public List<Document>findAll(String clltName){		
 		 return  db.getCollection(clltName).find().into(new ArrayList<Document>());
+	}
+	
+	@Override
+	public boolean upsert(String clltName, Document document) {
+		UpdateResult result = db.getCollection(clltName).replaceOne(Filters.eq(MONGOID, document.get(MONGOID)), document,updateOpt);
+		if(result.getModifiedCount() < 2)
+			return true;
+		return false;
 	}
 
 }
