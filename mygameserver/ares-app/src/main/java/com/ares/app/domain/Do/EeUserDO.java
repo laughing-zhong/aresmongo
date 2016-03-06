@@ -4,22 +4,15 @@ import java.util.List;
 
 import com.ares.framework.domain.MongoKeyDO;
 
-public class EeAccountDO extends MongoKeyDO {
+public class EeUserDO extends MongoKeyDO {
 	
-	public EeAccountDO(){}
+	public EeUserDO(){}
 	private String name;
-	private String passwd;
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getPasswd() {
-		return passwd;
-	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
 	}
 	public String getEmail() {
 		return email;

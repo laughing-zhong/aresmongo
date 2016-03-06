@@ -6,18 +6,18 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.ares.app.dao.EeAccountDAO;
-import com.ares.app.domain.Do.EeAccountDO;
+import com.ares.app.dao.EeUserDAO;
+import com.ares.app.domain.Do.EeUserDO;
 import com.ares.framework.service.IService;
 
 @Component
 public class EeAcountService implements IService{
 	
 	@Inject
-	private EeAccountDAO eeAccountDAO;
+	private EeUserDAO eeAccountDAO;
 	
-	public EeAccountDO  searchEeAccount(String accountName){		
-		List<EeAccountDO> eeAccountList = eeAccountDAO.findDos("_id", accountName);
+	public EeUserDO  searchEeAccount(String accountName){		
+		List<EeUserDO> eeAccountList = eeAccountDAO.findDos("_id", accountName);
 		int count = eeAccountList.size();
 		if(count > 1){
 			System.out.println(" select userName  "+accountName+" count = "+count);

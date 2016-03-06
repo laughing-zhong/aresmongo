@@ -33,13 +33,20 @@
     </bean>
 
    <!--  <context:component-scan base-package="com.ea.vanguard.game.simulator.rest"/>  --> 
-
+    <mvc:interceptors >   
+        <mvc:interceptor>   
+            <mvc:mapping path="/view" />
+            <mvc:mapping path="/rpc" />
+            <bean class="com.ares.framework.rpc.filter.SessionInterceptor"/>   
+        </mvc:interceptor> 
+   </mvc:interceptors>
 
 
 
 	<!-- selects a static view for rendering without the need for an explicit 
 		controller -->
-	<mvc:view-controller path="/" view-name="index" />
+	<!-- <mvc:view-controller path="/" view-name="index" /> -->
+	<mvc:view-controller path="/" view-name="login" />
     <mvc:view-controller path="default" view-name="default" />	
 	<!--  <mvc:view-controller path="/admin" view-name="/admin/adduser" />-->
 	<mvc:view-controller path="/logout_success" view-name="logout_success" />

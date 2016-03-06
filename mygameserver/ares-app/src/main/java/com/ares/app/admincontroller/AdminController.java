@@ -10,11 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ares.app.bean.EEAcountBean;
+import com.ares.app.dao.AccountDAO;
 import com.ares.app.dao.AdminDAO;
-import com.ares.app.dao.EeAccountDAO;
+import com.ares.app.dao.EeUserDAO;
+import com.ares.app.domain.Do.AccountDO;
 import com.ares.app.domain.Do.AdminDO;
-import com.ares.app.domain.Do.EeAccountDO;
+import com.ares.app.domain.Do.EeUserDO;
 import com.ares.framework.util.IdUtils;
+
 
 
 
@@ -24,7 +28,9 @@ public class AdminController   {
 	@Inject
 	private  AdminDAO adminDAO;	
 	@Inject
-	private EeAccountDAO eeAccountDAO;
+	private EeUserDAO eeUserDAO;
+	@Inject
+	private AccountDAO accountDAO;
 	
 	@RequestMapping(value = "/admin",method = RequestMethod.GET)
 	public  String  getAdminList(Model model){			
@@ -43,11 +49,24 @@ public class AdminController   {
 	}
 	
 	@RequestMapping(value="/admin/save/ee_acount",method = RequestMethod.POST)
-	public String saveEeAcount(EeAccountDO eeAccountDO){		
-		if(eeAccountDO.getId() == null){
-			eeAccountDO.setId(eeAccountDO.getName());
+	public String saveEeAcount(EEAcountBean eeAccountDO){
+		AccountDO accountDO = this.accountDAO.findById(eeAccountDO.getName());
+		EeUserDO eeUserDO = new EeUserDO();
+		if(accountDO == null){
+			accountDO = new AccountDO();
+			accountDO.setId(eeAccountDO.getName());
+			accountDO.setName(eeAccountDO.getName());
+			accountDO.setPassword(eeAccountDO.getPasswd());
+			this.accountDAO.create(accountDO);
+			String uid = IdUtils.generate();		
+			eeUserDO.setId(uid);		
 		}
-		boolean ret = eeAccountDAO.upsert(eeAccountDO);
+		eeUserDO.setEmail(eeAccountDO.getEmail());
+		eeUserDO.setContactList(eeAccountDO.getContactList());
+		eeUserDO.setName(eeAccountDO.getName());
+		eeUserDO.setTeleno(eeAccountDO.getTeleno());
+	
+		boolean ret = eeUserDAO.upsert(eeUserDO);
 		if(!ret){
 			System.out.println("upsert faild");
 		}		
