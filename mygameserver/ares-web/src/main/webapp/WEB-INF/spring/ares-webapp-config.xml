@@ -75,7 +75,7 @@
 	<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
-		<property name="suffix" value=".html" />
+		<property name="suffix" value=".vm" />
 		<property name="order" value="1" />
 	    <property name="contentType" value="text/html;charset=UTF-8"/> 
 

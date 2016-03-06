@@ -14,7 +14,6 @@ import com.ares.app.dao.AdminDAO;
 import com.ares.app.dao.EeAccountDAO;
 import com.ares.app.domain.Do.AdminDO;
 import com.ares.app.domain.Do.EeAccountDO;
-import com.ares.app.service.exception.DataException;
 import com.ares.framework.util.IdUtils;
 
 
@@ -27,19 +26,19 @@ public class AdminController   {
 	@Inject
 	private EeAccountDAO eeAccountDAO;
 	
-	@RequestMapping(value = "/admin",method=RequestMethod.GET)
+	@RequestMapping(value = "/admin",method = RequestMethod.GET)
 	public  String  getAdminList(Model model){			
 		List<AdminDO> playerList = 	adminDAO.findAll();
 		model.addAttribute("playerList", playerList);
 		return "/admin/adduser";	
 	}
 	
-	@RequestMapping(value = "/admin/save/admin",method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/save/admin",method = RequestMethod.POST)
 	public  String  saveAdmin(AdminDO adminDO,Model model){	
 		if(adminDO.getId() == null){
-			adminDO.setId(IdUtils.generate());
+			adminDO.setId(adminDO.getName());
 		}
-		adminDAO.create(adminDO);	
+		adminDAO.upsert(adminDO);	
 		return "/admin/adduser";	
 	}
 	

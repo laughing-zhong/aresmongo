@@ -6,14 +6,6 @@ import java.util.List;
 import com.ares.framework.domain.MongoKeyDO;
 
 public class AdminDO extends MongoKeyDO{
-
-	private String  adminId;
-	public String getAdminId() {
-		return adminId;
-	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
-	}
 	private String  email;
 	private String passwd;
 	public String getPasswd() {

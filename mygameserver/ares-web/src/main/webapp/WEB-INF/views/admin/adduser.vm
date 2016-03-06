@@ -24,6 +24,7 @@
   <script src="/resources/js/assets/js/application.js"></script>
 	
 <script type="text/javascript">
+var request_url="";
 $(function() { 
 	$("#createAdmin").click(function() {
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
@@ -42,8 +43,9 @@ $(function() {
 			if (contactSelect.options[i].selected)
 				val_array.push(contactSelect.options[i].value);
 		}
-	   console.log(JSON.stringify(val_array)); 
-     $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:"[\"1\",\"22\"]"},
+		console.log(val_array.toString());
+	   console.log(val_array.toLocaleString()); 
+     $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:val_array.toLocaleString()},
 	   function(data){
 	    
                    }
@@ -63,6 +65,21 @@ $(function() {
 	       )	
 	    }	
 	);
+	
+	$("[name='optionsRadios1']").on("change", 
+	function (e) { 
+		var group1 = $("[name='optionsRadios1']").filter(":checked"); 
+		var acType = group1.attr("value");
+		console.log(acType); 
+		if(acType == 1){
+			request_url = /admin/save/admin;
+			document.getElementById("contactList").style.visibility="hidden";
+			}
+		else 
+			document.getElementById("contactList").style.visibility="visible";
+			
+	} 
+	); 
 
 
 })
@@ -70,7 +87,7 @@ $(function() {
   </head>
   <body>
      <div class="col-md-4">
-      <h4>Horizontal form</h4>
+      <h4>admin account</h4>
         <form class="form-horizontal" role="form">
             <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">姓名</label>
@@ -82,7 +99,7 @@ $(function() {
 			 <div class="form-group">
                <label for="inputEmail1" class="col-lg-2 control-label">密码</label>
                <div class="col-lg-6">
-                 <input type="password" class="form-control" id="passwd" >
+                 <input type="password" class="form-control" id="admin-passwd" >
                </div>
             </div>	
 		   <div class="form-group">
@@ -119,13 +136,13 @@ $(function() {
 	      <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">姓名</label>
               <div class="col-lg-6">
-                <input type="email" class="form-control" id="name" >
+                <input type="text" class="form-control" id="name" >
               </div>
             </div>		
 		    <div class="form-group">
                <label for="inputEmail1" class="col-lg-2 control-label">密码</label>
                <div class="col-lg-6">
-                 <input type="password" class="form-control" id="admin-passwd" >
+                 <input type="password" class="form-control" id="passwd" >
                </div>
             </div>	
 		   <div class="form-group">
@@ -141,7 +158,19 @@ $(function() {
               </div>
             </div>	
 			
-		    <div class="form-group">
+		<!--   <div class="form-group">
+				<label class="radio" for="radio100">
+					<input name="optionsRadios1" type="radio" data-toggle="radio" value="1" id="radio100" required>
+						Admin
+              	</label>
+				<label class="radio" for="radio101">
+					<input name="optionsRadios1" type="radio" data-toggle="radio" value="2" id="radio101" required checked>
+						Ee
+              	</label>
+		   </div>
+		   -->
+			
+		    <div class="form-group" id ="contactList">
 				 <label class="col-lg-2 control-label">联系人</label>
 				 <div class="col-lg-8">				
 		         <select data-toggle="select" id ="contactList" multiple class="form-control multiselect multiselect-inverse mrs mbm">
@@ -166,8 +195,9 @@ $(function() {
 				<div class="col-lg-2">
 				   <button type="submit" class="btn btn-primary"  id="searchAccunt" >search</button>
 				</div>
-		</div>
+		     </div>
       </div>	  
 	 </form>
+ </div>
   </body>
 </html>
