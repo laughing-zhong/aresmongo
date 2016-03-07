@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ares.app.bean.AdminBean;
 import com.ares.app.bean.EEAcountBean;
 import com.ares.app.dao.AccountDAO;
 import com.ares.app.dao.AdminDAO;
@@ -40,11 +41,30 @@ public class AdminController   {
 	}
 	
 	@RequestMapping(value = "/admin/save/admin",method = RequestMethod.POST)
-	public  String  saveAdmin(AdminDO adminDO,Model model){	
-		if(adminDO.getId() == null){
-			adminDO.setId(adminDO.getName());
+	public  String  saveAdmin(AdminBean adminBean,Model model){
+		AccountDO accountDO = this.accountDAO.findById(adminBean.getName());	
+		if(accountDO != null){
+			model.addAttribute("errormsg", "user "+adminBean.getName()+" exist");
+			return "404";	
 		}
-		adminDAO.upsert(adminDO);	
+
+		String uid = IdUtils.generate();
+		//create account
+		accountDO = new AccountDO();
+		accountDO.setId(adminBean.getName());
+		accountDO.setName(adminBean.getName());
+		accountDO.setPassword(adminBean.getPasswd());
+		accountDO.setUserID(uid);
+		this.accountDAO.create(accountDO);
+		
+		//create admin 
+		AdminDO adminDo = new AdminDO();	
+		adminDo.setId(uid);
+		adminDo.setName(adminBean.getName());
+		adminDo.setEmail(adminBean.getEmail());
+		adminDo.setTeleno(adminBean.getTeleno());
+
+		adminDAO.upsert(adminDo);	
 		return "/admin/adduser";	
 	}
 	

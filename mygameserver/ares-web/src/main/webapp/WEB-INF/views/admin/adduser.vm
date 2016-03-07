@@ -29,6 +29,7 @@ $(function() {
 	$("#createAdmin").click(function() {
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
+	   console.log(data);
           $("#content").val(data.d);
         }
 	  )	

@@ -7,7 +7,7 @@ import com.ares.framework.dao.mongodb.CollectionName;
 import com.ares.framework.dao.mongodb.MongoDBDAO;
 
 @Repository
-@CollectionName("admin")
+@CollectionName("account")
 public class AccountDAO extends MongoDBDAO<AccountDO>{
 
 	public AccountDAO() {

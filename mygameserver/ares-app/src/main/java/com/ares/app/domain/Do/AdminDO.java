@@ -7,13 +7,7 @@ import com.ares.framework.domain.MongoKeyDO;
 
 public class AdminDO extends MongoKeyDO{
 	private String  email;
-	private String passwd;
-	public String getPasswd() {
-		return passwd;
-	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
-	}
+
 	public String getEmail() {
 		return email;
 	}
