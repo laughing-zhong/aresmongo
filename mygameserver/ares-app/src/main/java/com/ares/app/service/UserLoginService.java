@@ -27,5 +27,4 @@ public class UserLoginService  implements IService{
 			return "404";
 		}
 	}
-
 }
