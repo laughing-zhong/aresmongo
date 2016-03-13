@@ -20,7 +20,7 @@
     <![endif]-->
   </head>
   <body>
-   <p> $errormsg </p>
+   <p> ${errormsg}</p>
 
   </body>
 </html>

@@ -175,13 +175,13 @@ $(function() {
 				 <label class="col-lg-2 control-label">联系人</label>
 				 <div class="col-lg-8">				
 		         <select data-toggle="select" id ="contactList" multiple class="form-control multiselect multiselect-inverse mrs mbm">
-		          #foreach($item in $playerList)
-					#if($item.id==1)
-			            <option value=$item.id selected>$item.name</option>				
-					#else
-					    <option value=$item.id >$item.name</option>	
-				   #end						
-			      #end
+		          <% for( player in playerList) {
+					if( player.id == 1) {		%>		
+			            <option value = ${player.id} selected > ${player.name} </option>
+			           <% }else { %>
+					    <option value = ${player.id} > ${player.name} </option>
+					  <% }	
+					 }  %>
                   </select>
                 </div>
              </div>

@@ -21,8 +21,7 @@ public class UserLoginService  implements IService{
 			model.addAttribute("errormsg", "login faild");
 			return "404";
 		}
-		return "defalut";
-		
+		return "defalut";		
 	}
 
 }

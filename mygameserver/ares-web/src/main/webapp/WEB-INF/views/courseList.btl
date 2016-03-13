@@ -13,7 +13,7 @@
                 <td>Start</td>
                 <td>End</td>
             </tr>
-        #foreach($course in $courses)
+        @ for($course in $courses)
             <tr>
                 <td>
                     <a href="dispalyCourse.htm?id=${course.id}">
