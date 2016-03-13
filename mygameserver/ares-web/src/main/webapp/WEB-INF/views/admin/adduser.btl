@@ -77,8 +77,7 @@ $(function() {
 			document.getElementById("contactList").style.visibility="hidden";
 			}
 		else 
-			document.getElementById("contactList").style.visibility="visible";
-			
+			document.getElementById("contactList").style.visibility="visible";			
 	} 
 	); 
 
