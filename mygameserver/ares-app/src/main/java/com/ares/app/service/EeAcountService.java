@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.ares.app.dao.EeUserDAO;
 import com.ares.app.domain.Do.EeUserDO;
-import com.ares.framework.service.IService;
+import com.ares.framework.service.RpcService;
 
 @Component
-public class EeAcountService implements IService{
+public class EeAcountService implements RpcService{
 	
 	@Inject
 	private EeUserDAO eeAccountDAO;

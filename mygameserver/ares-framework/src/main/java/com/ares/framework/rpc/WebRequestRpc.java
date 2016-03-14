@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ares.framework.service.IService;
+import com.ares.framework.service.RpcService;
 import com.ares.framework.service.ServiceMgr;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -42,7 +42,7 @@ public class WebRequestRpc {
 	public String  CallView(@PathVariable String serviceName,
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
-		IService service = serviceMgr.GetService(serviceName);
+		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
 			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
 		    return "404";
@@ -62,22 +62,10 @@ public class WebRequestRpc {
 	public Object  CallRpc(@PathVariable String serviceName,
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
-		HttpSession session= req.getSession(false);
-		Cookie[]  cookies =  req.getCookies();
-		if(cookies != null){
-			Cookie cookie = cookies[0];
-			System.out.println("VVVVVVVVVVVVVVV   value = "+cookie.getValue()+"  name ="+cookie.getName());
-		}
-//		if(session == null){
-//			session = req.getSession(true);
-//			session.setAttribute("name", "wesley");
+//		if(session.getAttribute("name") == null){
+//			//se
 //		}
-//		else{
-//			String name = (String)session.getAttribute("name");
-//			System.out.println("get name = "+name);
-//		}
-
-		IService service = serviceMgr.GetService(serviceName);
+		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
 			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
 		    return "404";
@@ -103,7 +91,7 @@ public class WebRequestRpc {
 	}
 	
 	
-	private  String CallObjMethod(IService service, Method method, Map<String,String[]> params,Model model) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
+	private  String CallObjMethod(RpcService service, Method method, Map<String,String[]> params,Model model) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
 	{
 		 Class<?> methosParamType = method.getParameterTypes()[0];  
 		 
@@ -116,7 +104,7 @@ public class WebRequestRpc {
 	   return  (String)method.invoke(service, obj,model);        
 	}
 	
-	private  Object CallObjMethod(IService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
+	private  Object CallObjMethod(RpcService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
 	{
 		int paramCount =  method.getParameterCount();
 		if(paramCount > 0){
@@ -140,8 +128,7 @@ public class WebRequestRpc {
 		return method.invoke(service);	
 	}
 	
-	private  boolean IsStringType(Class<?> clazz) 
-	 {   
+	private  boolean IsStringType(Class<?> clazz) {   
 	     return clazz.equals(String.class);      
 	 }
 }

@@ -22,9 +22,29 @@
       <script src="js/vendor/html5shiv.js"></script>
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
+    
+  <script src="/resources/js/vendor/jquery.min.js"></script>
+  <script src="/resources/js/flat-ui.min.js"></script>
+  <script src="/resources/js/assets/js/application.js"></script>
+  <script src="/resources/js/jquery.cookie.js"></script>
+  <script type="text/javascript">
+	$(function() { 
+		$("#login").click(function() {
+     	$.post("view/UserLoginService/login", {accountID: $("#accountID").val(), pwd: $("#pwd").val()},
+	  	    function(data){
+	   		console.log(data);
+          	$.cookie('session_id',$("#accountID").val());
+          	console.log($.cookie('session_id'));
+          	 window.location.href='default'; 
+        	} 
+	  	   )	
+	   }	
+	  );
+	})
+	</script>
   </head>
   <body>
-       <form class="form-horizontal" action="view/UserLoginService/login" method=post>
+       <form class="form-horizontal" >
 			<div class="form-group">
               <label  class="col-lg-2 control-label">账号</label>
               <div class="col-lg-6">
@@ -40,7 +60,7 @@
             </div>
 			<div class="form-group">
 			  <div class="col-lg-2">
-			    <button type="submit" class="btn btn-primary" >Login</button>
+			    <button type="submit" class="btn btn-primary" id="login" >Login</button>
 			  </div>
             </div>
        </form>

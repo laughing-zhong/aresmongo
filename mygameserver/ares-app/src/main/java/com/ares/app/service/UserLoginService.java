@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import com.ares.app.bean.AccountBean;
 import com.ares.app.dao.AccountDAO;
 import com.ares.app.domain.Do.AccountDO;
-import com.ares.framework.service.IService;
+import com.ares.framework.service.RpcService;
 
 @Component
-public class UserLoginService  implements IService{
+public class UserLoginService  implements RpcService{
 	@Inject
 	private AccountDAO accountDAO;
 	public String  login(AccountBean account,Model model){

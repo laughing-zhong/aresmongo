@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ares.framework.service.IService;
+import com.ares.framework.service.RpcService;
 import com.ares.framework.service.ServiceMgr;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
@@ -46,7 +46,7 @@ public class ProtocServiceRPC {
 			String serviceName = reqeustEnvelope.getServiceName();
 			String methodName = reqeustEnvelope.getMethodName();
 
-			IService service = serviceMgr.GetService(serviceName);
+			RpcService service = serviceMgr.GetService(serviceName);
 			if (service == null) {
 				responseEnvelope.setCode(ResponseCode.NO_SERVICE);
 
@@ -78,7 +78,7 @@ public class ProtocServiceRPC {
 	}
 	
 	
-	private  Message CallObjMethod(IService service, Method method,ByteString  requestData) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+	private  Message CallObjMethod(RpcService service, Method method,ByteString  requestData) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		 Class<?> methosParamType = method.getParameterTypes()[0]; 
 		 Method parserMethod = methosParamType.getMethod("parseFrom", com.google.protobuf.ByteString.class);

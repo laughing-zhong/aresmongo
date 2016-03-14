@@ -13,10 +13,10 @@ import com.ares.app.bean.MongodbInfoBean;
 import com.ares.app.bean.WirteMongbdBean;
 import com.ares.framework.dao.mongodb.client.MgDataSource;
 import com.ares.framework.dao.mongodb.client.SynMongClient;
-import com.ares.framework.service.IService;
+import com.ares.framework.service.RpcService;
 
 @Component
-public class MongdbUtilsService  implements IService{
+public class MongdbUtilsService  implements RpcService{
 	
 	private final static String DATA="d";
 	@Inject

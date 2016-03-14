@@ -22,15 +22,17 @@
   <script src="/resources/js/vendor/jquery.min.js"></script>
   <script src="/resources/js/flat-ui.min.js"></script>
   <script src="/resources/js/assets/js/application.js"></script>
+  <script src="/resources/js/jquery.cookie.js"></script>
 	
 <script type="text/javascript">
 var request_url="";
 $(function() { 
 	$("#createAdmin").click(function() {
+	  console.log($.cookie('session_id')); 
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
 	   console.log(data);
-          $("#content").val(data.d);
+        console.log($.cookie('session_id')); 
         }
 	  )	
 	}	
@@ -80,8 +82,6 @@ $(function() {
 			document.getElementById("contactList").style.visibility="visible";			
 	} 
 	); 
-
-
 })
  </script>
   </head>

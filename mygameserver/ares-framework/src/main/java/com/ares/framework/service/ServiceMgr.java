@@ -14,23 +14,22 @@ import org.springframework.stereotype.Component;
 public class ServiceMgr {
 
    @Inject
-   private List<IService> rpcServices;
+   private List<RpcService> rpcServices;
    	
 	@PostConstruct
 	public void Init()
 	{
-		for(IService service : rpcServices){
+		for(RpcService service : rpcServices){
 			String serviceName = service.getClass().getSimpleName();
 			serviceMaps.put(serviceName, service);
 		}
 	}
 	
 	
-  public IService  GetService(String serviceName)
-  {
+  public RpcService  GetService(String serviceName){
 	  return serviceMaps.get(serviceName);
   }
     
-	private   Map<String,IService>   serviceMaps = new HashMap<>();
+	private   Map<String,RpcService>   serviceMaps = new HashMap<>();
 
 }
