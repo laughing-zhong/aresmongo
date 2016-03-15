@@ -41,7 +41,7 @@ public class AccountLoginController {
 			session.setAttribute(Const.USER_ID, userDO.getUserID());
 
 			RedirectView redirecView = new RedirectView();
-			redirecView.setUrl("topicList");
+			redirecView.setUrl("/view/NoteService/topicList");
 			redirecView.setExposePathVariables(true);
 			redirecView.setExpandUriTemplateVariables(false);
 			redirecView.setExposeModelAttributes(false);

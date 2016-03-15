@@ -21,7 +21,7 @@ public class NoteService implements RpcService{
 	@Inject
 	private NoteDAO noteDAO;
 	
-	public RpcResponse getTopics(Model modle){		
+	public RpcResponse topicList(Model modle){		
 		List<NoteDO>  noteDoList = noteDAO.findAll();
 		
 		//for test 

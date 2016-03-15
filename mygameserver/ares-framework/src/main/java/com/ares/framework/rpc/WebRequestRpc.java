@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 public abstract class WebRequestRpc {
 	private final static String ERROR_MSG_TAG = "error_msg";
-	private final static String REDIRECTOR    =  "redirect:/";
+	private final static String  ERROR_404 = "404";
 	@Inject
 	private ServiceMgr  serviceMgr;
 	
@@ -44,22 +44,25 @@ public abstract class WebRequestRpc {
 	
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
-			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
-		    return new ModelAndView("404");
+			model.addAttribute(ERROR_MSG_TAG, "can not find the service name :"+serviceName);
+		    return new ModelAndView(ERROR_404);
 		}
 		
 		Method method = this.GetMethod(service, methodName);
 		if(method == null){
-			model.addAttribute("errormsg", "can not find the method:"+methodName+"in the service: "+serviceName);
-			 return new ModelAndView("404");
+			model.addAttribute(ERROR_MSG_TAG, "can not find the method:"+methodName+"in the service: "+serviceName);
+			 return new ModelAndView(ERROR_404);
 		}
 		//call method
 		try {
 			checkSession(req);
 			RpcResponse result = CallObjMethod(service, method, req.getParameterMap(),model);
-			RedirectView redirecView = new RedirectView();
-			redirecView.setUrl(result.WebPage);
-			return new ModelAndView(redirecView);
+			if(result.Method != null || result.Service != null){
+				RedirectView redirecView = new RedirectView();
+				redirecView.setUrl(result.toString());
+				return new ModelAndView(redirecView);
+			}		
+			return new ModelAndView(result.WebPage);
 		}catch (InvocationTargetException e ){
 			RunLogicException  logicException = (RunLogicException) e.getTargetException();
 			model.addAttribute(ERROR_MSG_TAG, logicException.getMsg());
@@ -75,14 +78,14 @@ public abstract class WebRequestRpc {
 	{
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
-			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
-		    return "404";
+			model.addAttribute(ERROR_MSG_TAG, "can not find the service name :"+serviceName);
+		    return ERROR_404;
 		}
 		
 		Method method = this.GetMethod(service, methodName);
 		if(method == null){
-			model.addAttribute("errormsg", "can not find the method:"+methodName+"in the service: "+serviceName);
-			 return "404";
+			model.addAttribute(ERROR_MSG_TAG, "can not find the method:"+methodName+"in the service: "+serviceName);
+			 return ERROR_404;
 		}
 		return  CallObjMethod(service, method, req.getParameterMap());
 	}
