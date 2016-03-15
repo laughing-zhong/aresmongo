@@ -9,15 +9,13 @@
             <tr bgcolor="#999999">
                 <td>Course ID</td>
             </tr>
-        <% if(has(topic_list)) { 
-          for(  note in topic_list) { %>
+         <% for(  note in topic_list) { %>
             <tr>
                 <td>
                     ${note.topic}
                 </td>
             </tr>
-        <% }
-        } %>
+        <% }  %>
         </table>
     </body>
 </html
