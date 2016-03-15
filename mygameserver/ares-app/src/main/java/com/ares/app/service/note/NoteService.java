@@ -38,6 +38,7 @@ public class NoteService implements RpcService{
 			topicBean.setSenderName("zhong");
 			topicBean.setTopic(ndo.getTopic());
 			//topicBean.setType(ndo.getType());
+			topicBeans.add(topicBean);
 		}
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
 		RpcResponse  response = new RpcResponse();

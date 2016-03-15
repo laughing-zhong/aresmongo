@@ -8,17 +8,12 @@
         <table width="600" border="1" cellspacing="1" cellpadding="1">
             <tr bgcolor="#999999">
                 <td>Course ID</td>
-                <td>Name</td>
-                <td>Instructor</td>
-                <td>Start</td>
-                <td>End</td>
             </tr>
         <% if(has(topic_list)) { 
-          for(  topic in topic_list) { %>
+          for(  note in topic_list) { %>
             <tr>
                 <td>
-                    ${topic.content}
-                    </a>
+                    ${note.topic}
                 </td>
             </tr>
         <% }

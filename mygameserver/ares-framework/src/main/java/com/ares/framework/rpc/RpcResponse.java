@@ -17,7 +17,7 @@ public class RpcResponse {
 			sb.append("/");
 			sb.append(Method);
 		}
-		return sb.toString();			
+		return "/view/"+sb.toString();			
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.ares.app.admincontroller;
 
-import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +17,6 @@ import com.ares.app.bean.AccountBean;
 import com.ares.app.constdata.Const;
 import com.ares.app.dao.AccountDAO;
 import com.ares.app.domain.Do.AccountDO;
-import com.ares.framework.rpc.RpcResponse;
 
 @Controller
 public class AccountLoginController {
@@ -33,7 +30,6 @@ public class AccountLoginController {
 		if(userDO == null){
 			model.addAttribute(Const.ERROR_MSG_TAG, "no this user");
 			  return new ModelAndView("login");
-			// return new ModelAndView("login");
 		}
 		if ( userDO.getPassword().equals(account.getPwd()) ){
 			HttpSession session = req.getSession();
@@ -52,6 +48,4 @@ public class AccountLoginController {
 			return  new ModelAndView("login");
 		}
 	}
-
-
 }

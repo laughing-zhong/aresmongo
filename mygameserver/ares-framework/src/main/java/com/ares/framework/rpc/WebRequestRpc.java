@@ -123,8 +123,7 @@ public abstract class WebRequestRpc {
 	{
 		int paramCount =  method.getParameterCount();
 		if(paramCount > 0){
-			 Class<?> methosParamType = method.getParameterTypes()[0]; 
-	   
+			  Class<?> methosParamType = method.getParameterTypes()[0];    
 			  Object obj = methosParamType.newInstance();
 			     if(IsStringType(methosParamType)){
 			    	 Iterator<String[]>  stringParam = params.values().iterator();
