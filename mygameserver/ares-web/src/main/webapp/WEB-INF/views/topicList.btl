@@ -13,19 +13,16 @@
                 <td>Start</td>
                 <td>End</td>
             </tr>
-        @ for($course in $courses)
+        <% if(has(topic_list)) { 
+          for(  topic in topic_list) { %>
             <tr>
                 <td>
-                    <a href="dispalyCourse.htm?id=${course.id}">
-                    ${course.id}
+                    ${topic.content}
                     </a>
                 </td>
-                <td>$course.name</td>
-                <td>$course.instructor.lastName</td>
-                <td>${course.startDate}</td>
-                <td>${course.endDate}</td>
             </tr>
-        #end
+        <% }
+        } %>
         </table>
     </body>
 </html

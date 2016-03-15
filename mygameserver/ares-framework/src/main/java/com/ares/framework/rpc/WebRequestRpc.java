@@ -3,57 +3,68 @@ package com.ares.framework.rpc;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
-
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.ares.framework.service.RpcService;
 import com.ares.framework.service.ServiceMgr;
+import com.ares.service.exception.RunLogicException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 
 
-@Controller
-public class WebRequestRpc {
+public abstract class WebRequestRpc {
+	private final static String ERROR_MSG_TAG = "error_msg";
+	private final static String REDIRECTOR    =  "redirect:/";
 	@Inject
 	private ServiceMgr  serviceMgr;
 	
-	public WebRequestRpc()
-	{
-		
-	}
 	
-	@RequestMapping(value="/view/{serviceName}/{methodName}",method = RequestMethod.POST )
-	public String  CallView(@PathVariable String serviceName,
-			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
+	abstract public  void checkSession(HttpServletRequest req);
+	abstract public  void postProcess();//no use
+	
+	@RequestMapping(value="/view/{serviceName}/{methodName}",method ={ RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView   CallView(@PathVariable String serviceName,
+			@PathVariable String  methodName,Model model,HttpServletRequest req ,HttpServletResponse response) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, IOException, InstantiationException
 	{
+	
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
 			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
-		    return "404";
+		    return new ModelAndView("404");
 		}
 		
 		Method method = this.GetMethod(service, methodName);
 		if(method == null){
 			model.addAttribute("errormsg", "can not find the method:"+methodName+"in the service: "+serviceName);
-			 return "404";
+			 return new ModelAndView("404");
 		}
-		return  CallObjMethod(service, method, req.getParameterMap(),model);
+		//call method
+		try {
+			checkSession(req);
+			RpcResponse result = CallObjMethod(service, method, req.getParameterMap(),model);
+			RedirectView redirecView = new RedirectView();
+			redirecView.setUrl(result.WebPage);
+			return new ModelAndView(redirecView);
+		}catch (InvocationTargetException e ){
+			RunLogicException  logicException = (RunLogicException) e.getTargetException();
+			model.addAttribute(ERROR_MSG_TAG, logicException.getMsg());
+			return new ModelAndView(logicException.getWebPage());
+		}
 	}
 	
 	
@@ -62,9 +73,6 @@ public class WebRequestRpc {
 	public Object  CallRpc(@PathVariable String serviceName,
 			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
-//		if(session.getAttribute("name") == null){
-//			//se
-//		}
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
 			model.addAttribute("errormsg", "can not find the service name :"+serviceName);
@@ -91,17 +99,21 @@ public class WebRequestRpc {
 	}
 	
 	
-	private  String CallObjMethod(RpcService service, Method method, Map<String,String[]> params,Model model) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
+	private  RpcResponse CallObjMethod(RpcService service, Method method, Map<String,String[]> params,Model model) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
 	{
 		 Class<?> methosParamType = method.getParameterTypes()[0];  
-		 
-		  Object obj = methosParamType.newInstance();
-	       try {
-				BeanUtils.populate(obj, params);
-			} catch (IllegalAccessException | InvocationTargetException e) {
-				e.printStackTrace();
-			}  
-	   return  (String)method.invoke(service, obj,model);        
+		  Object obj = null;
+		 if(!methosParamType.equals(Model.class))
+		     obj = methosParamType.newInstance();
+		 if(obj != null){
+		       try {
+					BeanUtils.populate(obj, params);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}		    
+		   return  (RpcResponse)method.invoke(service, obj,model);   	 
+		 }
+		 return (RpcResponse)method.invoke(service,model);   
 	}
 	
 	private  Object CallObjMethod(RpcService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException

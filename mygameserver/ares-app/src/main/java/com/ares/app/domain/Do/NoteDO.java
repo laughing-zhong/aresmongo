@@ -2,12 +2,20 @@ package com.ares.app.domain.Do;
 
 import java.util.List;
 
+
 import com.ares.framework.domain.MongoKeyDO;
 
 public class NoteDO  extends MongoKeyDO {
 	public NoteDO(){}
 	private String topic;
 	private String content;
+	private int type;
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public String getTopic() {
 		return topic;
 	}

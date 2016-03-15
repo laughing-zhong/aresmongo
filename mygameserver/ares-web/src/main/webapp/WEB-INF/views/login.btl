@@ -29,13 +29,12 @@
   <script src="/resources/js/jquery.cookie.js"></script>
   <script type="text/javascript">
 	$(function() { 
-		$("#login").click(function() {
+		$("#login1").click(function() {
      	$.post("view/UserLoginService/login", {accountID: $("#accountID").val(), pwd: $("#pwd").val()},
 	  	    function(data){
 	   		console.log(data);
           	$.cookie('session_id',$("#accountID").val());
-          	console.log($.cookie('session_id'));
-          	 window.location.href='default'; 
+          	console.log($.cookie('session_id')); 
         	} 
 	  	   )	
 	   }	
@@ -44,9 +43,12 @@
 	</script>
   </head>
   <body>
-       <form class="form-horizontal" >
+  <% if(has(error_msg)) { %>
+     <p> ${error_msg}</p>
+     <% }%>
+     <form class = "form-horizontal" action = "/userlogin" method = "post">
 			<div class="form-group">
-              <label  class="col-lg-2 control-label">账号</label>
+              <label  class ="col-lg-2 control-label">账号</label>
               <div class="col-lg-6">
                 <input type="text" class="form-control" name="accountID" id="accountID" >
               </div>

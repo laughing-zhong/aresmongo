@@ -26,7 +26,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		// return false;
 		// }
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-	   this.rpcContextProvider.get().setPlayerID("111");
+	 //  this.rpcContextProvider.get().setPlayerID("111");
 		return true;
 	}
 

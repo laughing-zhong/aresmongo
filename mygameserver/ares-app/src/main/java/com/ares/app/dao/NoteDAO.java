@@ -8,7 +8,7 @@ import com.ares.framework.dao.mongodb.MongoDBDAO;
 
 
 @Repository
-@CollectionName("note")
+@CollectionName("notes")
 public class NoteDAO extends MongoDBDAO<NoteDO> {
 
 	public NoteDAO() {
