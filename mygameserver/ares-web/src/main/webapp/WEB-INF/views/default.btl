@@ -17,6 +17,7 @@
   		<script src="/resources/js/flat-ui.min.js"></script>
   		<script src="/resources/js/assets/js/application.js"></script>
  		<script src="/resources/js/jquery.cookie.js"></script>
+ 		<script src="/resources/js/obj-to-url.js"></script>
 		<script charset="utf-8" src="/resources/js/kindeditor-min.js"></script>
 		<script>
 			var editor;
@@ -35,8 +36,9 @@
 				  $.post("/rpc/NoteService/publishTopic", {content: editor.html()},
 	  	    			function(data){
 	   						console.log(data);
-	   						console.log(jQuery.param(data.params));
-	   						  window.location.replace("/view/"+data.service + "/" +data.method+"?"+ jQuery.param(data.params));
+	   						console.log(obj_to_url(data));
+	   						 // window.location.replace("/view/"+data.service + "/" +data.method+"?"+ jQuery.param(data.params));
+	   						 window.location.replace(obj_to_url(data));
         	               }      	      
 	  	   			) ;
 	  	   			 // window.location.href ="topic_detail";	
