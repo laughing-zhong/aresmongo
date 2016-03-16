@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.ares.framework.service.RpcService;
@@ -76,17 +74,15 @@ public abstract class WebRequestRpc {
 	@RequestMapping(value="/rpc/{serviceName}/{methodName}",method = RequestMethod.POST )
 	@ResponseBody
 	public Object  CallRpc(@PathVariable String serviceName,
-			@PathVariable String  methodName,Model model,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
+			@PathVariable String  methodName,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){
-			model.addAttribute(ERROR_MSG_TAG, "can not find the service name :"+serviceName);
 		    return ERROR_404;
 		}
 		
 		Method method = this.GetMethod(service, methodName);
 		if(method == null){
-			model.addAttribute(ERROR_MSG_TAG, "can not find the method:"+methodName+"in the service: "+serviceName);
 			 return ERROR_404;
 		}
 		return  CallObjMethod(service, method, req.getParameterMap());

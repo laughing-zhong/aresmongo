@@ -1,9 +1,7 @@
 package com.ares.app.service.note;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -15,7 +13,9 @@ import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
 import com.ares.app.bean.TopicIDBean;
 import com.ares.app.constdata.Const;
+import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
+import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
 import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
@@ -28,22 +28,24 @@ import com.ares.framework.util.IdUtils;
 public class NoteService implements RpcService{	
 	@Inject
 	private NoteDAO noteDAO;
+	@Inject 
+	private NoteCatagoryDAO noteCatagoryDAO;
 	@Inject
 	private Provider<RpcContext> rpcContextProvier;
 	
 	public ViewResponse topicList(Model modle){		
-		List<NoteDO>  noteDoList = noteDAO.findAll();
+		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
 		
 		//for test 
 		for(int i = 0 ; i < 10 ; i ++){
-			NoteDO noteDo = new NoteDO();
+			NoteCatagoryDO noteDo = new NoteCatagoryDO();
 			noteDo.setTopic("topic"+i);
-			noteDoList.add(noteDo);
+			noteCatagoryList.add(noteDo);
 		}
 		
 		//test end
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
-		for(NoteDO ndo : noteDoList){
+		for(NoteCatagoryDO ndo : noteCatagoryList){
 			TopicCategoryBean  topicBean = new TopicCategoryBean();
 			topicBean.setSenderName("zhong");
 			topicBean.setTopic(ndo.getTopic());
@@ -70,11 +72,20 @@ public class NoteService implements RpcService{
 		
 	}
 	public RpcResponse publishTopic(TopicBean topicBean){	
+		//create  note catagory
+		NoteCatagoryDO  catagoryDO = new NoteCatagoryDO();
+		catagoryDO.setId(IdUtils.generate());
+		catagoryDO.setTopic(topicBean.getContent());
+		this.noteCatagoryDAO.upsert(catagoryDO);
+		
+		// create note
 		NoteDO noteDo = new NoteDO();
 		noteDo.setId(IdUtils.generate());
 		noteDo.setContent(topicBean.getContent());
 		noteDo.setSendUserName(rpcContextProvier.get().getUserID());
 		this.noteDAO.upsert(noteDo);
+		
+		//tell  client to call topicDetail method with topicID to get note details
 		RpcResponse  response = new RpcResponse();
 		response.setMethod("topicDetail");
 		response.setService("NoteService");
