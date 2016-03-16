@@ -32,12 +32,14 @@
 				});
 				K('input[name=getHtml]').click(function(e) {
 					//alert(editor.html()); 
-				  $.post("/view/NoteService/publishTopic", {content: editor.html()},
+				  $.post("/rpc/NoteService/publishTopic", {content: editor.html()},
 	  	    			function(data){
 	   						console.log(data);
-          					console.log($.cookie('session_id')); 
-        	} 
-	  	   )	
+	   						console.log(jQuery.param(data.params));
+	   						  window.location.replace("/view/"+data.service + "/" +data.method+"?"+ jQuery.param(data.params));
+        	               }      	      
+	  	   			) ;
+	  	   			 // window.location.href ="topic_detail";	
 					//document.getElementById("msgshow").innerHTML=editor.html();
 					
 				});

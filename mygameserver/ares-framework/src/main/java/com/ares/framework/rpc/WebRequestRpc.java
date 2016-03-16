@@ -58,7 +58,7 @@ public abstract class WebRequestRpc {
 		//call method
 		try {
 			checkSession(req);
-			RpcResponse result = CallObjMethod(service, method, req.getParameterMap(),model);
+			ViewResponse result = CallObjMethod(service, method, req.getParameterMap(),model);
 			if(result.Method != null || result.Service != null){
 				RedirectView redirecView = new RedirectView();
 				redirecView.setUrl(result.toString());
@@ -104,7 +104,7 @@ public abstract class WebRequestRpc {
 	}
 	
 	
-	private RpcResponse CallObjMethod(RpcService service, Method method,
+	private ViewResponse CallObjMethod(RpcService service, Method method,
 			Map<String, String[]> params, Model model)
 			throws NoSuchMethodException, SecurityException,
 			IllegalAccessException, IllegalArgumentException,
@@ -121,9 +121,9 @@ public abstract class WebRequestRpc {
 			} catch (IllegalAccessException  e) {
 				e.printStackTrace();
 			}
-			return (RpcResponse) method.invoke(service, obj, model);
+			return (ViewResponse) method.invoke(service, obj, model);
 		}
-		return (RpcResponse) method.invoke(service, model);
+		return (ViewResponse) method.invoke(service, model);
 	}
 	
 	private  Object CallObjMethod(RpcService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException

@@ -4,33 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RpcResponse {
-	public String WebPage;
-	public String Method;
-	public String Service;
-	private Map<String, String> params = new HashMap<String, String>();
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		if(WebPage != null){
-			sb.append(WebPage);
-		}
-		if(Service != null){
-			sb.append("/");
-			sb.append(Service);
-		}
-		if(Method != null){
-			sb.append("/");
-			sb.append(Method);
-		}
-		return "/view"+sb.toString();			
+	private  String method;
+	public String getMethod() {
+		return method;
 	}
-	public void appendParam(String key, String value){
-		params.put(key, value);
+	public void setMethod(String method) {
+		this.method = method;
 	}
-	public boolean hasParam(){
-		return (params.size() > 0);
-	}
-	public Map<String, String> getParams(){
+
+	public Map<String, String> getParams() {
 		return params;
 	}
+	public void setParams(Map<String, String> params) {
+		this.params = params;
+	}
+	
+	public void append(String key, String value){
+		this.params.put(key, value);
+	}
+	private  String service;
+	public String getService() {
+		return service;
+	}
+	public void setService(String service) {
+		this.service = service;
+	}
+	private  Map<String,String> params = new HashMap<String, String>();
+	
+	
 
 }
