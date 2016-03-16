@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.ares.framework.service.RpcService;
@@ -60,7 +62,7 @@ public abstract class WebRequestRpc {
 			if(result.Method != null || result.Service != null){
 				RedirectView redirecView = new RedirectView();
 				redirecView.setUrl(result.toString());
-				return new ModelAndView(redirecView);
+				return new ModelAndView(redirecView,result.getParams());
 			}		
 			return new ModelAndView(result.WebPage);
 		}catch (InvocationTargetException e ){

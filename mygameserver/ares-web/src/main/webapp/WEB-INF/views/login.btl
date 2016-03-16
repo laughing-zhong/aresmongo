@@ -30,7 +30,7 @@
   <script type="text/javascript">
 	$(function() { 
 		$("#login1").click(function() {
-     	$.post("view/UserLoginService/login", {accountID: $("#accountID").val(), pwd: $("#pwd").val()},
+     	$.post("/view/UserLoginService/login", {accountID: $("#accountID").val(), pwd: $("#pwd").val()},
 	  	    function(data){
 	   		console.log(data);
           	$.cookie('session_id',$("#accountID").val());

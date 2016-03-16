@@ -1,9 +1,13 @@
 package com.ares.framework.rpc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RpcResponse {
 	public String WebPage;
 	public String Method;
 	public String Service;
+	private Map<String, String> params = new HashMap<String, String>();
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		if(WebPage != null){
@@ -17,7 +21,16 @@ public class RpcResponse {
 			sb.append("/");
 			sb.append(Method);
 		}
-		return "/view/"+sb.toString();			
+		return "/view"+sb.toString();			
+	}
+	public void appendParam(String key, String value){
+		params.put(key, value);
+	}
+	public boolean hasParam(){
+		return (params.size() > 0);
+	}
+	public Map<String, String> getParams(){
+		return params;
 	}
 
 }

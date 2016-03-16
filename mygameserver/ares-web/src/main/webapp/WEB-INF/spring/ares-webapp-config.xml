@@ -33,12 +33,6 @@
         </mvc:interceptor> 
    </mvc:interceptors>
   
-
-
-  <bean id="requestscope" class="com.ares.framework.rpc.context.RpcContext" scope="request" />
-
-
-
 	<!-- selects a static view for rendering without the need for an explicit 
 		controller -->
 	<!-- <mvc:view-controller path="/" view-name="index" /> -->
