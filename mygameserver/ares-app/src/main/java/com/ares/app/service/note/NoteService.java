@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import com.ares.app.bean.TopicCategoryBean;
 import com.ares.app.constdata.Const;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.domain.Do.NoteDO;
@@ -16,8 +17,7 @@ import com.ares.framework.service.RpcService;
 
 
 @Component
-public class NoteService implements RpcService{
-	
+public class NoteService implements RpcService{	
 	@Inject
 	private NoteDAO noteDAO;
 	
@@ -32,9 +32,9 @@ public class NoteService implements RpcService{
 		}
 		
 		//test end
-		List<TopicBean> topicBeans = new ArrayList<TopicBean>();
+		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
 		for(NoteDO ndo : noteDoList){
-			TopicBean  topicBean = new TopicBean();
+			TopicCategoryBean  topicBean = new TopicCategoryBean();
 			topicBean.setSenderName("zhong");
 			topicBean.setTopic(ndo.getTopic());
 			//topicBean.setType(ndo.getType());
@@ -44,5 +44,11 @@ public class NoteService implements RpcService{
 		RpcResponse  response = new RpcResponse();
 		response.WebPage = "topicList";
 		return response;	
+	}
+	
+	public RpcResponse sendTopicView(Model model){
+		RpcResponse response =  new RpcResponse();
+		response.WebPage = "default";
+		return  response;
 	}
 }

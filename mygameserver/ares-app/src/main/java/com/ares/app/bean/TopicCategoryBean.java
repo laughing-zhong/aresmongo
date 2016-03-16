@@ -1,6 +1,6 @@
-package com.ares.app.service.note;
+package com.ares.app.bean;
 
-public class TopicBean {
+public class TopicCategoryBean {
 	enum TopicType{
 		NORMAL,
 		TOP,

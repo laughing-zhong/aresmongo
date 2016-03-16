@@ -1,10 +1,37 @@
 <html>
     <head>
         <title>Course List</title>
+            <meta charset="utf-8">
+    <title>Flat UI Free 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Loading Bootstrap -->
+    <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		  
+    <!-- Loading Flat UI -->
+    <link href="/resources/css/flat-ui.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+  <script src="/resources/js/vendor/jquery.min.js"></script>
+  <script src="/resources/js/flat-ui.min.js"></script>
+  <script src="/resources/js/assets/js/application.js"></script>
+  <script src="/resources/js/jquery.cookie.js"></script>
     </head>
 
     <body>
         <h2>COURSE LIST</h2>
+        <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
         <table width="600" border="1" cellspacing="1" cellpadding="1">
             <tr bgcolor="#999999">
                 <td>Course ID</td>
@@ -17,5 +44,11 @@
             </tr>
         <% }  %>
         </table>
+      <div class="form-group">
+		<div class="col-lg-2">
+		<button type="submit" class="btn btn-primary" id="sendTopicView" >Login</button>
+		</div>
+      </div>
+      </form>
     </body>
 </html

@@ -102,21 +102,26 @@ public abstract class WebRequestRpc {
 	}
 	
 	
-	private  RpcResponse CallObjMethod(RpcService service, Method method, Map<String,String[]> params,Model model) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException
-	{
-		 Class<?> methosParamType = method.getParameterTypes()[0];  
-		  Object obj = null;
-		 if(!methosParamType.equals(Model.class))
-		     obj = methosParamType.newInstance();
-		 if(obj != null){
-		       try {
-					BeanUtils.populate(obj, params);
-				} catch (IllegalAccessException | InvocationTargetException e) {
-					e.printStackTrace();
-				}		    
-		   return  (RpcResponse)method.invoke(service, obj,model);   	 
-		 }
-		 return (RpcResponse)method.invoke(service,model);   
+	private RpcResponse CallObjMethod(RpcService service, Method method,
+			Map<String, String[]> params, Model model)
+			throws NoSuchMethodException, SecurityException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, JsonParseException,
+			JsonMappingException, IOException, InstantiationException {
+
+		Class<?> methosParamType = method.getParameterTypes()[0];
+		Object obj = null;
+		if (!methosParamType.equals(Model.class))
+			obj = methosParamType.newInstance();
+		if (obj != null) {
+			try {
+				BeanUtils.populate(obj, params);
+			} catch (IllegalAccessException  e) {
+				e.printStackTrace();
+			}
+			return (RpcResponse) method.invoke(service, obj, model);
+		}
+		return (RpcResponse) method.invoke(service, model);
 	}
 	
 	private  Object CallObjMethod(RpcService service, Method method, Map<String,String[]> params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, JsonParseException, JsonMappingException, IOException, InstantiationException

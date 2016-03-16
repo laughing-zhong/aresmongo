@@ -24,14 +24,14 @@ public class AccountLoginController {
 	@Inject
 	private AccountDAO accountDAO;
 	
-	@RequestMapping(value="/userlogin",method = RequestMethod.POST )
-	public ModelAndView  login(AccountBean account,Model model,HttpServletRequest req,HttpServletResponse  response){	
+	@RequestMapping(value="/userlogin", method = RequestMethod.POST)
+	public ModelAndView  login(AccountBean account, Model model, HttpServletRequest req, HttpServletResponse response){	
 		AccountDO userDO = accountDAO.findById(account.getAccountID());
 		if(userDO == null){
 			model.addAttribute(Const.ERROR_MSG_TAG, "no this user");
 			  return new ModelAndView("login");
 		}
-		if ( userDO.getPassword().equals(account.getPwd()) ){
+		if ( userDO.getPassword().equals(account.getPwd())){
 			HttpSession session = req.getSession();
 			session.setAttribute(Const.ACOUNT_ID, account.getAccountID());
 			session.setAttribute(Const.USER_ID, userDO.getUserID());
