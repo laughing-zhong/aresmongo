@@ -1,20 +1,20 @@
+<!doctype html>
 <html>
-    <head>
-        <title>Course List</title>
-            <meta charset="utf-8">
+  <head>
+    <title>Course List</title>
+     <meta charset="utf-8"/>
     <title>Flat UI Free 101 Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
     <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-      <!-- Loading Bootstrap -->
-    <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Loading my define -->
     <link href="/resources/css/wd.css" rel="stylesheet">
-
+  
 		  
     <!-- Loading Flat UI -->
     <link href="/resources/css/flat-ui.min.css" rel="stylesheet">
+    <link href="/resources/css/body.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/favicon.ico">
 
@@ -29,9 +29,12 @@
   <script src="/resources/js/assets/js/application.js"></script>
   <script src="/resources/js/jquery.cookie.js"></script>
  </head>
-    <body>
-      <h1>COURSE LIST</h1>
-       <hr id="line" />
+    <body id="wdbody">
+    <div class="container-fluid">
+     <div class="row-fluid">
+     <div class="span8">
+     <h1>COURSE LIST1</h1>
+     <hr id="line" />
         <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
         <table width="600" border="1" cellspacing="1" cellpadding="1">
             <tr bgcolor="#999999">
@@ -51,5 +54,11 @@
 		</div>
       </div>
       </form>
+     </div>
+    <div class="span4">
+    <h1>oooo</h1>
+	</div>
     </body>
+    </div>
+  </div>
 </html>
