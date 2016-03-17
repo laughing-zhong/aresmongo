@@ -3,6 +3,13 @@ package com.ares.app.bean;
 public class TopicBean {
 	private String id;
 	private String content;
+	private String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getId() {
 		return id;
 	}

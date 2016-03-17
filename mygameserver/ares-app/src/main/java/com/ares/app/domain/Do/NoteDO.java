@@ -68,5 +68,4 @@ public class NoteDO  extends MongoKeyDO {
 		}
 		private String content;
 	}
-
 }

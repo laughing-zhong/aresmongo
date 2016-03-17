@@ -17,6 +17,7 @@ import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
+import com.ares.app.domain.Do.NoteDO.SubNote;
 import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
 import com.ares.framework.rpc.context.RpcContext;
@@ -54,7 +55,7 @@ public class NoteService implements RpcService{
 		}
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
 		ViewResponse  response = new ViewResponse();
-		response.WebPage = "topicList";
+		response.WebPage = "topic_list";
 		return response;	
 	}
 	
@@ -91,5 +92,20 @@ public class NoteService implements RpcService{
 		response.setService("NoteService");
 		response.append("topicID", noteDo.getId());
 		return response;
+	}
+	public RpcResponse replyTopic(TopicBean topicBean){
+		NoteDO noteDO = this.noteDAO.findById(topicBean.getId());
+		SubNote  subNote = new SubNote();
+		subNote.setContent(topicBean.getContent());
+		subNote.setSendName(this.rpcContextProvier.get().getAccountID());
+		noteDO.getSubNoteList().add(subNote);
+		noteDAO.upsert(noteDO);
+		
+		//tell  client to call topicDetail method with topicID to get note details
+		RpcResponse  response = new RpcResponse();
+		response.setMethod("topicDetail");
+		response.setService("NoteService");
+		response.append("topicID", noteDO.getId());
+		return response;		
 	}
 }

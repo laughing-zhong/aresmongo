@@ -23,6 +23,4 @@ public class WirteMongbdBean {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-
-
 }

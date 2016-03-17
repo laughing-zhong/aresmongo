@@ -7,8 +7,7 @@ import com.ares.framework.domain.MongoKeyDO;
 public class RoleDO extends MongoKeyDO{
 	public enum RoleType{
 		CUSTMER,
-		DEV,
-		
+		DEV	
 	}
 	private String accountId;
 	public String getAccountId() {
@@ -52,5 +51,4 @@ public class RoleDO extends MongoKeyDO{
 	private RoleType type;
 	private List<String> parentsIds;
 	private List<String>childrenIds;
-
 }

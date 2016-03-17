@@ -10,6 +10,7 @@
 
       <!-- Loading Bootstrap -->
     <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/wd.css" rel="stylesheet">
 
 		  
     <!-- Loading Flat UI -->
@@ -27,10 +28,10 @@
   <script src="/resources/js/flat-ui.min.js"></script>
   <script src="/resources/js/assets/js/application.js"></script>
   <script src="/resources/js/jquery.cookie.js"></script>
-    </head>
-
+ </head>
     <body>
-        <h2>COURSE LIST</h2>
+      <h1>COURSE LIST</h1>
+       <hr id="line" />
         <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
         <table width="600" border="1" cellspacing="1" cellpadding="1">
             <tr bgcolor="#999999">
