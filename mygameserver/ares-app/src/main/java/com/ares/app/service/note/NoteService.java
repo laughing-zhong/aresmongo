@@ -36,16 +36,7 @@ public class NoteService implements RpcService{
 	
 	public ViewResponse topicList(Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
-		
-		//for test 
-		for(int i = 0 ; i < 10 ; i ++){
-			NoteCatagoryDO noteDo = new NoteCatagoryDO();
-			noteDo.setTopic("topic"+i);
-			noteDo.setId("1223e");
-			noteCatagoryList.add(noteDo);
-		}
-		
-		//test end
+	
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
 		for(NoteCatagoryDO ndo : noteCatagoryList){
 			TopicCategoryBean  topicBean = new TopicCategoryBean();

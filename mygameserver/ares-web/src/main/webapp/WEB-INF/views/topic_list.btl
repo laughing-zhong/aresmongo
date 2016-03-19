@@ -34,27 +34,22 @@
     <div class="container-fluid">
       <div class="row">
     	<div class="col-md-2">
-   			<h1>aaaa</h1>
 		 </div>
         <div class="col-md-6">
           <h1 id="center">COURSE LIST1</h1>
             <hr id="line" />
-    
-          <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
               <% for(  note in topic_list) { %>
               <div >
                  <a  href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a>  
                </div>
-              <% }  %>
-          <div class="form-group">
-		        <div class="col-lg-2">
-		          <button type="submit" class="btn btn-primary" id="sendTopicView" >Login</button>
-		        </div>
-          </div>
-     </form>
+              <% }  %>   
      </div>
     <div class="col-md-2">
-      <h1>oooo</h1>
+         <div class="form-group">
+		       <div class="col-lg-2">
+		          <a  class="btn btn-primary btn-hg"  href="/view/NoteService/sendTopicView">sendTopic</a>  
+		       </div>
+        </div>
 	 </div>
   </div>
 </div>
