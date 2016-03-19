@@ -41,6 +41,7 @@ public class NoteService implements RpcService{
 		for(int i = 0 ; i < 10 ; i ++){
 			NoteCatagoryDO noteDo = new NoteCatagoryDO();
 			noteDo.setTopic("topic"+i);
+			noteDo.setId("1223e");
 			noteCatagoryList.add(noteDo);
 		}
 		
@@ -51,6 +52,7 @@ public class NoteService implements RpcService{
 			topicBean.setSenderName("zhong");
 			topicBean.setTopic(ndo.getTopic());
 			//topicBean.setType(ndo.getType());
+			topicBean.setId(ndo.getTopicId());
 			topicBeans.add(topicBean);
 		}
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
@@ -73,18 +75,19 @@ public class NoteService implements RpcService{
 		
 	}
 	public RpcResponse publishTopic(TopicBean topicBean){	
-		//create  note catagory
-		NoteCatagoryDO  catagoryDO = new NoteCatagoryDO();
-		catagoryDO.setId(IdUtils.generate());
-		catagoryDO.setTopic(topicBean.getContent());
-		this.noteCatagoryDAO.upsert(catagoryDO);
-		
 		// create note
 		NoteDO noteDo = new NoteDO();
 		noteDo.setId(IdUtils.generate());
 		noteDo.setContent(topicBean.getContent());
 		noteDo.setSendUserName(rpcContextProvier.get().getUserID());
 		this.noteDAO.upsert(noteDo);
+		
+		// create note catagory
+		NoteCatagoryDO catagoryDO = new NoteCatagoryDO();
+		catagoryDO.setId(IdUtils.generate());
+		catagoryDO.setTopic(topicBean.getContent());
+		catagoryDO.setTopicId(noteDo.getId());
+		this.noteCatagoryDAO.upsert(catagoryDO);
 		
 		//tell  client to call topicDetail method with topicID to get note details
 		RpcResponse  response = new RpcResponse();

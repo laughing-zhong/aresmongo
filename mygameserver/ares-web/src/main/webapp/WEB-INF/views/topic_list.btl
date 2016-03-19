@@ -42,8 +42,8 @@
     
           <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
               <% for(  note in topic_list) { %>
-              <div class ="success">
-                    ${note.topic}
+              <div >
+                 <a  href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a>  
                </div>
               <% }  %>
           <div class="form-group">

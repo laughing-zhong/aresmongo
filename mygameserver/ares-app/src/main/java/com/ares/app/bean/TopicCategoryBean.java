@@ -1,6 +1,13 @@
 package com.ares.app.bean;
 
 public class TopicCategoryBean {
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	enum TopicType{
 		NORMAL,
 		TOP,

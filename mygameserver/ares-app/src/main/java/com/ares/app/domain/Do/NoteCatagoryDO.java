@@ -6,6 +6,13 @@ public class NoteCatagoryDO  extends MongoKeyDO{
 	private String id;
 	private String topic;
 	private String sender;
+	private String topicId;
+	public String getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
 	public String getId() {
 		return id;
 	}
