@@ -2,6 +2,13 @@ package com.ares.app.bean;
 
 public class TopicCategoryBean {
 	private String id;
+	private String lastRplTime;
+	public String getLastRplTime() {
+		return lastRplTime;
+	}
+	public void setLastRplTime(String lastRplTime) {
+		this.lastRplTime = lastRplTime;
+	}
 	public String getId() {
 		return id;
 	}

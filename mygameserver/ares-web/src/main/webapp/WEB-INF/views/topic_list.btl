@@ -36,18 +36,32 @@
     	<div class="col-md-2">
 		 </div>
         <div class="col-md-6">
-          <h1 id="center">COURSE LIST1</h1>
+             <div class="forum-info">
+               今日:324               |
+               昨日:1445 | 
+               帖子: 1318643 |
+               会员:607576|
+               欢迎新会员:
+               s505125548
+           </div>
+          
             <hr id="line" />
               <% for(  note in topic_list) { %>
               <div >
-                 <a  href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a>  
+                <div>
+                 	<a  href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a> 
+                 </div> 
+                 <div>
+                    发帖人：${note.senderName} 于 ${note.senderTime}发表 |最后回复：${note.lastRplTime}
+                 </div>
+                 <hr id="line" />
                </div>
               <% }  %>   
      </div>
     <div class="col-md-2">
          <div class="form-group">
 		       <div class="col-lg-2">
-		          <a  class="btn btn-primary btn-hg"  href="/view/NoteService/sendTopicView">sendTopic</a>  
+		          <a  class="btn btn-primary btn-hg"  href="/view/NoteService/sendTopicView">发帖</a>  
 		       </div>
         </div>
 	 </div>

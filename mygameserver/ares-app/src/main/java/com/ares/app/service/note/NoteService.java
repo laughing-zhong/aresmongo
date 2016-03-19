@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.antlr.v4.runtime.misc.Utils;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -22,6 +23,7 @@ import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
 import com.ares.framework.rpc.context.RpcContext;
 import com.ares.framework.service.RpcService;
+import com.ares.framework.util.DateUtils;
 import com.ares.framework.util.IdUtils;
 
 
@@ -40,8 +42,10 @@ public class NoteService implements RpcService{
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
 		for(NoteCatagoryDO ndo : noteCatagoryList){
 			TopicCategoryBean  topicBean = new TopicCategoryBean();
-			topicBean.setSenderName("zhong");
+			topicBean.setSenderName(ndo.getSender());
 			topicBean.setTopic(ndo.getTopic());
+			topicBean.setSenderTime(ndo.getSendTime());
+			topicBean.setLastRplTime(ndo.getLastRplTime());
 			//topicBean.setType(ndo.getType());
 			topicBean.setId(ndo.getTopicId());
 			topicBeans.add(topicBean);
@@ -65,20 +69,23 @@ public class NoteService implements RpcService{
 		return response;
 		
 	}
-	public RpcResponse publishTopic(TopicBean topicBean){	
+	public RpcResponse publishTopic(TopicBean topicBean){		
 		// create note
 		NoteDO noteDo = new NoteDO();
 		noteDo.setId(IdUtils.generate());
 		noteDo.setContent(topicBean.getContent());
 		noteDo.setSendUserName(rpcContextProvier.get().getUserID());
-		this.noteDAO.upsert(noteDo);
 		
 		// create note catagory
 		NoteCatagoryDO catagoryDO = new NoteCatagoryDO();
 		catagoryDO.setId(IdUtils.generate());
 		catagoryDO.setTopic(topicBean.getContent());
 		catagoryDO.setTopicId(noteDo.getId());
+		catagoryDO.setSender(this.rpcContextProvier.get().getAccountID());
+		catagoryDO.setSendTime(DateUtils.GetCurrentTime());
 		this.noteCatagoryDAO.upsert(catagoryDO);
+		noteDo.setCatagoryId(catagoryDO.getId());
+		this.noteDAO.upsert(noteDo);
 		
 		//tell  client to call topicDetail method with topicID to get note details
 		RpcResponse  response = new RpcResponse();
@@ -94,6 +101,10 @@ public class NoteService implements RpcService{
 		subNote.setSendName(this.rpcContextProvier.get().getAccountID());
 		noteDO.getSubNoteList().add(subNote);
 		noteDAO.upsert(noteDO);
+		
+		NoteCatagoryDO  noteCatagoryDO = noteCatagoryDAO.findById(noteDO.getCatagoryId());
+		noteCatagoryDO.setLastRplTime(DateUtils.GetCurrentTime());
+		noteCatagoryDAO.upsert(noteCatagoryDO);
 		
 		//tell  client to call topicDetail method with topicID to get note details
 		RpcResponse  response = new RpcResponse();

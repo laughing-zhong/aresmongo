@@ -1,1 +1,367 @@
 #line {height:1px;border:none;border-top:1px solid #D5D5D5;}
+
+#kdbbs {
+	background-color: #2776db;
+height: 54px;
+border-bottom: 2px solid #0954b3;
+}
+#kdbbs a {
+	color: #fff;
+}
+/**鏁版嵁**/
+#list-div{
+	/*width:674px;*/
+}
+#right-div{
+	/*width:270px;*/
+}
+#forum .nav-menu-a{color: #2d79d8;}
+.theme-type {
+    font-size: 14px;
+    padding-left: 16px;
+    margin: 5px 0;
+}
+.theme-type a {
+    padding: 0 10px;
+    line-height: 30px;
+    display: inline-block;
+}
+.theme-type a.current {
+    background-color: #F2F2F2;
+}
+.post-item-header-admin {
+    width:560px!important;
+}
+.replay-num{
+    right: -100px!important;
+}
+/*******鍒嗛〉*******/
+.page-box{
+    width:716px;
+    float:none!important;
+	margin:0px auto;
+	height:35px;
+	margin-top:28px;
+	text-align:center;
+}
+.page-box a,.page-box strong{
+    
+    padding:5px 10px;
+	border: 1px solid;
+	border-color: #ddd;
+	background-color: #FFF;
+}
+.page-box strong{
+    background-color: #2776db;
+	color: #fff 
+}
+.page-box a.prev{  
+    padding-left:25px; 
+	background-image: url(http://images.kisdee.com/club/static/image/common/arw_l.gif)  no-repeat;
+	background-position: center left;
+	}
+.page-box a.nxt{   
+    padding-right:25px;
+	background-image: url(http://images.kisdee.com/club/static/image/common/arw_r.gif) no-repeat;
+	background-position: center left;
+	}
+	
+.post-publish-info-admin em{
+	color:#aaa;
+}
+.post-publish-info-admin a{
+	color:#aaa;
+}
+.post-publish-info-admin a:hover {
+	color: #0097e0;
+}
+.replay-num-new a{
+    color:#919191;
+}
+/***鍙戝笘鎸夐挳***/
+#home-post-btn{
+    width:230px;
+    background: url(../img/bg_spirit.png) 0px -909px no-repeat;
+}
+#home-post-btn:hover{
+    width:230px;
+    background: url(../img/bg_spirit.png) 0px -961px no-repeat;
+}
+
+.forum-info{
+    height: 21px;
+    line-height: 21px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+}
+.table {
+    width: 100%;
+    text-align: center;
+    background-color: #fff
+}
+.table th,.table td {
+    text-align: center;
+    padding: 12px 0;
+    line-height: 18px
+}
+
+.table td {
+    color: #252525
+}
+
+.table thead {
+    color: #7d7d7d;
+    background-color: #fff;
+    font-weight: normal
+}
+
+.table .even {
+    background-color: #f7f7f7
+}
+
+.ranking-tab {
+    width: 267px;
+    height: 50px;
+    background-color: #fafafa;
+    border-bottom: 1px solid transparent;
+    border-radius: 4px 4px 0 0
+}
+
+.ranking-tab span {
+    display: block;
+    line-height: 50px;
+    font-size: 16px;
+    width: 133px;
+    text-align: center;
+    border-radius: 4px 4px 0 0
+}
+
+.ranking-tab .active {
+    color: #0058d4;
+    cursor: default;
+    background-color: #fff;
+    border-bottom: 1px solid transparent
+}
+/******缂栬緫鎺ㄨ崘**********/
+.list {
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 0px 0px 4px 4px
+}
+
+.list li {
+    font-size: 14px
+}
+
+.editor-recommend-list li,.hot-post-list li {
+    line-height: 34px
+}
+
+.editor-recommend-list a {
+    height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    color: #000;
+    text-decoration: none;
+    outline: none
+}
+.editor-recommend-list a:hover {
+    color: #0097e0;
+    text-decoration: none
+}
+/**涓汉涓績**/
+.new-msg {
+    background: red;
+    position: absolute;
+    right: -26px;
+    top: -16px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 24px;
+}
+.panel{
+    width:228px;!important;
+	background-color:#fff;
+	border:1px solid #e5e5e5;
+}
+.panel h4{
+	/*color: #fff;*/
+}
+.person-msg {
+    margin-bottom: 10px;
+}
+.service {
+    padding: 14px;
+}
+.recent-service-item {
+    font-size: 12px;
+    color: #919191;
+    line-height: 36px;
+}
+.service-header {
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 24px;
+}
+.more-recent-process {
+    color: #a8a8a8;
+}
+.service-status {
+    font-size: 14px;
+    color: #2685ff;
+}
+.process-box {
+    width: 100%;
+    background: #e2e7e9;
+    height: 16px;
+    position: relative;
+}
+.my-service-process li {
+    margin-bottom: 20px;
+}
+.num {
+    color: #252525;
+    font-size: 26px;
+    position: relative;
+}
+.already-compeleted {
+    height: 16px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #2685ff;
+    color: #fff;
+    text-align: center;
+}
+
+/* .my-post-cmnt {
+    padding: 8px 12px;
+}
+*/
+.my-post-cmnt ul {
+    margin: 8px 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px dotted #ced6dc;
+}
+.my-post-cmnt li {
+    position: relative;
+    text-align: center;
+    width: 100px;
+    height: 84px;
+}
+.my-post-cmnt .first {
+    border-right: 1px dotted #ced6dc;
+}
+.my-post-cmnt h6 {
+    color: #7d7d7d;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 32px;
+}
+.more {
+    padding-right: 5px;
+    /*color:#fff;*/
+}
+
+/*****鐗堝潡鏍峰紡*****/
+.box-border{
+    border: none;
+}
+.nav-list{
+	border-left: 1px solid #e5e5e5;
+	
+    border-right:none;
+	overflow: auto;	
+}
+.nav-list ul .nav-list li{
+	list-style-type: none;
+}
+.nav-list li{
+	float: left;
+	width:113px;
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 1px solid #e5e5e5;
+	border-right:1px solid #e5e5e5;
+	text-align: center;
+	font-size: 14px;
+}
+.nav-list li a {
+	display: block;
+	color:#919191;
+}
+.nav-list li a:hover{
+	color: #2776db;
+}
+.nav-list .moreli{
+	width:228px;
+	font-weight:bold;
+	font-size: 18px;
+}
+
+/****************骞荤伅鐗囨牱寮�*********************/
+.foucs-box {
+    height: 360px;
+    width: 100%;
+    position: relative;
+    margin-top: -1px;
+
+}
+#slideBox {
+    margin: 0 auto;
+    width: 100%;
+}
+.slide_page {
+    position: absolute;
+    right: 50%;
+    bottom: 18px;
+    margin-right: -50px;
+}
+
+.slide_page span {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    font-size: 0px;
+    border-radius: 5px;
+    margin-left: 10px;
+    background: #2776db
+}
+
+.slide_page .on {
+    background: #fff;
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+#slideHolder {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    position: relative;
+}
+
+#slideHolder img {
+    width: 1920px;
+    height: 360px;
+    left: 50%;
+    margin-left: -960px;
+    position: absolute;
+}
+
+#slideHolder li {
+    position: absolute;
+    top: 0px;
+    left: 1920px;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+}

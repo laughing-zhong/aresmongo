@@ -84,7 +84,8 @@ public abstract class WebRequestRpc {
 		Method method = this.GetMethod(service, methodName);
 		if(method == null){
 			 return ERROR_404;
-		}
+		}	
+		checkSession(req);
 		return  CallObjMethod(service, method, req.getParameterMap());
 	}
 	

@@ -31,12 +31,19 @@ public class NoteCatagoryDO  extends MongoKeyDO{
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	public String getSendTimer() {
-		return sendTimer;
+	public String getSendTime() {
+		return sendTime;
 	}
-	public void setSendTimer(String sendTimer) {
-		this.sendTimer = sendTimer;
+	public void setSendTime(String sendTime) {
+		this.sendTime = sendTime;
 	}
-	private String sendTimer;
+	private String sendTime;
+	private String lastRplTime;
+	public String getLastRplTime() {
+		return lastRplTime;
+	}
+	public void setLastRplTime(String lastRplTime) {
+		this.lastRplTime = lastRplTime;
+	}
 
 }

@@ -10,6 +10,13 @@ public class NoteDO  extends MongoKeyDO {
 	private String topic;
 	private String content;
 	private int type;
+	private String catagoryId;
+	public String getCatagoryId() {
+		return catagoryId;
+	}
+	public void setCatagoryId(String catagoryId) {
+		this.catagoryId = catagoryId;
+	}
 	public int getType() {
 		return type;
 	}

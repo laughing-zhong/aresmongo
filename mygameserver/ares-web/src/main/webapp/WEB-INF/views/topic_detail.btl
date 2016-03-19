@@ -27,26 +27,34 @@
   <script src="/resources/js/flat-ui.min.js"></script>
   <script src="/resources/js/assets/js/application.js"></script>
   <script src="/resources/js/jquery.cookie.js"></script>
-    </head>
+</head>
 
-    <body>
-        <h2>COURSE LIST</h2>
+ <body id="wdbody">
+   <hr id="line" />
+   <div class="container-fluid">
+      <div class="row">
+    	<div class="col-md-2">
+		 </div>
+        <div class="col-md-6">    
         <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
-        <table width="600" border="1" cellspacing="1" cellpadding="1">
-            <tr bgcolor="#999999">
-                <td>Course ID</td>
-            </tr>
-            <tr>
-                <td>
-                    ${topic_detail.content}
-                </td>
-            </tr>
-        </table>
-      <div class="form-group">
+       		<div>
+               ${topic_detail.content}
+        	</div>
+      		<div class="form-group">
 		<div class="col-lg-2">
-		<button type="submit" class="btn btn-primary" id="sendTopicView" >Login</button>
+			<button type="submit" class="btn btn-primary" id="sendTopicView" >Login</button>
 		</div>
       </div>
       </form>
+      </div>
+        <div class="col-md-2">
+         <div class="form-group">
+		       <div class="col-lg-2">
+		          <a  class="btn btn-primary btn-hg"  href="/view/NoteService/sendTopicView">发帖</a>  
+		       </div>
+        </div>
+	 </div>
+	 </div>
+	 </div>
     </body>
 </html>
