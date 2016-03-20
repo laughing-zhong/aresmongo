@@ -29,14 +29,14 @@
   <script src="/resources/js/assets/js/application.js"></script>
   <script src="/resources/js/jquery.cookie.js"></script>
  </head>
-    <body id="wdbody">
+ <body id="wdbody">
     <hr id="line" />
     <div class="container-fluid">
       <div class="row">
     	<div class="col-md-2">
 		 </div>
         <div class="col-md-6">
-             <div class="forum-info">
+             <div id="day_info">
                今日:324               |
                昨日:1445 | 
                帖子: 1318643 |
@@ -47,14 +47,14 @@
           
             <hr id="line" />
               <% for(  note in topic_list) { %>
-              <div >
+              <div  id ="tpc_item" >
                 <div>
-                 	<a  href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a> 
+                 	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a> 
                  </div> 
-                 <div>
-                    发帖人：${note.senderName} 于 ${note.senderTime}发表 |最后回复：${note.lastRplTime}
+                 <div  id="tpc_info">
+                    ${note.senderName} 于 ${note.senderTime}发表 |最后回复：${note.lastRplTime}
                  </div>
-                 <hr id="line" />
+                
                </div>
               <% }  %>   
      </div>
