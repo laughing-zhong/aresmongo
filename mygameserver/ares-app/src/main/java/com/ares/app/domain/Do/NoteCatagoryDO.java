@@ -4,7 +4,13 @@ import com.ares.framework.domain.MongoKeyDO;
 
 public class NoteCatagoryDO  extends MongoKeyDO{
 	private String id;
-	private String topic;
+	private String title;
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	private String sender;
 	private String topicId;
 	public String getTopicId() {
@@ -19,12 +25,7 @@ public class NoteCatagoryDO  extends MongoKeyDO{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTopic() {
-		return topic;
-	}
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
+
 	public String getSender() {
 		return sender;
 	}
@@ -45,5 +46,4 @@ public class NoteCatagoryDO  extends MongoKeyDO{
 	public void setLastRplTime(String lastRplTime) {
 		this.lastRplTime = lastRplTime;
 	}
-
 }

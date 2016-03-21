@@ -4,6 +4,13 @@ public class TopicBean {
 	private String id;
 	private String content;
 	private String type;
+	private String title;
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getType() {
 		return type;
 	}

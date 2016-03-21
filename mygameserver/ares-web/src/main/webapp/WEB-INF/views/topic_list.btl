@@ -49,7 +49,7 @@
               <% for(  note in topic_list) { %>
               <div  id ="tpc_item" >
                 <div>
-                 	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.topic}</a> 
+                 	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.title}</a> 
                  </div> 
                  <div  id="tpc_info">
                     ${note.senderName} 于 ${note.senderTime}发表 |最后回复：${note.lastRplTime}

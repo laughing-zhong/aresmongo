@@ -45,7 +45,7 @@
 						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 				});
 				K('input[name=getHtml]').click(function(e) {
-				  $.post("/rpc/NoteService/publishTopic", {content: editor.html()},
+				  $.post("/rpc/NoteService/publishTopic", {title:#("topic_title").val(),content: editor.html()},
 	  	    			function(data){
 	   						 window.location.replace(obj_to_url(data));
         	               }      	      
@@ -90,13 +90,13 @@
 		    <div class="form-group">
           <label class="col-sm-2 control-label" for="formGroupInputDefault">标题</label>
           <div class="col-sm-10">
-            <input class="form-control" type="text" id="formGroupInputDefault" placeholder="Default input">
+            <input class="form-control" type="text" id="topic_title" >
           </div>
         </div>
 		</div>
 	
 		<div id="center">
-			<textarea name="content" style="height:350px;visibility:hidden;">KindEditor</textarea>
+			<textarea name="content" style="height:350px;visibility:hidden;"></textarea>
             </div>
 			<p>
 				<input type="button" class="btn btn-primary btn-hg" name="getHtml" value="发表帖子" />

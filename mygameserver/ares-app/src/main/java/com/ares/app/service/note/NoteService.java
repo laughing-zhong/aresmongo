@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.antlr.v4.runtime.misc.Utils;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -43,7 +42,7 @@ public class NoteService implements RpcService{
 		for(NoteCatagoryDO ndo : noteCatagoryList){
 			TopicCategoryBean  topicBean = new TopicCategoryBean();
 			topicBean.setSenderName(ndo.getSender());
-			topicBean.setTopic(ndo.getTopic());
+			topicBean.setTitle(ndo.getTitle());
 			topicBean.setSenderTime(ndo.getSendTime());
 			topicBean.setLastRplTime(ndo.getLastRplTime());
 			//topicBean.setType(ndo.getType());
@@ -58,7 +57,7 @@ public class NoteService implements RpcService{
 	
 	public ViewResponse sendTopicView(Model model){		
 		ViewResponse response =  new ViewResponse();
-		response.WebPage = "default";
+		response.WebPage = "topic_send";
 		return  response;
 	}
 	public ViewResponse topicDetail(TopicIDBean topicID, Model model){
@@ -74,12 +73,13 @@ public class NoteService implements RpcService{
 		NoteDO noteDo = new NoteDO();
 		noteDo.setId(IdUtils.generate());
 		noteDo.setContent(topicBean.getContent());
+		noteDo.setTitle(topicBean.getTitle());	
 		noteDo.setSendUserName(rpcContextProvier.get().getUserID());
 		
 		// create note catagory
 		NoteCatagoryDO catagoryDO = new NoteCatagoryDO();
 		catagoryDO.setId(IdUtils.generate());
-		catagoryDO.setTopic(topicBean.getContent());
+		catagoryDO.setTitle(topicBean.getTitle());
 		catagoryDO.setTopicId(noteDo.getId());
 		catagoryDO.setSender(this.rpcContextProvier.get().getAccountID());
 		catagoryDO.setSendTime(DateUtils.GetCurrentTime());
