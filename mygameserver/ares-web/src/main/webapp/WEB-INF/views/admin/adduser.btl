@@ -28,11 +28,11 @@
 var request_url="";
 $(function() { 
 	$("#createAdmin").click(function() {
-	  console.log($.cookie('session_id')); 
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
 	   console.log(data);
-        console.log($.cookie('session_id')); 
+       console.log($.cookie('session_id')); 
+       window.location.replace("/admin/save/admin")
         }
 	  )	
 	}	
@@ -75,7 +75,6 @@ $(function() {
 		var acType = group1.attr("value");
 		console.log(acType); 
 		if(acType == 1){
-			request_url = /admin/save/admin;
 			document.getElementById("contactList").style.visibility="hidden";
 			}
 		else 
