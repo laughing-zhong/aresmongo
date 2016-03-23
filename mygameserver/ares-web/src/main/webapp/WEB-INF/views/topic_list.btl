@@ -46,7 +46,7 @@
            </div>
           
             <hr id="line" />
-              <% for(  note in topic_list) { %>
+              <% for(note in topic_list) { %>
               <div  id ="tpc_item" >
                 <div>
                  	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.title}</a> 

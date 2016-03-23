@@ -99,7 +99,12 @@ public class NoteService implements RpcService{
 		SubNote  subNote = new SubNote();
 		subNote.setContent(topicBean.getContent());
 		subNote.setSendName(this.rpcContextProvier.get().getAccountID());
-		noteDO.getSubNoteList().add(subNote);
+		List<SubNote> subNoteList = noteDO.getSubNoteList();
+		if(subNoteList == null){
+			subNoteList = new ArrayList<SubNote>();
+		}
+		subNoteList.add(subNote);
+		noteDO.setSubNoteList(subNoteList);
 		noteDAO.upsert(noteDO);
 		
 		NoteCatagoryDO  noteCatagoryDO = noteCatagoryDAO.findById(noteDO.getCatagoryId());

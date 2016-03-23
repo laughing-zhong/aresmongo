@@ -27,6 +27,55 @@
   <script src="/resources/js/flat-ui.min.js"></script>
   <script src="/resources/js/assets/js/application.js"></script>
   <script src="/resources/js/jquery.cookie.js"></script>
+  <script src="/resources/js/obj-to-url.js"></script>
+  <script charset="utf-8" src="/resources/js/kindeditor-min.js"></script>
+  <script>
+	var editor;
+			KindEditor.ready(function(K) {
+			editor = K.create('textarea[name="content"]', {
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+				});
+				K('input[name=getHtml]').click(function(e) {
+				  $.post("/rpc/NoteService/replyTopic", {id:$("#topic_id").attr("value"),content: editor.html()},
+	  	    			function(data){
+	   						 window.location.replace(obj_to_url(data));
+        	               }      	      
+	  	   			) ;					
+				});
+				K('input[name=isEmpty]').click(function(e) {
+					alert(editor.isEmpty());
+				});
+				K('input[name=getText]').click(function(e) {
+					alert(editor.text());
+				});
+				K('input[name=selectedHtml]').click(function(e) {
+					alert(editor.selectedHtml());
+				});
+				K('input[name=setHtml]').click(function(e) {
+					editor.html('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=setText]').click(function(e) {
+					editor.text('<h3>Hello KindEditor</h3>');
+				});
+				K('input[name=insertHtml]').click(function(e) {
+					editor.insertHtml('<strong>插入HTML</strong>');
+				});
+				K('input[name=appendHtml]').click(function(e) {
+					editor.appendHtml('<strong>添加HTML</strong>');
+				});
+				K('input[name=clear]').click(function(e) {
+					editor.html('');
+				});
+			});
+		</script>
+  
+  
 </head>
 
  <body id="wdbody">
@@ -39,23 +88,25 @@
         <div>${topic_detail.title} </div>
         <div>
              ${topic_detail.content}
-        </div>   
-        <form  class = "form-horizontal" action = "/view/NoteService/sendTopicView" method = "post"> 
-       
-      <div class="form-group">
-		<div class="col-lg-2">
-			<button type="submit" class="btn btn-primary" id="sendTopicView" >Login</button>
-		</div>
-      </div>
-      </form>
-      </div>
-        <div class="col-md-2">
-         <div class="form-group">
-		       <div class="col-lg-2">
-		          <a  class="btn btn-primary btn-hg"  href="/view/NoteService/sendTopicView">发帖</a>  
-		       </div>
+             <label id="topic_id" hidden="true" value=${topic_detail.id} ></label>
         </div>
-	 </div>
+        <% if(topic_detail.subNoteList != null){
+        	for(subtopic in topic_detail.subNoteList) { %>
+        		<div>
+           			 ${subtopic.content}
+        		</div>    
+            <% } 
+        }%>
+        <hr id="line" />
+        
+        <div id="center">
+			<textarea name="content" style="height:250px;visibility:hidden;"></textarea>
+			<p>
+				<input type="button" class="btn btn-primary btn-hg" name="getHtml" value="回复" />
+			</p>
+       </div>
+               
+      </div>
 	 </div>
 	 </div>
     </body>

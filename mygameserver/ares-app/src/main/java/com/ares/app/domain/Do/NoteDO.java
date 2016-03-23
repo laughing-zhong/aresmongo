@@ -1,7 +1,7 @@
 package com.ares.app.domain.Do;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 import com.ares.framework.domain.MongoKeyDO;
 
@@ -49,7 +49,7 @@ public class NoteDO  extends MongoKeyDO {
 	}
 	private String sendUserName;
 	private String sendTime;
-	private List<SubNote> subNoteList;
+	private List<SubNote> subNoteList ;
 	
 	public List<SubNote> getSubNoteList() {
 		return subNoteList;
