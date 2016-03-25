@@ -10,10 +10,10 @@
     
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-        <file>${CATALINA_BASE}/logs/vanguard.log</file>
+        <file>${CATALINA_BASE}/logs/ares.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>${CATALINA_BASE}/logs/vanguard.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>${CATALINA_BASE}/logs/ares.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -23,19 +23,11 @@
         </layout>
     </appender>
     
-     <logger name="game.framework.rpc.JsonServiceRpc" additivity="false">
-        <level value="DEBUG"/>
+     <logger name="game.framework.rpc.JsonServiceRpc" />
+
+    <root level="INFO">
         <appender-ref ref="FILE"/>
-    </logger>
-
-
-	<!-- Setting to debug to see battle sim during development. -->
-	<logger name="org.apache.velocity.app.VelocityEngine" level="OFF"/>
-
-
-
-    <root level="${root.log.level:-INFO}">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 
     <appender name="CoalescingStatistics" class="org.perf4j.logback.AsyncCoalescingStatisticsAppender">
@@ -49,7 +41,6 @@
     <logger name="org.perf4j.TimingLogger" additivity="false">
         <level value="DEBUG"/>
         <appender-ref ref="CoalescingStatistics"/>
-        <appender-ref ref="perf4jFileAppender"/>
     </logger>
     
     <appender name="daoErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -62,8 +53,10 @@
         </rollingPolicy>
     </appender>
     
-    <logger name ="ares.app.asyn.msg.listener" level="ERROR" additivity="false" >
+    <logger name ="com.ares.app.dao" level="ERROR" additivity="false" >
 	      <appender-ref ref ="daoErrorAppender"/>
 	</logger>
-
+	
+    <logger name ="com.ares.app.service.note.NoteService" level="INFO" />
+	
 </configuration>

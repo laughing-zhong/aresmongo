@@ -120,7 +120,7 @@ $(function() {
 			  </div>
             </div>
 			
-	  <nav role="navigation" class="navbar navbar-default">
+	  <ul role="navigation" class="navbar navbar-default">
         <div class="navbar-header">
           <button data-target="#bs-example-navbar-collapse-10" data-toggle="collapse" class="navbar-toggle" type="button">
             <span class="sr-only">Toggle navigation</span>
@@ -130,7 +130,7 @@ $(function() {
           </button>
           <p class="navbar-brand">add ee user</p>
         </div>
-      </nav>
+      </ul>
 	  
 	      <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">姓名</label>

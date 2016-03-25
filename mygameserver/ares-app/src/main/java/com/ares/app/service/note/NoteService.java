@@ -6,8 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+
+import org.slf4j.Logger;
+
 
 import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
@@ -28,6 +32,8 @@ import com.ares.framework.util.IdUtils;
 
 @Component
 public class NoteService implements RpcService{	
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger( NoteService.class );
 	@Inject
 	private NoteDAO noteDAO;
 	@Inject 
@@ -37,7 +43,6 @@ public class NoteService implements RpcService{
 	
 	public ViewResponse topicList(Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
-	
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
 		for(NoteCatagoryDO ndo : noteCatagoryList){
 			TopicCategoryBean  topicBean = new TopicCategoryBean();
@@ -49,6 +54,7 @@ public class NoteService implements RpcService{
 			topicBean.setId(ndo.getTopicId());
 			topicBeans.add(topicBean);
 		}
+		//LOGGER.error("topicList  end");
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
 		ViewResponse  response = new ViewResponse();
 		response.WebPage = "topic_list";
