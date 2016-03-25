@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.bson.BsonArray;
-import org.bson.BsonValue;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
@@ -53,7 +51,6 @@ public class SynMongClient implements IMongodbClient{
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Document> findObjList(String clltName, String filedName,
 			List<String> uIds) {

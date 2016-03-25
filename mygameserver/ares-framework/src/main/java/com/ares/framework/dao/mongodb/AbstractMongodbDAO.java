@@ -86,5 +86,4 @@ public abstract class AbstractMongodbDAO <DomainDO extends MongoKeyDO>  implemen
 		}
 		return coll.value();	
 	}
-
 }
