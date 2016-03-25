@@ -140,5 +140,4 @@ public class SynMongClient implements IMongodbClient{
 			return true;
 		return false;
 	}
-
 }
