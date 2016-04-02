@@ -1,6 +1,13 @@
 package com.ares.app.constdata;
 
 public class Const {
+	
+	//================================================only one===========
+	public final static String 	NOTYE_STATISTICS = "note_statistics";
+	
+	
+	
+	
 	public final static String  REDIRECTOR    = "redirect:/";
 	public final static String  ACOUNT_ID     = "account_id";
 	public final static String  USER_ID       = "user_id";
@@ -8,6 +15,12 @@ public class Const {
 	public final static String  ERROR_MSG_TAG = "error_msg";
 	public final static String  TOPIC_LIST    = "topic_list";
 	public final static String  TOPIC_DETAIL  = "topic_detail";
+	
+	//notelist =======================
+	public final static String  TODAY = "today";
+	public final static String  YESTORY = "yestody";
+	public final static String  TOLTAL = "total";
+	public final static String  STATISTTICS="note_statistics";
 	
 
 }

@@ -6,12 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
-
-import org.slf4j.Logger;
-
 
 import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
@@ -19,9 +19,11 @@ import com.ares.app.bean.TopicIDBean;
 import com.ares.app.constdata.Const;
 import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
+import com.ares.app.dao.NoteStatisticsDAO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
 import com.ares.app.domain.Do.NoteDO.SubNote;
+import com.ares.app.domain.Do.NoteStatisticsDO;
 import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
 import com.ares.framework.rpc.context.RpcContext;
@@ -41,6 +43,9 @@ public class NoteService implements RpcService{
 	@Inject
 	private Provider<RpcContext> rpcContextProvier;
 	
+	@Inject
+	private NoteStatisticsDAO  noteStatisticDAO;
+	
 	public ViewResponse topicList(Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
@@ -55,7 +60,16 @@ public class NoteService implements RpcService{
 			topicBeans.add(topicBean);
 		}
 		//LOGGER.error("topicList  end");
+		NoteStatisticsDO  statisticsDO = this.noteStatisticDAO.findById(Const.NOTYE_STATISTICS);
+		if(statisticsDO == null){
+			statisticsDO  = new NoteStatisticsDO();
+			statisticsDO.setLstStaticCountTime(DateTime.now());			
+			this.noteStatisticDAO.upsert(statisticsDO);
+		}
+		
+		checkDayChanged(statisticsDO);	
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
+		modle.addAttribute(Const.STATISTTICS,statisticsDO);
 		ViewResponse  response = new ViewResponse();
 		response.WebPage = "topic_list";
 		return response;	
@@ -98,6 +112,16 @@ public class NoteService implements RpcService{
 		response.setMethod("topicDetail");
 		response.setService("NoteService");
 		response.append("topicID", noteDo.getId());
+				
+		//notistics note
+		NoteStatisticsDO  statisticsDO = this.noteStatisticDAO.findById(Const.NOTYE_STATISTICS);
+		if(statisticsDO == null){
+			statisticsDO  = new NoteStatisticsDO();
+			statisticsDO.setLstStaticCountTime(DateTime.now());	
+		}
+		checkDayChanged(statisticsDO);	
+		statisticsDO.setTodayNoteCount(statisticsDO.getTodayNoteCount() + 1);	
+		this.noteStatisticDAO.upsert(statisticsDO);
 		return response;
 	}
 	public RpcResponse replyTopic(TopicBean topicBean){
@@ -124,4 +148,20 @@ public class NoteService implements RpcService{
 		response.append("topicID", noteDO.getId());
 		return response;		
 	}
+	
+	private void checkDayChanged(NoteStatisticsDO  statisticsDO){	
+		DateTime lstRecordTime = statisticsDO.getLstStaticCountTime();
+		int lstRecordDay = lstRecordTime.getDayOfYear();
+		int nowDay = DateTime.now().getDayOfYear();
+		if(lstRecordDay != nowDay){
+			if(nowDay - lstRecordDay == 1){
+				statisticsDO.setLastDayCount(statisticsDO.getTodayNoteCount());	
+			}
+			else{
+				statisticsDO.setLastDayCount(0);
+			}
+			statisticsDO.setTodayNoteCount(0);
+		}
+		this.noteStatisticDAO.upsert(statisticsDO);
+	}	
 }

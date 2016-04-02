@@ -64,6 +64,7 @@ public abstract class WebRequestRpc {
 			}		
 			return new ModelAndView(result.WebPage);
 		}catch (InvocationTargetException e ){
+			e.printStackTrace();
 			RunLogicException  logicException = (RunLogicException) e.getTargetException();
 			model.addAttribute(ERROR_MSG_TAG, logicException.getMsg());
 			return new ModelAndView(logicException.getWebPage());

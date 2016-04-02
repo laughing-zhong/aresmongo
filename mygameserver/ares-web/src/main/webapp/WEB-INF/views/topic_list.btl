@@ -37,9 +37,9 @@
 		 </div>
         <div class="col-md-6">
              <div id="day_info">
-               今日:324               |
-               昨日:1445 | 
-               帖子: 1318643 |
+               今日:${note_statistics.todayNoteCount}               |
+               昨日:${note_statistics.lastDayCount}  | 
+               帖子: ${note_statistics.totalCount} |
                会员:607576|
                欢迎新会员:
                s505125548
