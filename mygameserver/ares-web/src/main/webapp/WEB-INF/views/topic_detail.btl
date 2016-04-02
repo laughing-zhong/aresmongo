@@ -10,7 +10,10 @@
 
       <!-- Loading Bootstrap -->
     <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="/resources/css/body.css" rel="stylesheet">
+    
+      <!-- Loading my define -->
+    <link href="/resources/css/wd.css" rel="stylesheet">
 		  
     <!-- Loading Flat UI -->
     <link href="/resources/css/flat-ui.min.css" rel="stylesheet">
@@ -86,15 +89,20 @@
 		 </div>
         <div class="col-md-6"> 
         <div>${topic_detail.title} </div>
-        <div>
+        <div id ="tpc_item">
              ${topic_detail.content}
              <label id="topic_id" hidden="true" value=${topic_detail.id} ></label>
         </div>
         <% if(topic_detail.subNoteList != null){
         	for(subtopic in topic_detail.subNoteList) { %>
+        	<div id ="tpc_item">
         		<div>
-           			 ${subtopic.content}
-        		</div>    
+        		   ${subtopic.replyName}  发表于：${subtopic.replyTime} 
+        		</div>
+        		<div>
+           		   ${subtopic.content}
+           		</div>
+        	</div>    
             <% } 
         }%>
         <hr id="line" />

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -33,8 +33,7 @@ import com.ares.framework.util.IdUtils;
 
 
 @Component
-public class NoteService implements RpcService{	
-	
+public class NoteService implements RpcService{		
 	private static final Logger LOGGER = LoggerFactory.getLogger( NoteService.class );
 	@Inject
 	private NoteDAO noteDAO;
@@ -55,15 +54,15 @@ public class NoteService implements RpcService{
 			topicBean.setTitle(ndo.getTitle());
 			topicBean.setSenderTime(ndo.getSendTime());
 			topicBean.setLastRplTime(ndo.getLastRplTime());
-			//topicBean.setType(ndo.getType());
 			topicBean.setId(ndo.getTopicId());
 			topicBeans.add(topicBean);
 		}
-		//LOGGER.error("topicList  end");
+
 		NoteStatisticsDO  statisticsDO = this.noteStatisticDAO.findById(Const.NOTYE_STATISTICS);
 		if(statisticsDO == null){
 			statisticsDO  = new NoteStatisticsDO();
-			statisticsDO.setLstStaticCountTime(DateTime.now());			
+			statisticsDO.setLstStaticCountTime(DateTime.now());
+			statisticsDO.setId(Const.NOTYE_STATISTICS);
 			this.noteStatisticDAO.upsert(statisticsDO);
 		}
 		
@@ -117,6 +116,7 @@ public class NoteService implements RpcService{
 		NoteStatisticsDO  statisticsDO = this.noteStatisticDAO.findById(Const.NOTYE_STATISTICS);
 		if(statisticsDO == null){
 			statisticsDO  = new NoteStatisticsDO();
+			statisticsDO.setId(Const.NOTYE_STATISTICS);
 			statisticsDO.setLstStaticCountTime(DateTime.now());	
 		}
 		checkDayChanged(statisticsDO);	
@@ -128,7 +128,8 @@ public class NoteService implements RpcService{
 		NoteDO noteDO = this.noteDAO.findById(topicBean.getId());
 		SubNote  subNote = new SubNote();
 		subNote.setContent(topicBean.getContent());
-		subNote.setSendName(this.rpcContextProvier.get().getAccountID());
+		subNote.setReplyName(this.rpcContextProvier.get().getAccountID());
+		subNote.setReplyTime(DateTime.now());
 		List<SubNote> subNoteList = noteDO.getSubNoteList();
 		if(subNoteList == null){
 			subNoteList = new ArrayList<SubNote>();

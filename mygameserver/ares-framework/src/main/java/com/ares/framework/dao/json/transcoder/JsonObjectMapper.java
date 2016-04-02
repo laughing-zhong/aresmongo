@@ -27,8 +27,8 @@ public class JsonObjectMapper {
 		JodaModule jodaMode = new JodaModule();
 
 		DateTimeFormatterFactory formatterFactory = new DateTimeFormatterFactory();
-		formatterFactory.setIso(ISO.DATE_TIME);
-		formatterFactory.setTimeZone(TimeZone.getDefault());
+	//	formatterFactory.setIso(ISO.DATE_TIME);
+	//	formatterFactory.setTimeZone(TimeZone.getDefault());
 		jodaMode.addSerializer(DateTime.class, new DateTimeSerializer(
 				new JacksonJodaDateFormat(formatterFactory.createDateTimeFormatter().withZoneUTC())));
 

@@ -1,7 +1,8 @@
 package com.ares.app.domain.Do;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import com.ares.framework.domain.MongoKeyDO;
 
@@ -60,12 +61,21 @@ public class NoteDO  extends MongoKeyDO {
 
 	public static class SubNote{
 		public SubNote(){}
-		private String sendName;
-		public String getSendName() {
-			return sendName;
+		private DateTime replyTime;
+
+		public DateTime getReplyTime() {
+			return replyTime;
 		}
-		public void setSendName(String sendName) {
-			this.sendName = sendName;
+		public void setReplyTime(DateTime replyTime) {
+			this.replyTime = replyTime;
+		}
+		private String replyName;
+	
+		public String getReplyName() {
+			return replyName;
+		}
+		public void setReplyName(String replyName) {
+			this.replyName = replyName;
 		}
 		public String getContent() {
 			return content;
