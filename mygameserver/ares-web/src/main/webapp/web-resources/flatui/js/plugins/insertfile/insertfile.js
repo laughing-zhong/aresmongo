@@ -12,12 +12,15 @@ KindEditor.plugin('insertfile', function(K) {
 		allowFileUpload = K.undef(self.allowFileUpload, true),
 		allowFileManager = K.undef(self.allowFileManager, false),
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
-		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php'),
+		uploadJson = K.undef(self.uploadJson, self.basePath + 'uploads'),
 		extraParams = K.undef(self.extraFileUploadParams, {}),
 		filePostName = K.undef(self.filePostName, 'imgFile'),
 		lang = self.lang(name + '.');
+		console.log(self.basePath );
+	   console.log(uploadJson);
+	   uploadJson="http://localhost:8080/upload"
 	self.plugin.fileDialog = function(options) {
-		var fileUrl = K.undef(options.fileUrl, 'http://'),
+		var fileUrl = K.undef(options.fileUrl, 'http://localhost:8080/upload11'),
 			fileTitle = K.undef(options.fileTitle, ''),
 			clickFn = options.clickFn;
 		var html = [
@@ -71,7 +74,7 @@ KindEditor.plugin('insertfile', function(K) {
 			var uploadbutton = K.uploadbutton({
 				button : K('.ke-upload-button', div)[0],
 				fieldName : filePostName,
-				url : K.addParam(uploadJson, 'dir=file'),
+				url : uploadJson,
 				extraParams : extraParams,
 				afterUpload : function(data) {
 					dialog.hideLoading();
