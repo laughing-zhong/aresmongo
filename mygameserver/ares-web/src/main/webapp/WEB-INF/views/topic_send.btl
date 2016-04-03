@@ -38,11 +38,13 @@
 			editor = K.create('textarea[name="content"]', {
 					resizeType : 1,
 					allowPreviewEmoticons : false,
-					allowImageUpload : false,
+					allowImageUpload : true,
+					allowFileManager : true,
+					allowFileUpload: true,
 					items : [
 						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link','insertfile']
 				});
 				K('input[name=getHtml]').click(function(e) {
 				  $.post("/rpc/NoteService/publishTopic", {title:$("#topic_title").val(),content: editor.html()},
