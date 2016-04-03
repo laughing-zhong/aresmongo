@@ -117,5 +117,9 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 		return domainList;			
 	}
 
-	
+	@Override
+	public long getCount() {
+		// TODO Auto-generated method stub
+		return  this.mgDataSource.getMgConnection().getCount(this.collectionName);
+	}	
 }

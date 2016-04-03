@@ -20,7 +20,8 @@ public class Const {
 	public final static String  TODAY = "today";
 	public final static String  YESTORY = "yestody";
 	public final static String  TOLTAL = "total";
-	public final static String  STATISTTICS="note_statistics";
+	public final static String  STATISTTICS = "note_statistics";
+	public final static String  TOTAL_USERS = "total_users";
 	
 
 }

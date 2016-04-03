@@ -203,4 +203,10 @@ public class RedisBaseDAO<DomainObject  extends CasJsonDO> implements IDAO<Domai
 		return false;
 	}
 
+	@Override
+	public long getCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

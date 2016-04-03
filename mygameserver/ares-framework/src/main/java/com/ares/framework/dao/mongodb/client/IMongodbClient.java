@@ -12,6 +12,7 @@ public interface IMongodbClient {
 	public void     insert(String clltName,Document document);
 	public boolean  upsert(String clltName,Document document);
 	public boolean  delete(String clltName,String targetId);
+	public long      getCount(String clltName);
 	
 	List<String> getDbs();
 	List<String> getCollections(String db);

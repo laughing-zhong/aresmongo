@@ -17,6 +17,7 @@ import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
 import com.ares.app.bean.TopicIDBean;
 import com.ares.app.constdata.Const;
+import com.ares.app.dao.EeUserDAO;
 import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.dao.NoteStatisticsDAO;
@@ -45,6 +46,9 @@ public class NoteService implements RpcService{
 	@Inject
 	private NoteStatisticsDAO  noteStatisticDAO;
 	
+	@Inject
+	private EeUserDAO eeUserDAO;
+	
 	public ViewResponse topicList(Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
@@ -69,6 +73,7 @@ public class NoteService implements RpcService{
 		checkDayChanged(statisticsDO);	
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
 		modle.addAttribute(Const.STATISTTICS,statisticsDO);
+		modle.addAttribute(Const.TOTAL_USERS, eeUserDAO.getCount());
 		ViewResponse  response = new ViewResponse();
 		response.WebPage = "topic_list";
 		return response;	
@@ -156,13 +161,14 @@ public class NoteService implements RpcService{
 		int nowDay = DateTime.now().getDayOfYear();
 		if(lstRecordDay != nowDay){
 			if(nowDay - lstRecordDay == 1){
-				statisticsDO.setLastDayCount(statisticsDO.getTodayNoteCount());	
+				statisticsDO.setLastDayCount(statisticsDO.getTodayNoteCount());				
 			}
 			else{
 				statisticsDO.setLastDayCount(0);
 			}
 			statisticsDO.setTodayNoteCount(0);
-		}
-		this.noteStatisticDAO.upsert(statisticsDO);
+			statisticsDO.setLstStaticCountTime(DateTime.now());
+			this.noteStatisticDAO.upsert(statisticsDO);
+		}	
 	}	
 }

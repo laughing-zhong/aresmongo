@@ -89,6 +89,7 @@ public interface IDAO<DO>  extends IFAccessEorror {
 	 *                      DaoException will be thrown
 	 */
 	boolean delete( String targetId ) throws DAOException;
+	public long getCount();
 	
 	List<DO> findAll() throws DAOException;
 	List<DO> findDocs(String filedName,List<String> targetIds);

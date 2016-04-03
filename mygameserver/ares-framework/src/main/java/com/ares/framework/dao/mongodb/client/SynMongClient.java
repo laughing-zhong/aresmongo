@@ -103,6 +103,11 @@ public class SynMongClient implements IMongodbClient{
 		return false;
 	}
 	@Override
+	public long  getCount(String clltName){
+		return db.getCollection(clltName).count();
+	}
+	
+	@Override
 	public List<String> getDbs() {
 		// TODO Auto-generated method stub
 	 List<String> names = new ArrayList<String>();
