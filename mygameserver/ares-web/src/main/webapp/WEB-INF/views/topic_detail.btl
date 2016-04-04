@@ -37,12 +37,15 @@
 			KindEditor.ready(function(K) {
 			editor = K.create('textarea[name="content"]', {
 					resizeType : 1,
-					allowPreviewEmoticons : false,
-					allowImageUpload : false,
+				    allowPreviewEmoticons : false,
+					allowImageUpload : true,
+					allowFileManager : true,
+					allowFileUpload: true,
+					uploadJson: "${file_upload_url}",
 					items : [
 						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-						'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+						'insertunorderedlist', '|', 'emoticons', 'image', 'link','insertfile']
 				});
 				K('input[name=getHtml]').click(function(e) {
 				  $.post("/rpc/NoteService/replyTopic", {id:$("#topic_id").attr("value"),content: editor.html()},

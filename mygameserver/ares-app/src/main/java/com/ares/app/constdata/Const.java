@@ -25,7 +25,8 @@ public class Const {
 	
 
 	// file upload ===================
-	public final static String  FILE_UP_URL = "file_upload_url";
+	public final static String  FILE_UP_URL_KEY = "file_upload_url";
+	public final static String  FILE_UP_URL = "http://localhost:8080/upload";
 	
 
 }

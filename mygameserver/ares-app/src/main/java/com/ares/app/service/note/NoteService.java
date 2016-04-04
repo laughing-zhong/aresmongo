@@ -81,13 +81,14 @@ public class NoteService implements RpcService{
 	
 	public ViewResponse sendTopicView(Model model){		
 		ViewResponse response =  new ViewResponse();
-		model.addAttribute(Const.FILE_UP_URL,"http://localhost:8080/upload");
+		model.addAttribute(Const.FILE_UP_URL_KEY, Const.FILE_UP_URL);
 		response.WebPage = "topic_send";
 		return  response;
 	}
 	public ViewResponse topicDetail(TopicIDBean topicID, Model model){
 		NoteDO noteDO = this.noteDAO.findById(topicID.getTopicID());
 		model.addAttribute(Const.TOPIC_DETAIL, noteDO);
+		model.addAttribute(Const.FILE_UP_URL_KEY, Const.FILE_UP_URL);
 		ViewResponse response = new ViewResponse();
 		response.WebPage = "topic_detail";
 		return response;

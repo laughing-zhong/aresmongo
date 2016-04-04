@@ -89,7 +89,7 @@ public class FileUploadController {
                     //真实上传路径  
                     StringBuffer sbRealPath = new StringBuffer();  
                     sbRealPath.append(filePath).append(uuid).append(".").append(fileEnd);  
-                    ret.setUrl("http://localhost:8070/" + uuid +"." + fileEnd);
+                    ret.setUrl("http://localhost:8070/" + uuid + "." + fileEnd);
                     //写入文件  
                     File file = new File(sbRealPath.toString());  
                     item.write(file);  
