@@ -24,4 +24,8 @@ public class Const {
 	public final static String  TOTAL_USERS = "total_users";
 	
 
+	// file upload ===================
+	public final static String  FILE_UP_URL = "file_upload_url";
+	
+
 }

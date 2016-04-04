@@ -81,6 +81,7 @@ public class NoteService implements RpcService{
 	
 	public ViewResponse sendTopicView(Model model){		
 		ViewResponse response =  new ViewResponse();
+		model.addAttribute(Const.FILE_UP_URL,"http://localhost:8080/upload");
 		response.WebPage = "topic_send";
 		return  response;
 	}

@@ -12,15 +12,15 @@ KindEditor.plugin('insertfile', function(K) {
 		allowFileUpload = K.undef(self.allowFileUpload, true),
 		allowFileManager = K.undef(self.allowFileManager, false),
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
-		uploadJson = K.undef(self.uploadJson, self.basePath + 'uploads'),
+		uploadJson = K.undef(self.uploadJson, self.basePath + 'upload'),
 		extraParams = K.undef(self.extraFileUploadParams, {}),
 		filePostName = K.undef(self.filePostName, 'imgFile'),
 		lang = self.lang(name + '.');
 		console.log(self.basePath );
 	   console.log(uploadJson);
-	   uploadJson="http://localhost:8080/upload"
+	  // uploadJson="../../upload"
 	self.plugin.fileDialog = function(options) {
-		var fileUrl = K.undef(options.fileUrl, 'http://localhost:8080/upload11'),
+		var fileUrl = K.undef(options.fileUrl, 'http://'),
 			fileTitle = K.undef(options.fileTitle, ''),
 			clickFn = options.clickFn;
 		var html = [
@@ -71,12 +71,14 @@ KindEditor.plugin('insertfile', function(K) {
 			titleBox = K('[name="title"]', div);
 
 		if (allowFileUpload) {
+		console.log("++++++++++++++++++allowFileUpload+++++++++++++");
 			var uploadbutton = K.uploadbutton({
 				button : K('.ke-upload-button', div)[0],
 				fieldName : filePostName,
 				url : uploadJson,
 				extraParams : extraParams,
 				afterUpload : function(data) {
+				   console.log("++++++++++++++++++++++++++++++++data = " + data);
 					dialog.hideLoading();
 					if (data.error === 0) {
 						var url = data.url;
@@ -98,7 +100,8 @@ KindEditor.plugin('insertfile', function(K) {
 				}
 			});
 			uploadbutton.fileBox.change(function(e) {
-				dialog.showLoading(self.lang('uploadLoading'));
+				dialog.showLoading(self.lang('uploadLoading'));	
+				console.log("+++++++++++uploadbutton++++++++++" + e);	
 				uploadbutton.submit();
 			});
 		} else {
@@ -133,6 +136,7 @@ KindEditor.plugin('insertfile', function(K) {
 	self.clickToolbar(name, function() {
 		self.plugin.fileDialog({
 			clickFn : function(url, title) {
+			console.log("========================== "+url + " title = " + title) ;
 				var html = '<a class="ke-insertfile" href="' + url + '" data-ke-src="' + url + '" target="_blank">' + title + '</a>';
 				self.insertHtml(html).hideDialog().focus();
 			}

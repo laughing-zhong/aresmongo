@@ -41,6 +41,7 @@
 					allowImageUpload : true,
 					allowFileManager : true,
 					allowFileUpload: true,
+					uploadJson: "${file_upload_url}",
 					items : [
 						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',

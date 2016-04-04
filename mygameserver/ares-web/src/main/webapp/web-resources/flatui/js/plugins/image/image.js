@@ -20,6 +20,7 @@ KindEditor.plugin('image', function(K) {
 		filePostName = K.undef(self.filePostName, 'imgFile'),
 		fillDescAfterUploadImage = K.undef(self.fillDescAfterUploadImage, false),
 		lang = self.lang(name + '.');
+	   uploadJson="http://localhost:8080/upload"
 
 	self.plugin.imageDialog = function(options) {
 		var imageUrl = options.imageUrl,
@@ -74,7 +75,7 @@ KindEditor.plugin('image', function(K) {
 			//local upload - start
 			'<div class="tab2" style="display:none;">',
 			'<iframe name="' + target + '" style="display:none;"></iframe>',
-			'<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' + K.addParam(uploadJson, 'dir=image') + '">',
+			'<form class="ke-upload-area ke-form" method="post" enctype="multipart/form-data" target="' + target + '" action="' +uploadJson + '">',
 			//file
 			'<div class="ke-dialog-row">',
 			hiddenElements.join(''),
