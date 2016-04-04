@@ -112,7 +112,7 @@ public class NoteService implements RpcService{
 		this.noteCatagoryDAO.upsert(catagoryDO);
 		noteDo.setCatagoryId(catagoryDO.getId());
 		this.noteDAO.upsert(noteDo);
-		
+
 		//tell  client to call topicDetail method with topicID to get note details
 		RpcResponse  response = new RpcResponse();
 		response.setMethod("topicDetail");
