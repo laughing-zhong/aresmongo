@@ -27,15 +27,15 @@ public class AdminController   {
 	@Inject
 	private AccountDAO accountDAO;
 	
-	@RequestMapping(value = "/admin",method = RequestMethod.GET)
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public  String  getAdminList(Model model){			
 		List<AdminDO> playerList = 	adminDAO.findAll();
 		model.addAttribute("playerList", playerList);
 		return "/admin/adduser";	
 	}
 	
-	@RequestMapping(value = "/admin/save/admin",method = RequestMethod.POST)
-	public  String  saveAdmin(AdminBean adminBean,Model model){
+	@RequestMapping(value = "/admin/save/admin", method = { RequestMethod.POST, RequestMethod.GET})
+	public  String  saveAdmin(AdminBean adminBean, Model model){
 		AccountDO accountDO = this.accountDAO.findById(adminBean.getName());	
 		if(accountDO != null){
 			model.addAttribute("errormsg", "user "+adminBean.getName()+" exist");
@@ -66,7 +66,7 @@ public class AdminController   {
 		return "/admin/adduser";	
 	}
 	
-	@RequestMapping(value="/admin/save/ee_acount",method = RequestMethod.POST)
+	@RequestMapping(value="/admin/save/ee_acount",method = {RequestMethod.POST, RequestMethod.GET})
 	public String saveEeAcount(EEAcountBean eeAccountDO){
 		AccountDO accountDO = this.accountDAO.findById(eeAccountDO.getName());
 		UserDO eeUserDO = new UserDO();
