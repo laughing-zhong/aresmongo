@@ -29,12 +29,13 @@ public class AccountLoginController {
 		AccountDO userDO = accountDAO.findById(account.getAccountID());
 		if(userDO == null){
 			model.addAttribute(Const.ERROR_MSG_TAG, "no this user");
-			  return new ModelAndView("login");
+			return new ModelAndView("login");
 		}
-		if ( userDO.getPassword().equals(account.getPwd())){
+		if (userDO.getPassword().equals(account.getPwd())){
 			HttpSession session = req.getSession();
 			session.setAttribute(Const.ACOUNT_ID, account.getAccountID());
 			session.setAttribute(Const.USER_ID, userDO.getUserID());
+			session.setAttribute(Const.ADMIN, userDO.isAdmin());
 
 			RedirectView redirecView = new RedirectView();
 			redirecView.setUrl("/view/NoteService/topicList");

@@ -29,8 +29,8 @@ public class AdminDO extends MongoKeyDO{
 		this.name = name;
 	}
 	private String name;
-	private List<String>employeeList;
-	private List<String>managerList ;
+	private List<String> employeeList;
+	private List<String> managerList ;
 	public List<String> getManagerList() {
 		return managerList;
 	}

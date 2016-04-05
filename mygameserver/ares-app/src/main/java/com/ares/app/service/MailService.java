@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.ares.app.dao.AdminDAO;
 import com.ares.app.domain.Do.AdminDO;
-import com.ares.app.domain.Do.EeUserDO;
+import com.ares.app.domain.Do.UserDO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 
 @Component
@@ -183,7 +183,7 @@ public class MailService {
 		return true;
 	}
 	
-	public void sendMailInfoToAttactor(EeUserDO userDO, NoteCatagoryDO noteCatageyDO, String bref){
+	public void sendMailInfoToAttactor(UserDO userDO, NoteCatagoryDO noteCatageyDO, String bref){
 		List<String> adminUidList = userDO.getContactList();
 		List<AdminDO> admins = adminDAO.findByIds(adminUidList);
 		for(AdminDO adminDO : admins){

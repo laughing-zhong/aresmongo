@@ -11,10 +11,10 @@ import com.ares.app.bean.AdminBean;
 import com.ares.app.bean.EEAcountBean;
 import com.ares.app.dao.AccountDAO;
 import com.ares.app.dao.AdminDAO;
-import com.ares.app.dao.EeUserDAO;
+import com.ares.app.dao.UserDAO;
 import com.ares.app.domain.Do.AccountDO;
 import com.ares.app.domain.Do.AdminDO;
-import com.ares.app.domain.Do.EeUserDO;
+import com.ares.app.domain.Do.UserDO;
 import com.ares.framework.util.IdUtils;
 
 @Controller
@@ -23,7 +23,7 @@ public class AdminController   {
 	@Inject
 	private  AdminDAO adminDAO;	
 	@Inject
-	private EeUserDAO eeUserDAO;
+	private UserDAO eeUserDAO;
 	@Inject
 	private AccountDAO accountDAO;
 	
@@ -49,6 +49,7 @@ public class AdminController   {
 		accountDO.setName(adminBean.getName());
 		accountDO.setPassword(adminBean.getPasswd());
 		accountDO.setUserID(uid);
+		accountDO.setAdmin(true);
 		this.accountDAO.create(accountDO);
 		
 		//create admin 
@@ -57,6 +58,7 @@ public class AdminController   {
 		adminDo.setName(adminBean.getName());
 		adminDo.setEmail(adminBean.getEmail());
 		adminDo.setTeleno(adminBean.getTeleno());
+	
 
 		adminDAO.upsert(adminDo);	
 		return "/admin/adduser";	
@@ -65,12 +67,13 @@ public class AdminController   {
 	@RequestMapping(value="/admin/save/ee_acount",method = RequestMethod.POST)
 	public String saveEeAcount(EEAcountBean eeAccountDO){
 		AccountDO accountDO = this.accountDAO.findById(eeAccountDO.getName());
-		EeUserDO eeUserDO = new EeUserDO();
+		UserDO eeUserDO = new UserDO();
 		if(accountDO == null){
 			accountDO = new AccountDO();
 			accountDO.setId(eeAccountDO.getName());
 			accountDO.setName(eeAccountDO.getName());
 			accountDO.setPassword(eeAccountDO.getPasswd());
+			accountDO.setAdmin(false);
 			this.accountDAO.create(accountDO);
 			String uid = IdUtils.generate();		
 			eeUserDO.setId(uid);		

@@ -16,11 +16,11 @@ import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
 import com.ares.app.bean.TopicIDBean;
 import com.ares.app.constdata.Const;
-import com.ares.app.dao.EeUserDAO;
+import com.ares.app.dao.UserDAO;
 import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.dao.NoteStatisticsDAO;
-import com.ares.app.domain.Do.EeUserDO;
+import com.ares.app.domain.Do.UserDO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
 import com.ares.app.domain.Do.NoteDO.SubNote;
@@ -48,7 +48,7 @@ public class NoteService implements RpcService{
 	private NoteStatisticsDAO  noteStatisticDAO;
 	
 	@Inject
-	private EeUserDAO eeUserDAO;
+	private UserDAO eeUserDAO;
 	
 	@Inject
 	private  MailService mailService;
@@ -135,7 +135,11 @@ public class NoteService implements RpcService{
 		this.noteStatisticDAO.upsert(statisticsDO);
 		//send email  to admin
 		
-		EeUserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());
+//		String admin
+//		if(rpcContextProvier.get().isAdmin()){
+//			
+//		}
+		UserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());
 		
 		String bref = "http:://localhost:8080/view/NoteService/topicDetail?topicID=" + noteDo.getId();
 		mailService.sendMailInfoToAttactor(userDO, catagoryDO, bref);
