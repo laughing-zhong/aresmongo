@@ -47,7 +47,7 @@ $(function() {
 				val_array.push(contactSelect.options[i].value);
 		}
 		console.log(val_array.toString());
-	   console.log(val_array.toLocaleString()); 
+	     console.log(val_array.toLocaleString()); 
      $.post("/admin/save/ee_acount", {name: $("#name").val(), email: $("#email").val(),teleno:$("#teleno").val(),passwd:$("#passwd").val(),contactList:val_array.toLocaleString()},
 	   function(data){
 	    
@@ -169,7 +169,7 @@ $(function() {
 		   </div>
 		   -->
 			
-		    <div class="form-group" id ="contactList">
+		    <div class="form-group" id ="contactList_div">
 				 <label class="col-lg-2 control-label">联系人</label>
 				 <div class="col-lg-8">				
 		         <select data-toggle="select" id ="contactList" multiple class="form-control multiselect multiselect-inverse mrs mbm">

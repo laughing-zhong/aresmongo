@@ -59,8 +59,10 @@ public class AdminController   {
 		adminDo.setEmail(adminBean.getEmail());
 		adminDo.setTeleno(adminBean.getTeleno());
 	
-
 		adminDAO.upsert(adminDo);	
+		
+		List<AdminDO> playerList = 	adminDAO.findAll();
+		model.addAttribute("playerList", playerList);
 		return "/admin/adduser";	
 	}
 	
@@ -74,8 +76,10 @@ public class AdminController   {
 			accountDO.setName(eeAccountDO.getName());
 			accountDO.setPassword(eeAccountDO.getPasswd());
 			accountDO.setAdmin(false);
+		
+			String uid = IdUtils.generate();	
+			accountDO.setUserID(uid);
 			this.accountDAO.create(accountDO);
-			String uid = IdUtils.generate();		
 			eeUserDO.setId(uid);		
 		}
 		eeUserDO.setEmail(eeAccountDO.getEmail());
