@@ -101,9 +101,9 @@
 		<div id="center">
 			<textarea name="content" style="height:350px;visibility:hidden;"></textarea>
             </div>
-		<!-- <p>
+		<p>
 			<input type="button" class="btn btn-primary btn-hg" name="getHtml" value="发表帖子" />
-			 	<input type="button" name="isEmpty" value="判断是否为空" />
+		<!-- 	 	<input type="button" name="isEmpty" value="判断是否为空" />
 				<input type="button" name="getText" value="取得文本(包含img,embed)" />
 				<input type="button" name="selectedHtml" value="取得选中HTML" />
 				<br />
@@ -114,8 +114,9 @@
 				<input type="button" name="appendHtml" value="添加HTML" />
 				<input type="button" name="clear" value="清空内容" />
 				<input type="reset"  name="reset" value="Reset" />
+				-->
 			</p>
-			-->
+			
             <div> 
               <div class="form-group">
               <label class="checkbox" for="checkbox1">
@@ -127,6 +128,7 @@
                邮件通知我的联系人
               </label>
 
+			  
             </div>
             </div>
 		</form>

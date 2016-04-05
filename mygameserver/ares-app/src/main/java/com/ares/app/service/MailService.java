@@ -25,11 +25,6 @@ import com.ares.app.domain.Do.NoteCatagoryDO;
 @Component
 public class MailService {
 	
-	public void sendMain(String email, String message){
-		
-	}
-	
-
 	private MimeMessage mimeMsg;
 	private Session session;
 	private Properties props;
@@ -188,19 +183,19 @@ public class MailService {
 		return true;
 	}
 	
-	public void sendMailInfoToAttactor(EeUserDO userDO, NoteCatagoryDO noteCatageyDO){
+	public void sendMailInfoToAttactor(EeUserDO userDO, NoteCatagoryDO noteCatageyDO, String bref){
 		List<String> adminUidList = userDO.getContactList();
 		List<AdminDO> admins = adminDAO.findByIds(adminUidList);
 		for(AdminDO adminDO : admins){
 			String adminEmail = adminDO.getEmail();
-			String mailBody = this.createMailBodyByNote(noteCatageyDO);
+			String mailBody = this.createMailBodyByNote(noteCatageyDO, bref);
 			sendAndCc(SMTP, WD_MAIL, adminEmail, "", SUB_JECT, mailBody, WD_MAIL, WD_PASS);			
 		}	
 	}
 	
-	private String createMailBodyByNote(NoteCatagoryDO noteCatageyDO){
+	private String createMailBodyByNote(NoteCatagoryDO noteCatageyDO, String bref){
 		
-		return noteCatageyDO.getTitle();
+		return noteCatageyDO.getTitle()  + "<a bref = "+ bref + ">" + "查看</a>";
 	}
 	
 	private String WD_MAIL = "wq.zhong@wdksoft.com";

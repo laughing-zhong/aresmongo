@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.joda.time.DateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -21,10 +20,12 @@ import com.ares.app.dao.EeUserDAO;
 import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.dao.NoteStatisticsDAO;
+import com.ares.app.domain.Do.EeUserDO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
 import com.ares.app.domain.Do.NoteDO.SubNote;
 import com.ares.app.domain.Do.NoteStatisticsDO;
+import com.ares.app.service.MailService;
 import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
 import com.ares.framework.rpc.context.RpcContext;
@@ -48,6 +49,9 @@ public class NoteService implements RpcService{
 	
 	@Inject
 	private EeUserDAO eeUserDAO;
+	
+	@Inject
+	private  MailService mailService;
 	
 	public ViewResponse topicList(Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
@@ -129,6 +133,12 @@ public class NoteService implements RpcService{
 		checkDayChanged(statisticsDO);	
 		statisticsDO.setTodayNoteCount(statisticsDO.getTodayNoteCount() + 1);	
 		this.noteStatisticDAO.upsert(statisticsDO);
+		//send email  to admin
+		
+		EeUserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());
+		
+		String bref = "http:://localhost:8080/view/NoteService/topicDetail?topicID=" + noteDo.getId();
+		mailService.sendMailInfoToAttactor(userDO, catagoryDO, bref);
 		return response;
 	}
 	public RpcResponse replyTopic(TopicBean topicBean){
