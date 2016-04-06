@@ -67,11 +67,9 @@ public class AdminController   {
 	
 		adminDAO.upsert(adminDo);	
 		
-	//	List<AdminDO> playerList = 	adminDAO.findAll();
-	//	model.addAttribute("playerList", playerList);
-//		RedirectView redirecView = new RedirectView();
-//		redirecView.setUrl(redirectUrl);
-		return "forward:/admin";
+		List<AdminDO> playerList = 	adminDAO.findAll();
+		model.addAttribute("playerList", playerList);
+		return "/admin_view/adduser";
 	}
 	
 	@RequestMapping(value="/save/ee_acount",method = {RequestMethod.POST, RequestMethod.GET})
