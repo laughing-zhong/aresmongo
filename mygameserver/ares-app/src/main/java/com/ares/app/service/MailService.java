@@ -185,8 +185,8 @@ public class MailService {
 	
 	public void sendMailInfoToAttactor(UserDO userDO, NoteCatagoryDO noteCatageyDO, String bref){
 		List<String> adminUidList = userDO.getContactList();
-		List<AdminDO> admins = adminDAO.findByIds(adminUidList);
-		for(AdminDO adminDO : admins){
+		for(String  adminID : adminUidList){
+			AdminDO adminDO = this.adminDAO.findById(adminID);
 			String adminEmail = adminDO.getEmail();
 			String mailBody = this.createMailBodyByNote(noteCatageyDO, bref);
 			sendAndCc(SMTP, WD_MAIL, adminEmail, "", SUB_JECT, mailBody, WD_MAIL, WD_PASS);			
