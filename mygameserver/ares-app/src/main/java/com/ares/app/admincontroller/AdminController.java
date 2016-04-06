@@ -42,7 +42,6 @@ public class AdminController   {
 		if(playerList != null){
 			count = playerList.size();
 		}
-		System.out.println("getAdminList   ==  count = "+ count);
 		return "/admin_view/adduser";	
 	}
 	
@@ -75,7 +74,6 @@ public class AdminController   {
 		adminDAO.upsert(adminDo);		
 		//List<AdminDO> playerList = 	adminDAO.findAll();
 		//model.addAttribute("playerList", playerList);
-		System.out.println("save admin========================= finish");
 		return "sucess";
 	}
 	
