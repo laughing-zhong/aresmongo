@@ -38,7 +38,7 @@
 	<!-- <mvc:view-controller path="/" view-name="index" /> -->
 	<mvc:view-controller path="/" view-name="login" />
     <mvc:view-controller path="default" view-name="default" />	
-	<mvc:view-controller path="/admin" view-name="/admin/adduser" />
+
 	<mvc:view-controller path="/logout_success" view-name="logout_success" />
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
