@@ -1,3 +1,7 @@
 *.class
 *.prefs
 *.prefs
+*.prefs
+*.class
+mygameserver/ares-app/target/ares-app-0.0.1-SNAPSHOT.jar
+*.jar

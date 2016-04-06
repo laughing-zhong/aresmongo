@@ -30,9 +30,8 @@ $(function() {
 	$("#createAdmin").click(function() {
      $.post("/admin/save/admin", {name: $("#admin-name").val(), email: $("#admin-email").val(),teleno:$("#admin-teleno").val(),passwd:$("#admin-passwd").val()},
 	   function(data){
-	   console.log(data);
-       console.log($.cookie('session_id')); 
-       window.location.replace("/admin/save/admin")
+	    console.log(data)
+	     window.location.replace("/admin");
         }
 	  )	
 	}	
@@ -87,7 +86,7 @@ $(function() {
   <body>
      <div class="col-md-4">
       <h4>admin account</h4>
-        <form class="form-horizontal" role="form">
+        <div class="form-horizontal" >
             <div class="form-group">
               <label for="inputEmail1" class="col-lg-2 control-label">姓名</label>
               <div class="col-lg-6">
@@ -196,7 +195,7 @@ $(function() {
 				</div>
 		     </div>
       </div>	  
-	 </form>
+	 </div>
  </div>
   </body>
 </html>
