@@ -193,9 +193,9 @@ public class MailService {
 		}	
 	}
 	
-	private String createMailBodyByNote(NoteCatagoryDO noteCatageyDO, String bref){
+	private String createMailBodyByNote(NoteCatagoryDO noteCatageyDO, String href){
 		
-		return noteCatageyDO.getTitle()  + "<a bref = "+ bref + ">" + "查看</a>";
+		return noteCatageyDO.getTitle()  + "<a href = "+ href + ">" + "查看</a>";
 	}
 	
 	private String WD_MAIL = "wq.zhong@wdksoft.com";
