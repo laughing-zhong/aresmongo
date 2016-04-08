@@ -141,7 +141,7 @@ public class NoteService implements RpcService{
 //		}
 		UserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());
 		
-		String bref = "http://localhost:8080/view/NoteService/topicDetail?topicID=" + noteDo.getId();
+		String bref = rpcContextProvier.get().getServerUrl() + "/view/NoteService/topicDetail" + "?topicID=" + noteDo.getId();
 		mailService.sendMailInfoToAttactor(userDO, catagoryDO, bref);
 		return response;
 	}
