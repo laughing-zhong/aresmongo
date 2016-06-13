@@ -49,7 +49,6 @@ public class ProtocServiceRPC {
 			RpcService service = serviceMgr.GetService(serviceName);
 			if (service == null) {
 				responseEnvelope.setCode(ResponseCode.NO_SERVICE);
-
 			}
 			Method method = this.GetMethod(service, methodName);
 			if(method == null){
