@@ -36,6 +36,7 @@ public class AppWebRequetRpc  extends WebRequestRpc{
 		context.setContentPath(req.getPathInfo());
 		context.setServerName(req.getServerName());
 		context.setPort(req.getServerPort());
+		context.setAdmin((Boolean)session.getAttribute(Const.ADMIN));
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class NoteService implements RpcService{
 
 		NoteStatisticsDO  statisticsDO = this.noteStatisticDAO.findById(Const.NOTYE_STATISTICS);
 		if(statisticsDO == null){
-			statisticsDO  = new NoteStatisticsDO();
+			statisticsDO = new NoteStatisticsDO();
 			statisticsDO.setLstStaticCountTime(DateTime.now());
 			statisticsDO.setId(Const.NOTYE_STATISTICS);
 			this.noteStatisticDAO.upsert(statisticsDO);
@@ -136,11 +136,10 @@ public class NoteService implements RpcService{
 		//send email  to admin
 		
 //		String admin
-//		if(rpcContextProvier.get().isAdmin()){
-//			
-//		}
-		UserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());
-		
+		if(rpcContextProvier.get().isAdmin()){
+			return response;
+		}
+		UserDO userDO  = this.eeUserDAO.findById(rpcContextProvier.get().getUserID());	
 		String bref = rpcContextProvier.get().getServerUrl() + "/view/NoteService/topicDetail" + "?topicID=" + noteDo.getId();
 		mailService.sendMailInfoToAttactor(userDO, catagoryDO, bref);
 		return response;

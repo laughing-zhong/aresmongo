@@ -52,7 +52,13 @@
                  	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.title}</a> 
                  </div> 
                  <div  id="tpc_info">
+					
+					<% 	if (note.lastRplTime != null) { %>
                     ${note.senderName} 于 ${note.senderTime}发表 |最后回复：${note.lastRplTime}
+					<% } %>
+					<% else{ %>
+				     ${note.senderName} 于 ${note.senderTime}发表|暂无回复
+					 <%}%>
                  </div>
                 
                </div>

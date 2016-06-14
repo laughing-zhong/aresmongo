@@ -193,6 +193,7 @@ public class MailService {
 		}	
 	}
 	
+	
 	private String createMailBodyByNote(NoteCatagoryDO noteCatageyDO, String href){
 		
 		return noteCatageyDO.getTitle()  + "<a href = "+ href + ">" + "查看</a>";

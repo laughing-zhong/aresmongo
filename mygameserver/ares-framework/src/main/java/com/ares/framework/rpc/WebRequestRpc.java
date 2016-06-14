@@ -37,7 +37,7 @@ public abstract class WebRequestRpc {
 	abstract public  void checkSession(HttpServletRequest req);
 	abstract public  void postProcess();//no use
 	
-	@RequestMapping(value="/view/{serviceName}/{methodName}",method ={ RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/view/{serviceName}/{methodName}",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView   CallView(@PathVariable String serviceName,
 			@PathVariable String  methodName,Model model,HttpServletRequest req ,HttpServletResponse response) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, IOException, InstantiationException
 	{
@@ -72,10 +72,10 @@ public abstract class WebRequestRpc {
 	}
 	
 	
-	@RequestMapping(value="/rpc/{serviceName}/{methodName}",method = RequestMethod.POST )
+	@RequestMapping(value = "/rpc/{serviceName}/{methodName}",method = RequestMethod.POST )
 	@ResponseBody
 	public Object  CallRpc(@PathVariable String serviceName,
-			@PathVariable String  methodName,HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
+			@PathVariable String  methodName, HttpServletRequest req ) throws JsonParseException, JsonMappingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException, InstantiationException
 	{
 		RpcService service = serviceMgr.GetService(serviceName);
 		if(service == null){

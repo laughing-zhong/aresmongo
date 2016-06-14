@@ -36,12 +36,6 @@ public class AdminController   {
 	public  String  getAdminList(Model model){			
 		List<AdminDO> playerList = 	adminDAO.findAll();
 		model.addAttribute("playerList", playerList);
-		
-		//for test
-		int count = 0;
-		if(playerList != null){
-			count = playerList.size();
-		}
 		return "/admin_view/adduser";	
 	}
 	
