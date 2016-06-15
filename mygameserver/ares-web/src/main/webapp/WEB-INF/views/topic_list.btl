@@ -41,13 +41,13 @@
                昨日:${note_statistics.lastDayCount}  | 
                帖子: ${note_statistics.totalCount} |
                会员:${total_users}|
-               欢迎新会员:
-               s505125548
+               欢迎新会员:s505125548
            </div>
           
             <hr id="line" />
               <% for(note in topic_list) { %>
-              <div  id ="tpc_item" >
+	
+              <div  class="row">
                 <div>
                  	<a  id= "tpc_dec" href="/view/NoteService/topicDetail?topicID=${note.id}">${note.title}</a> 
                  </div> 
