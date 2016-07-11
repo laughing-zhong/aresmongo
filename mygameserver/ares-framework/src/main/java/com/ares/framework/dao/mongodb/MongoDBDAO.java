@@ -92,13 +92,6 @@ public class MongoDBDAO <DomainDO extends MongoKeyDO> extends AbstractMongodbDAO
 	
 	@Override
 	public List<DomainDO> findDocs(String filedName,List<String> targetIds){
-		
-//		List<BsonValue> targetIdList = new BsonArray();
-//		for( int i = 0 ; i <  targetIds.size(); ++i){
-//			BsonString bs = new BsonString (targetIds.get(i));
-//			targetIdList.add(bs);
-//		}
-
 		List<Document> docList= 	this.mgDataSource.getMgConnection().findObjList(this.collectionName, filedName, targetIds);
 		List<DomainDO> domainList = new ArrayList<DomainDO>();
 		for(Document doc : docList){

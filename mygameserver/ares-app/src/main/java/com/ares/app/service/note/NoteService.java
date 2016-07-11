@@ -95,8 +95,7 @@ public class NoteService implements RpcService{
 		model.addAttribute(Const.FILE_UP_URL_KEY, Const.FILE_UP_URL);
 		ViewResponse response = new ViewResponse();
 		response.WebPage = "topic_detail";
-		return response;
-		
+		return response;	
 	}
 	public RpcResponse publishTopic(TopicBean topicBean){		
 		// create note
