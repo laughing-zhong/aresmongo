@@ -19,8 +19,10 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-   <p> this is a header</p>
 
-  </body>
+ <%include("/test/header.html"){} %>
+ this is content:${layoutContent}
+
+  <%include("/test/footer.html"){} %>
+
 </html>

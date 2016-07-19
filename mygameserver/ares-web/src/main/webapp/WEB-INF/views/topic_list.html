@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>topiclist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- Loading Bootstrap -->
     <link href="/resources/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -34,7 +34,7 @@
       <div class="row">
  
         <div class="col-md-8">
-             <div id="day_info">
+          <div id="day_info">
                今日:${note_statistics.todayNoteCount}|
                昨日:${note_statistics.lastDayCount}  | 
                帖子: ${note_statistics.totalCount} |
@@ -60,7 +60,19 @@
                  </div>
                 
                </div>
-              <% }  %>   
+              <% }  %> 
+              
+       <div class="col-md-12">
+          <p>
+            <div class="btn-toolbar">
+              <div class="btn-group">
+              <% for (var i = 0; i < page_count; ++i){ %>            
+                <a  class="btn btn-info" type="button" href="/view/NoteService/topicList?pageIndex=${i+1}">${i + 1}</a>
+              <%}%>
+              </div>
+            </div>
+          </p>
+        </div>  
      </div>
     <div class="col-md-2">
          <div class="form-group">

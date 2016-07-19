@@ -15,16 +15,17 @@ import org.springframework.ui.Model;
 import com.ares.app.bean.TopicBean;
 import com.ares.app.bean.TopicCategoryBean;
 import com.ares.app.bean.TopicIDBean;
+import com.ares.app.bean.TopicPageBean;
 import com.ares.app.constdata.Const;
-import com.ares.app.dao.UserDAO;
 import com.ares.app.dao.NoteCatagoryDAO;
 import com.ares.app.dao.NoteDAO;
 import com.ares.app.dao.NoteStatisticsDAO;
-import com.ares.app.domain.Do.UserDO;
+import com.ares.app.dao.UserDAO;
 import com.ares.app.domain.Do.NoteCatagoryDO;
 import com.ares.app.domain.Do.NoteDO;
 import com.ares.app.domain.Do.NoteDO.SubNote;
 import com.ares.app.domain.Do.NoteStatisticsDO;
+import com.ares.app.domain.Do.UserDO;
 import com.ares.app.service.MailService;
 import com.ares.framework.rpc.RpcResponse;
 import com.ares.framework.rpc.ViewResponse;
@@ -37,6 +38,7 @@ import com.ares.framework.util.IdUtils;
 @Component
 public class NoteService implements RpcService{		
 	private static final Logger LOGGER = LoggerFactory.getLogger( NoteService.class );
+	private static final int pageCount = 10;
 	@Inject
 	private NoteDAO noteDAO;
 	@Inject 
@@ -53,10 +55,16 @@ public class NoteService implements RpcService{
 	@Inject
 	private  MailService mailService;
 	
-	public ViewResponse topicList(Model modle){		
+	public ViewResponse topicList(TopicPageBean pageBean, Model modle){		
 		List<NoteCatagoryDO>  noteCatagoryList = noteCatagoryDAO.findAll();
 		List<TopicCategoryBean> topicBeans = new ArrayList<TopicCategoryBean>();
-		for(NoteCatagoryDO ndo : noteCatagoryList){
+		int pageIndex = pageBean.getPageIndex();
+		if(pageIndex > noteCatagoryList.size()){
+			return null;
+		}
+		int beginIndex = pageCount * pageIndex;
+		for(int i = 0 ; i < pageCount && i + beginIndex < noteCatagoryList.size(); ++i){			
+		    NoteCatagoryDO ndo =  noteCatagoryList.get(i + beginIndex);
 			TopicCategoryBean  topicBean = new TopicCategoryBean();
 			topicBean.setSenderName(ndo.getSender());
 			topicBean.setTitle(ndo.getTitle());
@@ -76,6 +84,7 @@ public class NoteService implements RpcService{
 		
 		checkDayChanged(statisticsDO);	
 		modle.addAttribute(Const.TOPIC_LIST, topicBeans);
+		modle.addAttribute(Const.PAGE_COUNT,noteCatagoryList.size()/pageCount + 1);
 		modle.addAttribute(Const.STATISTTICS,statisticsDO);
 		modle.addAttribute(Const.TOTAL_USERS, eeUserDAO.getCount());
 		ViewResponse  response = new ViewResponse();

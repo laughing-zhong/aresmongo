@@ -19,11 +19,16 @@
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-   <%
-    layout("header.btl");{}
-
-    %>
-
-  </body>
+ <%
+    layout("/test/layout.html"){%>
+       this is 正文
+    <div class="container">
+     <form  role="form" action = "/userlogin" method = "post"> 
+       <input type="text"     class="form-control" name="accountID" id="accountID"  placeholder="账号" required autofocus>
+       <input type="password" class="form-control"  name="pwd"  id="pwd" placeholder="密码" required >
+       <button type="submit"  class="btn btn-primary" id="login" >Login</button>		 
+     </form>
+   </div>
+ <%}%>
+ 
 </html>

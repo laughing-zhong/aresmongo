@@ -16,6 +16,7 @@ public class Const {
 	public final static String  ERROR_MSG_TAG = "error_msg";
 	public final static String  TOPIC_LIST    = "topic_list";
 	public final static String  TOPIC_DETAIL  = "topic_detail";
+	public final static String  PAGE_COUNT    = "page_count";
 	
 	//notelist =======================
 	public final static String  TODAY = "today";
